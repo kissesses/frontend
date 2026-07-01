@@ -1,0 +1,94 @@
+import { Button, Group, Text } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import { BulkUsersActionsWidget } from '@widgets/dashboard/users/bulk-users-actions/bulk-users-actions.widget'
+import { GetAllUsersCommand } from '@remnawave/backend-contract'
+import { useTranslation } from 'react-i18next'
+import { PiClockClockwise } from 'react-icons/pi'
+import { TbDots } from 'react-icons/tb'
+
+import { QueryKeys } from '@shared/api/hooks'
+import { queryClient } from '@shared/api/query-client'
+import { useIsMobile } from '@shared/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+
+import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
+
+interface IProps {
+    users: GetAllUsersCommand.Response['response']['users']
+}
+
+export const UsersCardsSelectionFeature = (props: IProps) => {
+    const { users } = props
+    const { t } = useTranslation()
+    const isMobile = useIsMobile()
+    const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
+    const usersToUpdate = bulkUsersActionsStoreActions.getUuidLength()
+
+    if (usersToUpdate === 0) {
+        return null
+    }
+
+    const handleClearSelection = () => {
+        bulkUsersActionsStoreActions.resetState()
+    }
+
+    const handleSelectAll = () => {
+        bulkUsersActionsStoreActions.setTableSelection(
+            Object.fromEntries(users.map((user) => [user.uuid, true]))
+        )
+    }
+
+    const handleCloseModal = async () => {
+        bulkUsersActionsStoreActions.resetState()
+        await queryClient.refetchQueries({ queryKey: QueryKeys.users.getAllUsers._def })
+        await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
+    }
+
+    return (
+        <Group justify="apart" px="xs">
+            <Text fw={600} size="sm">
+                {usersToUpdate} {t('users-table-selection.feature.row-s-selected')}
+            </Text>
+            <Group gap="xs">
+                <Button color="blue" onClick={handleClearSelection} size="xs" variant="subtle">
+                    {t('users-table-selection.feature.clear-selection')}
+                </Button>
+                <Button color="blue" onClick={handleSelectAll} size="xs" variant="subtle">
+                    {t('users-table-selection.feature.select-all')}
+                </Button>
+                <Button
+                    color="green"
+                    leftSection={<PiClockClockwise />}
+                    onClick={() =>
+                        modals.open({
+                            title: (
+                                <BaseOverlayHeader
+                                    iconColor="cyan"
+                                    IconComponent={TbDots}
+                                    iconVariant="soft"
+                                    subtitle={t(
+                                        'bulk-user-actions.actions.tab.feature.perform-action-on-users',
+                                        {
+                                            usersCount: usersToUpdate
+                                        }
+                                    )}
+                                    title={t('bulk-user-actions-drawer.widget.bulk-user-actions')}
+                                    titleOrder={5}
+                                />
+                            ),
+                            size: 'lg',
+                            fullScreen: isMobile,
+                            centered: true,
+                            onClose: handleCloseModal,
+                            children: <BulkUsersActionsWidget isMobile={isMobile} />
+                        })
+                    }
+                    size="sm"
+                    variant="subtle"
+                >
+                    {t('users-table-selection.feature.bulk-actions')}
+                </Button>
+            </Group>
+        </Group>
+    )
+}
