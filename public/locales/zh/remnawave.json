@@ -469,6 +469,10 @@
   "home": {
     "page": {
       "online-stats": "在线统计",
+      "overview": "概览",
+      "live-nodes": "实时节点",
+      "traffic": "流量",
+      "active-users": "活跃用户",
       "system": "系统",
       "bandwidth": "带宽",
       "short-stats": "简要统计",

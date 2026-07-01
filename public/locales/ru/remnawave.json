@@ -494,6 +494,10 @@
   "home": {
     "page": {
       "online-stats": "Онлайн",
+      "overview": "Обзор",
+      "live-nodes": "Ноды в реальном времени",
+      "traffic": "Трафик",
+      "active-users": "Активные пользователи",
       "system": "Система",
       "bandwidth": "Трафик",
       "short-stats": "Краткая статистика",

@@ -494,6 +494,10 @@
   "home": {
     "page": {
       "online-stats": "Online stats",
+      "overview": "Overview",
+      "live-nodes": "Live nodes",
+      "traffic": "Traffic",
+      "active-users": "Active users",
       "system": "System",
       "bandwidth": "Bandwidth",
       "short-stats": "Home",

@@ -66,6 +66,18 @@
 .section:nth-child(7) {
     --section-delay: 900ms;
 }
+.section:nth-child(8) {
+    --section-delay: 1050ms;
+}
+.section:nth-child(9) {
+    --section-delay: 1200ms;
+}
+.section:nth-child(10) {
+    --section-delay: 1350ms;
+}
+.section:nth-child(n + 11) {
+    --section-delay: 1500ms;
+}
 
 .title {
     animation: titleSlideIn 0.3s ease-out both;

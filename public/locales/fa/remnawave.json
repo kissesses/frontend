@@ -469,6 +469,10 @@
   "home": {
     "page": {
       "online-stats": "آمار آنلاین شدن کاربرها",
+      "overview": "نمای کلی",
+      "live-nodes": "نودهای زنده",
+      "traffic": "ترافیک",
+      "active-users": "کاربران فعال",
       "system": "سیستم",
       "bandwidth": "پهنای باند",
       "short-stats": "آمار مختصر",

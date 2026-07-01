@@ -1,4 +1,5 @@
 import {
+    GetAllNodesCommand,
     GetBandwidthStatsCommand,
     GetRemnawaveHealthCommand,
     GetStatsCommand
@@ -6,6 +7,8 @@ import {
 
 export interface IProps {
     bandwidthStats: GetBandwidthStatsCommand.Response['response']
+    isNodesLoading: boolean
+    nodes: GetAllNodesCommand.Response['response'] | undefined
     remnawaveHealth: GetRemnawaveHealthCommand.Response['response']
     systemInfo: GetStatsCommand.Response['response']
 }
