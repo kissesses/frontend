@@ -2523,6 +2523,33 @@
     "revoked-title": "Доступ закрыт",
     "revoked-message": "Повышенный доступ отозван. Подтвердите доступ снова, чтобы продолжить."
   },
+  "ops-panel": {
+    "title": "Ops-консоль",
+    "description": "Скрытая консоль управления с расширенными инструментами и обзором системы.",
+    "unlocked-title": "Ops-консоль открыта",
+    "unlocked-message": "Расширенные инструменты управления доступны в этой сессии.",
+    "lock-console": "Закрыть консоль",
+    "users-overview": "Обзор пользователей",
+    "management-section": "Управление",
+    "tools-section": "Инструменты",
+    "users-online": "Онлайн пользователей",
+    "nodes-online": "Нод онлайн",
+    "api-instances": "Инстансов API",
+    "elevated": "Доступ открыт",
+    "locked": "Нужна верификация",
+    "queues-viewer": "Просмотр очередей",
+    "database-management-description": "Бэкапы, архивы и обслуживание базы данных.",
+    "postgres-management-description": "SQL-консоль с подтверждением деструктивных запросов в Telegram.",
+    "settings-description": "Аутентификация, API-токены и брендинг.",
+    "telegram-routes-description": "Маршруты и топики Telegram-уведомлений.",
+    "queues-description": "Инспектор очередей BullMQ в новой вкладке.",
+    "sessions-explorer-description": "Активные subscription-сессии на нодах.",
+    "hwid-inspector-description": "HWID-устройства, блокировки и поиск по пользователям.",
+    "srh-inspector-description": "Поиск по истории subscription-запросов.",
+    "activity-timeline-description": "События активности пользователей и аудит.",
+    "tb-reports-description": "Отчёты torrent blocker.",
+    "infra-billing-description": "Записи инфраструктурного биллинга."
+  },
   "keypair-generator": {
     "widget": {
       "generate": "Сгенерировать"

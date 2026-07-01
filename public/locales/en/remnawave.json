@@ -2523,6 +2523,33 @@
     "revoked-title": "Access locked",
     "revoked-message": "Elevated access has been revoked. Verify again to continue."
   },
+  "ops-panel": {
+    "title": "Ops Console",
+    "description": "Hidden management console with elevated tools and system overview.",
+    "unlocked-title": "Ops Console unlocked",
+    "unlocked-message": "Extended management tools are available for this session.",
+    "lock-console": "Lock console",
+    "users-overview": "Users overview",
+    "management-section": "Management",
+    "tools-section": "Tools",
+    "users-online": "Users online",
+    "nodes-online": "Nodes online",
+    "api-instances": "API instances",
+    "elevated": "Elevated",
+    "locked": "Step-up required",
+    "queues-viewer": "Queues Viewer",
+    "database-management-description": "Backups, archives and database maintenance.",
+    "postgres-management-description": "SQL console with Telegram confirmation for destructive queries.",
+    "settings-description": "Authentication, API tokens and branding.",
+    "telegram-routes-description": "Telegram notification routing and topics.",
+    "queues-description": "BullMQ queues inspector in a new tab.",
+    "sessions-explorer-description": "Live subscription sessions across nodes.",
+    "hwid-inspector-description": "HWID devices, blocks and cross-user lookup.",
+    "srh-inspector-description": "Subscription request history search.",
+    "activity-timeline-description": "User activity events and audit trail.",
+    "tb-reports-description": "Torrent blocker violation reports.",
+    "infra-billing-description": "Infrastructure billing records."
+  },
   "keypair-generator": {
     "widget": {
       "generate": "Generate"

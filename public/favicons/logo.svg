@@ -1,6 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <rect width="32" height="32" rx="6" fill="#151A23"/>
-  <g transform="translate(4, 4) scale(1.5)">
-    <path fill="#3CC9DB" fill-rule="evenodd" d="M8 1a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-1.5 0V1.75A.75.75 0 0 1 8 1Zm6 2a.75.75 0 0 1 .75.75v8.5a.75.75 0 0 1-1.5 0v-8.5A.75.75 0 0 1 14 3ZM5 4a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0v-6.5A.75.75 0 0 1 5 4Zm6 1a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 11 5ZM2 6a.75.75 0 0 1 .75.75v2.5a.75.75 0 0 1-1.5 0v-2.5A.75.75 0 0 1 2 6Z" clip-rule="evenodd"/>
-  </g>
+  <svg x="3" y="3" width="26" height="26" viewBox="0 0 512 512" fill="none">
+    <defs>
+      <linearGradient id="purple" x1="120" y1="90" x2="390" y2="420" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#E97CFF"/>
+        <stop offset="35%" stop-color="#B84DFF"/>
+        <stop offset="70%" stop-color="#7A2EFF"/>
+        <stop offset="100%" stop-color="#4B148C"/>
+      </linearGradient>
+      <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <g filter="url(#glow)">
+      <path d="M128 170 L256 82 C256 160 242 205 178 250 L128 218 Z" fill="url(#purple)"/>
+      <path d="M384 170 L256 82 C256 160 270 205 334 250 L384 218 Z" fill="url(#purple)"/>
+      <path d="M384 342 L256 430 C256 352 270 307 334 262 L384 294 Z" fill="url(#purple)"/>
+      <path d="M128 342 L256 430 C256 352 242 307 178 262 L128 294 Z" fill="url(#purple)"/>
+    </g>
+  </svg>
 </svg>

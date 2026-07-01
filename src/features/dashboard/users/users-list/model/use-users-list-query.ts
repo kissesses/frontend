@@ -1,9 +1,10 @@
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import {
     MRT_ColumnFilterFnsState,
+    MRT_ColumnFiltersState,
     MRT_SortingState
 } from '@kastov/mantine-react-table-open'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import {
     useGetExternalSquads,
@@ -19,6 +20,32 @@ import {
     useBulkUsersActionsStoreActions
 } from '@entities/dashboard/users/bulk-users-actions-store'
 import { useUsersTableStore } from '@entities/dashboard/users/users-table-store'
+
+const DEFAULT_FILTER_MODES: Record<string, string> = {
+    hwidDeviceLimit: 'equals',
+    tag: 'equals',
+    trafficLimitBytes: 'between'
+}
+
+function isActiveFilterValue(value: unknown): boolean {
+    return Array.isArray(value)
+        ? value.some((bound) => bound !== null && bound !== undefined && bound !== '')
+        : value !== null && value !== undefined && value !== ''
+}
+
+function resolveFilterModes(
+    filters: MRT_ColumnFiltersState,
+    columnFilterFns: MRT_ColumnFilterFnsState
+): Record<string, string> {
+    const modes: Record<string, string> = {}
+
+    for (const filter of filters) {
+        modes[filter.id] =
+            columnFilterFns[filter.id] ?? DEFAULT_FILTER_MODES[filter.id] ?? 'contains'
+    }
+
+    return modes
+}
 
 export function useUsersListQuery(options?: { includeTableColumns?: boolean }) {
     const includeTableColumns = options?.includeTableColumns ?? true
@@ -40,19 +67,26 @@ export function useUsersListQuery(options?: { includeTableColumns?: boolean }) {
 
     const [sorting, setSorting] = useState<MRT_SortingState>([])
 
-    const defaultFilterFns: Record<string, string> = {
-        hwidDeviceLimit: 'equals',
-        tag: 'equals',
-        trafficLimitBytes: 'between'
-    }
+    const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(() => {
+        if (!includeTableColumns) {
+            return { ...DEFAULT_FILTER_MODES }
+        }
 
-    const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(() =>
-        Object.fromEntries(
+        return Object.fromEntries(
             tableColumns.map(({ accessorKey }) => [
                 accessorKey,
-                defaultFilterFns[accessorKey!] ?? 'contains'
+                DEFAULT_FILTER_MODES[accessorKey!] ?? 'contains'
             ])
         )
+    })
+
+    const tableColumnAccessorKeys = useMemo(
+        () =>
+            tableColumns
+                .map(({ accessorKey }) => accessorKey)
+                .filter((key): key is string => Boolean(key))
+                .join('\0'),
+        [tableColumns]
     )
 
     useEffect(() => {
@@ -61,29 +95,31 @@ export function useUsersListQuery(options?: { includeTableColumns?: boolean }) {
         }
 
         setColumnFilterFns((prev) => {
+            let changed = false
             const next = { ...prev }
 
-            for (const { accessorKey } of tableColumns) {
+            for (const accessorKey of tableColumnAccessorKeys.split('\0')) {
                 if (!accessorKey || accessorKey in next) {
                     continue
                 }
 
-                next[accessorKey] = defaultFilterFns[accessorKey] ?? 'contains'
+                next[accessorKey] = DEFAULT_FILTER_MODES[accessorKey] ?? 'contains'
+                changed = true
             }
 
-            return next
+            return changed ? next : prev
         })
-    }, [includeTableColumns, tableColumns])
+    }, [includeTableColumns, tableColumnAccessorKeys])
+
+    const activeFilters = persistedTableState.columnFilters.filter(({ value }) =>
+        isActiveFilterValue(value)
+    )
 
     const params = {
         start: persistedTableState.pagination.pageIndex * persistedTableState.pagination.pageSize,
         size: persistedTableState.pagination.pageSize,
-        filters: persistedTableState.columnFilters.filter(({ value }) =>
-            Array.isArray(value)
-                ? value.some((bound) => bound !== null && bound !== undefined && bound !== '')
-                : value !== null && value !== undefined && value !== ''
-        ),
-        filterModes: columnFilterFns,
+        filters: activeFilters,
+        filterModes: resolveFilterModes(activeFilters, columnFilterFns),
         sorting
     }
 

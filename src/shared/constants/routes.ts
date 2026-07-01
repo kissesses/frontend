@@ -53,6 +53,7 @@ export const ROUTES = {
         CRM: {
             ROOT: '/dashboard/crm',
             INFRA_BILLING: '/dashboard/crm/infra-billing'
-        }
+        },
+        OPS: '/dashboard/ops'
     }
 } as const

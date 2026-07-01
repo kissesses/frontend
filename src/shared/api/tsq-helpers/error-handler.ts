@@ -17,4 +17,6 @@ export function errorHandler(error: unknown, title: string) {
         message: error instanceof Error ? error.message : 'Request failed with unknown error.',
         color: 'red'
     })
+
+    throw error
 }

@@ -1,4 +1,5 @@
 import { useMediaQuery } from '@mantine/hooks'
+import { OpsPanelUnlockBridge } from '@features/ops-panel'
 
 import { useIsMobile } from '@shared/hooks'
 import { HeaderControls } from '@shared/ui/header-buttons'
@@ -38,18 +39,31 @@ export function MainLayout() {
 
     if (isMobile) {
         return (
-            <MobileLayout
+            <>
+                <OpsPanelUnlockBridge />
+                <MobileLayout
                 headerControls={headerControls}
                 isSocialButtons={isMobile}
                 isLoadingUpdates={isLoadingUpdates}
                 remnawaveInfo={remnawaveInfo}
-            />
+                />
+            </>
         )
     }
 
     if (layoutStyle === LAYOUT_STYLE.SIDEBAR) {
-        return <SidebarLayout headerControls={headerControls} />
+        return (
+            <>
+                <OpsPanelUnlockBridge />
+                <SidebarLayout headerControls={headerControls} />
+            </>
+        )
     }
 
-    return <CompactLayout headerControls={headerControls} isHiResDesktop={isHiResDesktop} />
+    return (
+        <>
+            <OpsPanelUnlockBridge />
+            <CompactLayout headerControls={headerControls} isHiResDesktop={isHiResDesktop} />
+        </>
+    )
 }

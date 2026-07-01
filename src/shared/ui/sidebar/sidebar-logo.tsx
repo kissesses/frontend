@@ -1,4 +1,5 @@
 import { Image } from '@mantine/core'
+import { useOpsPanelLogoClick } from '@features/ops-panel'
 import { useNavigate } from 'react-router'
 
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
@@ -9,11 +10,16 @@ import classes from './sidebar.module.css'
 
 export const SidebarLogoShared = () => {
     const { data: authStatus } = useGetAuthStatus()
+    const { handleLogoClick } = useOpsPanelLogoClick()
 
     const navigate = useNavigate()
 
-    const handleClick = () => {
+    const handleSingleClick = () => {
         navigate(ROUTES.DASHBOARD.HOME)
+    }
+
+    const onClick = () => {
+        handleLogoClick(handleSingleClick)
     }
 
     if (authStatus?.branding.logoUrl) {
@@ -23,7 +29,7 @@ export const SidebarLogoShared = () => {
                 className={classes.fadeIn}
                 fallbackSrc="/favicons/logo.svg"
                 fit="contain"
-                onClick={handleClick}
+                onClick={onClick}
                 src={authStatus.branding.logoUrl}
                 style={{
                     maxWidth: '30px',
@@ -38,9 +44,8 @@ export const SidebarLogoShared = () => {
 
     return (
         <Logo
-            c="cyan"
             className={classes.fadeIn}
-            onClick={handleClick}
+            onClick={onClick}
             style={{ cursor: 'pointer' }}
             w="2.5rem"
         />

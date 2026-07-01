@@ -29,6 +29,7 @@ import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connect
 import { TemplateEditorPageConnector } from '@pages/dashboard/templates/ui/connectors/template-editor-page.connector'
 import { TorrentBlockerReportsPageConnector } from '@pages/dashboard/torrent-blocker-reports/ui/connectors'
 import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
+import { OpsPanelPageConnector } from '@pages/dashboard/ops-panel/connectors/ops-panel.page.connector'
 import { NotFoundPageComponent } from '@pages/errors/4xx-error'
 import { ErrorPageComponent } from '@pages/errors/5xx-error'
 import {
@@ -41,6 +42,7 @@ import {
 
 import { ErrorBoundaryHoc } from '@shared/hocs/error-boundary'
 import { AuthGuard } from '@shared/hocs/guards/auth-guard'
+import { OpsPanelGuard } from '@shared/hocs/guards/ops-panel-guard'
 
 import { ROUTES } from '../../shared/constants'
 import { AuthLayout } from '../layouts/auth'
@@ -200,6 +202,10 @@ const router = createBrowserRouter(
                             element={<InfraBillingPageConnector />}
                             path={ROUTES.DASHBOARD.CRM.INFRA_BILLING}
                         />
+                    </Route>
+
+                    <Route element={<OpsPanelGuard />}>
+                        <Route element={<OpsPanelPageConnector />} path={ROUTES.DASHBOARD.OPS} />
                     </Route>
                 </Route>
 
