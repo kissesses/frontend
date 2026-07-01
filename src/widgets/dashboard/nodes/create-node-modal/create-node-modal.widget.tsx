@@ -16,8 +16,10 @@ import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/
 import { CreateNodeStep1Connection } from './create-node-steps/create-node-step-1-connection'
 import { CreateNodeStep2ConfigProfiles } from './create-node-steps/create-node-step-2-config-profiles'
 import { CreateNodeStep3Status } from './create-node-steps/create-node-step-3-status'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const CreateNodeModalWidget = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const isModalOpen = useNodesStoreCreateModalIsOpen()
@@ -101,7 +103,7 @@ export const CreateNodeModalWidget = () => {
             size="md"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCpu}
                     iconVariant="soft"
                     title={t('create-node-modal.widget.create-node')}
@@ -113,7 +115,7 @@ export const CreateNodeModalWidget = () => {
                 <Group gap="xs" grow>
                     <Progress
                         animated
-                        color="teal"
+                        color={entityAccentColor}
                         radius="sm"
                         size="md"
                         striped
@@ -122,7 +124,7 @@ export const CreateNodeModalWidget = () => {
                     />
                     <Progress
                         animated
-                        color="teal"
+                        color={entityAccentColor}
                         radius="sm"
                         size="md"
                         striped
@@ -131,7 +133,7 @@ export const CreateNodeModalWidget = () => {
                     />
                     <Progress
                         animated
-                        color="teal"
+                        color={entityAccentColor}
                         radius="sm"
                         size="md"
                         striped

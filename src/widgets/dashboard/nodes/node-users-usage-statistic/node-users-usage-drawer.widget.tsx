@@ -13,6 +13,7 @@ import { getDefaultDateRange } from '@shared/utils/time-utils'
 import { MODALS, useModalCloseActions, useModalState } from '@entities/dashboard/modal-store'
 
 import { NodeUsersSparklineCardWidget } from './usage-sparkline-card'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const TOP_USERS_LIMIT_OPTIONS = [
     { value: '5', label: 'Top 5' },
@@ -28,6 +29,7 @@ const TOP_USERS_LIMIT_OPTIONS = [
 const DEFAULT_TOP_USERS_LIMIT = 100
 
 export const NodeUsersUsageDrawer = () => {
+    const entityAccentColor = useEntityAccentColor()
     const defaultRange = getDefaultDateRange()
 
     const { isOpen, internalState: nodeUuid } = useModalState(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)
@@ -102,7 +104,7 @@ export const NodeUsersUsageDrawer = () => {
             size="600px"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbChartArcs}
                     iconVariant="soft"
                     title={t('node-users-usage-drawer.widget.user-traffic-statistics')}

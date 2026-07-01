@@ -21,12 +21,14 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     internalSquadCount: number
 }
 
 export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { internalSquadCount } = props
 
     const { t } = useTranslation()
@@ -94,7 +96,7 @@ export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                     label={t('internal-squad-header-action-buttons.feature.create-internal-squad')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} size="input-md" variant="soft">
+                    <ActionIcon color={entityAccentColor} onClick={open} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
@@ -107,7 +109,7 @@ export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                 size="md"
                 title={
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbCirclesRelation}
                         iconVariant="soft"
                         title={t(
@@ -143,7 +145,7 @@ export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                             </Button>
 
                             <Button
-                                color="teal"
+                                color={entityAccentColor}
                                 disabled={!!nameField.error || nameField.getValue().length === 0}
                                 loading={isPending}
                                 type="submit"

@@ -1824,7 +1824,12 @@
       "layout-style": "Стиль оформления",
       "choose-how-the-desktop-navigation-is-displayed": "Выберите способ навигации по интерфейсу панели",
       "compact": "Компактный",
-      "sidebar": "Боковая панель"
+      "sidebar": "Боковая панель",
+      "theme-style": "Визуальная тема",
+      "theme-default": "Стандартная",
+      "theme-default-description": "Тёмная тема в стиле GitHub с cyan-акцентами",
+      "theme-noctis": "Noctis",
+      "theme-noctis-description": "Премиальная минималистичная тема в духе Linear и Stripe"
     }
   },
   "api-tokens-card": {

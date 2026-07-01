@@ -13,6 +13,7 @@ import { SubscriptionInfoCardWidget } from './cards/subscription-info-card.widge
 import { SubscriptionResponseHeadersCardWidget } from './cards/subscription-response-headers-card.widget'
 import { SubscriptionUserRemarksCardWidget } from './cards/subscription-user-remarks-card.widget'
 import styles from './subscription-tabs.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 interface SubscriptionTabsProps {
     subscriptionSettings: UpdateSubscriptionSettingsCommand.Response['response']
@@ -27,6 +28,7 @@ const TABS = {
 type TabKey = keyof typeof TABS
 
 export const SubscriptionSettingsTabsWidget = ({ subscriptionSettings }: SubscriptionTabsProps) => {
+    const primaryColor = usePrimaryColorName()
     const { t } = useTranslation()
 
     const [activeTab, setActiveTab] = useState<TabKey>(TABS.general)
@@ -37,7 +39,7 @@ export const SubscriptionSettingsTabsWidget = ({ subscriptionSettings }: Subscri
                 tab: styles.tab,
                 tabLabel: styles.tabLabel
             }}
-            color="cyan"
+            color={primaryColor}
             defaultValue={TABS.general}
             keepMountedMode="display-none"
             onChange={(value) => {

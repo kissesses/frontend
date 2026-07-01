@@ -17,12 +17,16 @@ import { MobileNodesListWidget } from './mobile-nodes-list.widget'
 import { MobileProvidersListWidget } from './mobile-providers-list.widget'
 import { MobileStatsWidget } from './mobile-stats.widget'
 import { VirtualizedRecordsList } from './virtualized-records-list.widget'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const RECORDS_HEIGHT = 'calc(100vh - 280px)'
 
 type TabValue = 'nodes' | 'providers' | 'records'
 
 export function MobileInfraBillingWidget() {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const [activeTab, setActiveTab] = useState<TabValue>('nodes')
     const {
         data: infraProviders,
@@ -99,7 +103,7 @@ export function MobileInfraBillingWidget() {
                     tab: styles.tab,
                     tabLabel: styles.tabLabel
                 }}
-                color="cyan"
+                color={primaryColor}
                 keepMountedMode="display-none"
                 onChange={(value) => {
                     if (value) {
@@ -191,7 +195,7 @@ export function MobileInfraBillingWidget() {
                 }}
             >
                 <ActionIcon
-                    color="cyan"
+                    color={primaryColor}
                     loading={
                         isInfraProvidersRefetching ||
                         isInfraBillingNodesRefetching ||
@@ -203,7 +207,7 @@ export function MobileInfraBillingWidget() {
                 >
                     <TbRefresh size={22} />
                 </ActionIcon>
-                <ActionIcon color="teal" onClick={handleAdd} size={40} variant="soft">
+                <ActionIcon color={entityAccentColor} onClick={handleAdd} size={40} variant="soft">
                     <TbPlus size={22} />
                 </ActionIcon>
             </Group>

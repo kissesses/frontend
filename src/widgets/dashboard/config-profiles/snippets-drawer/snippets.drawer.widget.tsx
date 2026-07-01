@@ -22,12 +22,14 @@ import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-
 
 import { CREATE_SNIPPET_MODAL_ID, CreateSnippetModal } from './create-snippet.modal'
 import { SnippetsGridWidget } from './snippets-grid.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     fromMainView?: boolean
 }
 
 export const SnippetsDrawerWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { fromMainView = false } = props
 
     const { t } = useTranslation()
@@ -52,7 +54,7 @@ export const SnippetsDrawerWidget = (props: IProps) => {
         modals.open({
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCode}
                     iconVariant="soft"
                     title={t('snippets.drawer.widget.create-snippet')}
@@ -69,7 +71,7 @@ export const SnippetsDrawerWidget = (props: IProps) => {
         modals.open({
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCode}
                     iconVariant="soft"
                     title={t('snippets.drawer.widget.snippets')}
@@ -148,7 +150,7 @@ export const SnippetsDrawerWidget = (props: IProps) => {
             <SectionCard.Section>
                 <Group align="flex-center" justify="space-between">
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbCode}
                         iconSize={20}
                         iconVariant="soft"
@@ -180,7 +182,7 @@ export const SnippetsDrawerWidget = (props: IProps) => {
 
                         {fromMainView && (
                             <ActionIcon
-                                color="teal"
+                                color={entityAccentColor}
                                 onClick={handleCreateModal}
                                 size="input-sm"
                                 variant="light"

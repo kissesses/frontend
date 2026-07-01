@@ -24,6 +24,7 @@ import { NodeConfigProfilesCard } from './node-config-profiles.card'
 import { NodeConsumptionCard } from './node-consumption.card'
 import { NodeTrackingAndBillingCard } from './node-tracking-and-billing.card'
 import { NodeVitalsCard } from './node-vitals.card'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)
@@ -72,6 +73,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
     } = props
 
     const isMobile = useIsMobile()
+    const entityAccentColor = useEntityAccentColor()
 
     return (
         <>
@@ -211,7 +213,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                     </Menu>
                 )}
                 <Button
-                    color="teal"
+                    color={entityAccentColor}
                     disabled={!form.isDirty() || !form.isTouched()}
                     leftSection={<PiFloppyDiskDuotone size="16px" />}
                     loading={isDataSubmitting}

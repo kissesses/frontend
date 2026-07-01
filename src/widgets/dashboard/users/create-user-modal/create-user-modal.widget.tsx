@@ -15,6 +15,7 @@ import {
     useGetUserTags
 } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 import {
     AccessSettingsCard,
     ContactInformationCard,
@@ -54,6 +55,7 @@ const cardVariants = {
 }
 
 export const CreateUserModalWidget = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const isModalOpen = useUserCreationModalStoreIsModalOpen()
@@ -155,7 +157,7 @@ export const CreateUserModalWidget = () => {
             size="1000px"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbUser}
                     iconVariant="soft"
                     title={t('create-user-modal.widget.create-user')}
@@ -263,7 +265,7 @@ export const CreateUserModalWidget = () => {
 
             <ModalFooter isMobile={isMobile}>
                 <Button
-                    color="teal"
+                    color={entityAccentColor}
                     leftSection={<PiFloppyDiskDuotone size="16px" />}
                     loading={isDataSubmitting}
                     onClick={() => {

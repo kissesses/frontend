@@ -7,12 +7,14 @@ import { TbDeviceFloppy } from 'react-icons/tb'
 
 import { queryClient } from '@shared/api'
 import { QueryKeys, useGetSubscriptionPageConfigs, useUpdateExternalSquad } from '@shared/api/hooks'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     externalSquad: GetExternalSquadByUuidCommand.Response['response']
 }
 
 export const ExternalSquadsSubpageConfigTabWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { externalSquad } = props
     const { t } = useTranslation()
 
@@ -76,7 +78,7 @@ export const ExternalSquadsSubpageConfigTabWidget = (props: IProps) => {
                 />
 
                 <Button
-                    color="teal"
+                    color={entityAccentColor}
                     fullWidth
                     leftSection={<TbDeviceFloppy size="1.2rem" />}
                     loading={isUpdatingExternalSquad}

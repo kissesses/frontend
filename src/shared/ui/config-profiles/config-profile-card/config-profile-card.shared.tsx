@@ -11,8 +11,10 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { ActiveNodesListModalShared } from '../active-nodes-list-modal/active-nodes-list.modal.shared'
 import { VirtualizedInboundsListShared } from '../virtualized-inbounds-list/virtualized-inbounds-list.shared'
 import { AccordionControlShared } from './accordion-control.shared'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const ConfigProfileCardShared = memo((props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const {
         hideSelectActions,
         profile,
@@ -78,7 +80,7 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                                     children: <ActiveNodesListModalShared nodes={profile.nodes} />,
                                     title: (
                                         <BaseOverlayHeader
-                                            iconColor="teal"
+                                            iconColor={entityAccentColor}
                                             IconComponent={PiCpu}
                                             iconVariant="soft"
                                             title={`Active Nodes - ${profile.name}`}

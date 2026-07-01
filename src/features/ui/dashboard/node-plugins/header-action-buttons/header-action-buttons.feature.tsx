@@ -22,8 +22,10 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const NodePluginsHeaderActionButtonsFeature = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { isFetching } = useGetNodePlugins()
@@ -108,7 +110,7 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <ActionIcon color="teal" onClick={open} size="input-md" variant="soft">
+                <ActionIcon color={entityAccentColor} onClick={open} size="input-md" variant="soft">
                     <TbPlus size="24px" />
                 </ActionIcon>
             </ActionIconGroup>
@@ -120,7 +122,7 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
                 size="md"
                 title={
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbPackage}
                         iconVariant="soft"
                         title={t('common.create')}
@@ -150,7 +152,7 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
                                 {t('common.cancel')}
                             </Button>
 
-                            <Button color="teal" loading={isPending} type="submit">
+                            <Button color={entityAccentColor} loading={isPending} type="submit">
                                 {t('common.create')}
                             </Button>
                         </Group>

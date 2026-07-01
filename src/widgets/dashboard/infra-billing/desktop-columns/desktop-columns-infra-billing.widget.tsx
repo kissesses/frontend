@@ -30,10 +30,14 @@ import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-st
 import { AddButton } from './add-button'
 import { Column } from './column'
 import { RefreshButton } from './refresh-button'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const COLUMN_HEIGHT = 'calc(100vh - 320px)'
 
 export function DesktopColumnsInfraBillingWidget() {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { t } = useTranslation()
     const openModalWithData = useModalsStoreOpenWithData()
 
@@ -133,7 +137,7 @@ export function DesktopColumnsInfraBillingWidget() {
 
     const nodesActions = selectMode ? (
         <>
-            <Badge color="cyan" radius="sm" size="lg" variant="light">
+            <Badge color={primaryColor} radius="sm" size="lg" variant="light">
                 {selectedUuids.size}
             </Badge>
 
@@ -151,7 +155,7 @@ export function DesktopColumnsInfraBillingWidget() {
 
             <Tooltip label={t('infra-billing-nodes.widget.update-multiple-nodes')} withArrow>
                 <ActionIcon
-                    color="teal"
+                    color={entityAccentColor}
                     disabled={selectedUuids.size === 0}
                     onClick={handleUpdateSelected}
                     size="input-xs"

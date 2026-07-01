@@ -14,8 +14,10 @@ import { useAuth } from '@shared/hooks/use-auth'
 import { Page } from '@shared/ui/page'
 import { consumeManagementOAuthPending } from '@shared/utils/management-oauth-pending.util'
 import { consumeReturnTo } from '@shared/utils/return-to.util'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const Oauth2CallbackPage = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { provider } = useParams()
     const { setIsAuthenticated } = useAuth()
     const { t } = useTranslation()
@@ -118,7 +120,7 @@ export const Oauth2CallbackPage = () => {
                                 {isPending ? (
                                     <Loader size="xl" variant="dots" />
                                 ) : (
-                                    <IconCheck color="teal" size={48} />
+                                    <IconCheck color={entityAccentColor} size={48} />
                                 )}
                             </div>
                         )}

@@ -31,5 +31,5 @@
         rgba(45, 212, 191, 0.04) 60%,
         rgba(45, 212, 191, 0) 100%
     );
-    box-shadow: inset 2px 0 0 0 var(--mantine-color-teal-5);
+    box-shadow: inset 2px 0 0 0 var(--app-accent-muted);
 }

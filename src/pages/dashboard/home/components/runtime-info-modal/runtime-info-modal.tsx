@@ -19,10 +19,14 @@ import { MetricEntry } from './metric-entry'
 import { ProcessCard } from './process-card'
 import classes from './runtime-info-modal.module.css'
 import { SectionShell } from './section-shell'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const TRANS_COMPONENTS = { highlight: <Code className={classes.highlight} /> }
 
 export function RuntimeInfoModalContent() {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { t } = useTranslation()
 
     return (
@@ -62,7 +66,7 @@ export function RuntimeInfoModalContent() {
                         title="Scheduler"
                     />
                     <ProcessCard
-                        color="teal"
+                        color={entityAccentColor}
                         description={
                             <Trans
                                 components={TRANS_COMPONENTS}
@@ -77,14 +81,14 @@ export function RuntimeInfoModalContent() {
 
             <SectionShell
                 accent="rgba(45, 212, 191, 0.25)"
-                color="teal"
+                color={entityAccentColor}
                 description={t('home.runtime-info.memory-description')}
                 Icon={TbServer}
                 title="Memory"
             >
                 <Stack gap="md">
                     <MetricEntry
-                        color="teal"
+                        color={entityAccentColor}
                         description={
                             <Trans
                                 components={TRANS_COMPONENTS}
@@ -95,7 +99,7 @@ export function RuntimeInfoModalContent() {
                         title="Heap"
                     />
                     <MetricEntry
-                        color="cyan"
+                        color={primaryColor}
                         description={
                             <Trans
                                 components={TRANS_COMPONENTS}

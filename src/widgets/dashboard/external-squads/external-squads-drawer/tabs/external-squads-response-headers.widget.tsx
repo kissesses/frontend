@@ -9,6 +9,7 @@ import { TbDeviceFloppy } from 'react-icons/tb'
 import { queryClient } from '@shared/api'
 import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface HeaderItem {
     key: string
@@ -24,6 +25,7 @@ const HEADER_NAME_REGEX = /^[!#$%&'*+\-.0-9A-Z^_`a-z|~]+$/
 const HEADER_VALUE_REGEX = /^$|^[\x21-\x7E]([\x20-\x7E]*[\x21-\x7E])?$/
 
 export const ExternalSquadsResponseHeadersTabWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { externalSquad, isOpen } = props
     const { t } = useTranslation()
 
@@ -234,7 +236,7 @@ export const ExternalSquadsResponseHeadersTabWidget = (props: IProps) => {
                         {t('headers-manager.widget.add-header')}
                     </Button>
                     <Button
-                        color="teal"
+                        color={entityAccentColor}
                         leftSection={<TbDeviceFloppy size="1.2rem" />}
                         loading={isUpdatingExternalSquad}
                         onClick={handleUpdateExternalSquad}

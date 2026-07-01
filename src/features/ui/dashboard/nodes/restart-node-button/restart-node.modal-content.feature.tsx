@@ -5,6 +5,7 @@ import { TbAlertCircle, TbRocket } from 'react-icons/tb'
 
 import { useRestartNode } from '@shared/api/hooks'
 import { ActionCardShared } from '@shared/ui/action-card'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     handleClose: () => void
@@ -12,6 +13,7 @@ interface IProps {
 }
 
 export function RestartNodeModalContentFeature(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { handleClose, nodeUuid } = props
     const { t } = useTranslation()
 
@@ -50,7 +52,7 @@ export function RestartNodeModalContentFeature(props: IProps) {
             <ActionCardShared
                 description={t('restart-node-button.feature.restart-description-line-2')}
                 icon={<TbRocket size={22} />}
-                iconColor="teal"
+                iconColor={entityAccentColor}
                 isLoading={isPending}
                 onClick={() => {
                     restartNode({

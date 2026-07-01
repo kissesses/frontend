@@ -19,19 +19,23 @@ import { TbHealthRecognition, TbKey, TbLink } from 'react-icons/tb'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import styles from '../subpage-config-visual-editor.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     form: UseFormReturnType<TSubscriptionPageRawConfig>
 }
 
 export function BaseSettingsBlockComponent({ form }: IProps) {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { t } = useTranslation()
 
     return (
         <Card className={styles.sectionCard} p="lg" radius="lg">
             <Stack gap="md">
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbHealthRecognition}
                     iconSize={20}
                     iconVariant="soft"
@@ -66,7 +70,7 @@ export function BaseSettingsBlockComponent({ form }: IProps) {
                     >
                         <Group justify="space-between" wrap="nowrap">
                             <Group gap="sm" wrap="nowrap">
-                                <ThemeIcon color="cyan" size="lg" variant="soft">
+                                <ThemeIcon color={primaryColor} size="lg" variant="soft">
                                     <TbKey size={20} />
                                 </ThemeIcon>
                                 <Stack gap={2}>
@@ -110,7 +114,7 @@ export function BaseSettingsBlockComponent({ form }: IProps) {
                     >
                         <Group justify="space-between" wrap="nowrap">
                             <Group gap="sm" wrap="nowrap">
-                                <ThemeIcon color="cyan" size="lg" variant="soft">
+                                <ThemeIcon color={primaryColor} size="lg" variant="soft">
                                     <TbLink size={20} />
                                 </ThemeIcon>
                                 <Stack gap={2}>

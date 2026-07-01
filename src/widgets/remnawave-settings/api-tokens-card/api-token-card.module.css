@@ -149,7 +149,7 @@
 .kindPillActive {
     background: rgb(45, 212, 168, 0.05);
     border-color: var(--mantine-color-teal-9);
-    color: var(--mantine-color-teal-4);
+    color: var(--app-card-title-hover);
 }
 
 .oneTimeNotice {

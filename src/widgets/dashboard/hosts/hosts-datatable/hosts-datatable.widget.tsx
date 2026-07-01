@@ -15,6 +15,7 @@ import {
     useGetSubscriptionTemplates
 } from '@shared/api/hooks'
 import { usePreventTableBackScroll } from '@shared/hooks'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 import { DataTableControls, LoadingScreen, sortRecords } from '@shared/ui'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -50,6 +51,7 @@ const DEFAULT_SORT_STATUS: DataTableSortStatus<HostType> = {
 export const HostsDataTableWidget = memo((props: IProps) => {
     const { configProfiles, hosts, selectedHosts, setSelectedHosts, state } = props
     const { t } = useTranslation()
+    const entityAccentColor = useEntityAccentColor()
 
     const [sortStatus, setSortStatus] = useState<DataTableSortStatus<HostType>>(DEFAULT_SORT_STATUS)
 
@@ -166,7 +168,7 @@ export const HostsDataTableWidget = memo((props: IProps) => {
         setColumnsToggle
     } = useDataTableColumns({
         key: HOSTS_CACHE_KEY,
-        columns: getHostsTableColumns(t, handleViewHost, filters)
+        columns: getHostsTableColumns(t, handleViewHost, filters, entityAccentColor)
     })
 
     const columnLabels = useMemo(() => getHostColumnLabels(t), [t])

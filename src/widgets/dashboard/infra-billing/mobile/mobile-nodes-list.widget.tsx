@@ -24,6 +24,8 @@ import { SectionCard } from '@shared/ui/section-card'
 import { formatTimeUtil } from '@shared/utils/time-utils'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 type BillingNode = GetInfraBillingNodesCommand.Response['response']['billingNodes'][number]
 
@@ -48,6 +50,8 @@ interface IProps {
 }
 
 export function MobileNodesListWidget(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { nodes, style, selectMode = false, selectedUuids, onToggleSelect } = props
     const openModalWithData = useModalsStoreOpenWithData()
     const { t, i18n } = useTranslation()
@@ -176,7 +180,7 @@ export function MobileNodesListWidget(props: IProps) {
                                                 {selectMode && (
                                                     <Checkbox
                                                         checked={isSelected}
-                                                        color="cyan"
+                                                        color={primaryColor}
                                                         readOnly
                                                     />
                                                 )}
@@ -229,7 +233,7 @@ export function MobileNodesListWidget(props: IProps) {
                                                     )}
 
                                                     <ActionIcon
-                                                        color="teal"
+                                                        color={entityAccentColor}
                                                         loading={updatingUuids.has(node.uuid)}
                                                         onClick={() =>
                                                             handleQuickUpdate(

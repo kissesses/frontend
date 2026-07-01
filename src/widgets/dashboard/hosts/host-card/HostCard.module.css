@@ -8,8 +8,8 @@
 
     background: linear-gradient(
         135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
+        var(--app-surface) 0%,
+        var(--app-surface-raised) 100%
     );
     box-shadow: var(--mantine-shadow-sm);
 }
@@ -23,8 +23,8 @@
     height: 190px;
     background: linear-gradient(
         135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
+        var(--app-surface) 0%,
+        var(--app-surface-raised) 100%
     );
 }
 
@@ -33,8 +33,8 @@
     box-shadow: var(--mantine-shadow-lg);
     background: linear-gradient(
         135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
+        var(--app-surface) 0%,
+        var(--app-surface-raised) 100%
     );
 }
 
@@ -55,7 +55,7 @@
 }
 
 .itemDragging {
-    border: 1px solid light-dark(var(--mantine-color-blue-5), var(--mantine-color-teal-5));
+    border: 1px solid light-dark(var(--mantine-color-blue-5), var(--app-accent-muted));
     box-shadow: var(--mantine-shadow-xl);
     z-index: 1000;
 }
@@ -171,8 +171,8 @@
 }
 
 .statusActive {
-    background-color: light-dark(var(--mantine-color-teal-1), var(--mantine-color-teal-9));
-    color: var(--mantine-color-teal-7);
+    background-color: var(--app-accent-subtle);
+    color: var(--app-accent);
 }
 
 .statusInactive {

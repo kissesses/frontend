@@ -27,6 +27,7 @@ import { queryClient } from '@shared/api/query-client'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 import { BaseOverlayHeader } from '../overlays/base-overlay-header'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 type RenameType =
     | 'configProfile'
@@ -42,6 +43,7 @@ interface IProps {
 }
 
 export function RenameModalShared({ renameFrom }: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { isOpen, internalState } = useModalState(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
@@ -274,7 +276,7 @@ export function RenameModalShared({ renameFrom }: IProps) {
             opened={isOpen}
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbPencil}
                     iconVariant="soft"
                     title={t('common.rename')}
@@ -302,7 +304,7 @@ export function RenameModalShared({ renameFrom }: IProps) {
                             {t('common.cancel')}
                         </Button>
                         <Button
-                            color="teal"
+                            color={entityAccentColor}
                             disabled={!!nameField.error || !nameField.getValue()}
                             leftSection={<TbDeviceFloppy size="1.2rem" />}
                             loading={isLoading}

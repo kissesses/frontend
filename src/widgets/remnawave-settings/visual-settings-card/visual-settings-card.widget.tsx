@@ -1,23 +1,30 @@
-import { Group, SegmentedControl, Stack } from '@mantine/core'
+import { Group, SegmentedControl, Stack, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { TbLayoutNavbar, TbLayoutSidebar } from 'react-icons/tb'
+import { TbLayoutNavbar, TbLayoutSidebar, TbPalette } from 'react-icons/tb'
 
+import { UI_THEME } from '@shared/constants/theme'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 import { useIsMobile } from '@shared/hooks'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 
 import {
     LAYOUT_STYLE,
     useLayoutStyle,
-    useToggleLayoutStyleAction
+    useSetUiThemeAction,
+    useToggleLayoutStyleAction,
+    useUiTheme
 } from '@entities/dashboard/view-preferences-store'
 
 export const VisualSettingsCardWidget = () => {
     const { t } = useTranslation()
 
     const isMobile = useIsMobile()
+    const primaryColor = usePrimaryColorName()
 
     const layoutStyle = useLayoutStyle()
+    const uiTheme = useUiTheme()
     const toggleLayoutStyle = useToggleLayoutStyleAction()
+    const setUiTheme = useSetUiThemeAction()
 
     if (isMobile) {
         return null
@@ -30,7 +37,7 @@ export const VisualSettingsCardWidget = () => {
                     'visual-settings-card.widget.choose-how-the-desktop-navigation-is-displayed'
                 )}
                 icon={<TbLayoutSidebar size={24} />}
-                iconColor="cyan"
+                iconColor={primaryColor}
                 iconVariant="soft"
                 title={t('visual-settings-card.widget.layout-style')}
             />
@@ -62,6 +69,35 @@ export const VisualSettingsCardWidget = () => {
                         onChange={() => toggleLayoutStyle()}
                         value={layoutStyle}
                     />
+
+                    <Stack gap="xs">
+                        <Group gap="xs">
+                            <TbPalette size={18} />
+                            <Text fw={500} size="sm">
+                                {t('visual-settings-card.widget.theme-style')}
+                            </Text>
+                        </Group>
+                        <Text c="dimmed" size="xs">
+                            {uiTheme === UI_THEME.NOCTIS
+                                ? t('visual-settings-card.widget.theme-noctis-description')
+                                : t('visual-settings-card.widget.theme-default-description')}
+                        </Text>
+                        <SegmentedControl
+                            data={[
+                                {
+                                    label: t('visual-settings-card.widget.theme-default'),
+                                    value: UI_THEME.DEFAULT
+                                },
+                                {
+                                    label: t('visual-settings-card.widget.theme-noctis'),
+                                    value: UI_THEME.NOCTIS
+                                }
+                            ]}
+                            fullWidth
+                            onChange={(value) => setUiTheme(value as UI_THEME)}
+                            value={uiTheme}
+                        />
+                    </Stack>
                 </Stack>
             </SettingsCardShared.Content>
         </SettingsCardShared.Container>

@@ -13,7 +13,8 @@ export default {
         },
         defaultProps: {
             radius: 'md',
-            centered: true
+            centered: true,
+            transitionProps: { duration: 200, transition: 'pop' }
         }
     })
 }

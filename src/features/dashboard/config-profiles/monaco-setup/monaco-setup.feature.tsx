@@ -10,7 +10,7 @@ import consola from 'consola'
 import { app } from 'src/config'
 import zodToJsonSchema, { jsonDescription } from 'zod-to-json-schema'
 
-import { monacoTheme } from '@shared/constants/monaco-theme'
+import { applyMonacoTheme, MONACO_THEME_NAME } from '@shared/constants/monaco-theme'
 
 export const MonacoSetupFeature = {
     setup: async (
@@ -281,10 +281,7 @@ export const MonacoSetupResponseRulesFeature = {
                 selectionRanges: true
             })
 
-            monaco.editor.defineTheme('GithubDark', {
-                ...monacoTheme,
-                base: 'vs-dark'
-            })
+            applyMonacoTheme(monaco)
         } catch (error) {
             consola.error('Failed to load JSON schema:', error)
         }
@@ -329,10 +326,7 @@ export const MonacoSetupNodePluginEditorFeature = {
                 selectionRanges: true
             })
 
-            monaco.editor.defineTheme('GithubDark', {
-                ...monacoTheme,
-                base: 'vs-dark'
-            })
+            applyMonacoTheme(monaco)
         } catch (error) {
             consola.error('Failed to load JSON schema:', error)
         }

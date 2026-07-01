@@ -10,6 +10,7 @@ import { LottieStopShared } from '@shared/ui/lotties/stop'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { useNodesStoreActions } from '@entities/dashboard/nodes'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     nodeUuid?: string
@@ -23,6 +24,7 @@ enum STATUS {
 }
 
 export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
     const actions = useNodesStoreActions()
 
@@ -105,7 +107,7 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
 
                         {status === STATUS.CONNECTED && (
                             <>
-                                <Badge color="teal" size="lg" variant="light">
+                                <Badge color={entityAccentColor} size="lg" variant="light">
                                     {t('create-node-modal.widget.connection-successful')}
                                 </Badge>
                                 <Text c="dimmed" fw={600} size="sm" ta="center">
@@ -133,7 +135,7 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
 
             {!errorMessage && (
                 <Alert
-                    color="teal"
+                    color={entityAccentColor}
                     icon={<TbCheck size={20} />}
                     title={t('create-node-step-3-status.no-errros-so-far')}
                     variant="light"

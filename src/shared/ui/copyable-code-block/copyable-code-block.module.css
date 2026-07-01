@@ -65,5 +65,5 @@
 
 .copyButton[data-copied='true'] {
     opacity: 1;
-    color: var(--mantine-color-teal-5);
+    color: var(--app-accent-muted);
 }

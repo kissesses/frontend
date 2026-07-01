@@ -11,6 +11,7 @@ import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { handleFormErrors } from '@shared/utils/misc'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface HeaderItem {
     key: string
@@ -25,6 +26,7 @@ const HEADER_NAME_REGEX = /^[!#$%&'*+\-.0-9A-Z^_`a-z|~]+$/
 const HEADER_VALUE_REGEX = /^$|^[\x21-\x7E]([\x20-\x7E]*[\x21-\x7E])?$/
 
 export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { subscriptionSettings } = props
     const { t } = useTranslation()
 
@@ -185,7 +187,6 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                         'subscription-tabs.widget.headers-that-will-be-sent-with-subscription-content'
                     )}
                     icon={<PiChatsCircle size={24} />}
-                    iconColor="cyan"
                     iconVariant="soft"
                     title={t('subscription-tabs.widget.additional-response-headers')}
                 />
@@ -248,7 +249,7 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                         >
                             {t('headers-manager.widget.add-header')}
                         </Button>
-                        <Button color="teal" loading={isPending} size="md" type="submit">
+                        <Button color={entityAccentColor} loading={isPending} size="md" type="submit">
                             {t('common.save')}
                         </Button>
                     </Group>

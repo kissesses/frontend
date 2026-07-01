@@ -27,12 +27,14 @@ import {
 import { ROUTES } from '@shared/constants'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     templateType: TSubscriptionTemplateType
 }
 
 export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { templateType } = props
     const { t } = useTranslation()
 
@@ -92,7 +94,7 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
 
             <ActionIconGroup>
                 <Tooltip label={t('header-action-buttons.feature.create-new-template')} withArrow>
-                    <ActionIcon color="teal" onClick={open} size="input-md" variant="soft">
+                    <ActionIcon color={entityAccentColor} onClick={open} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
@@ -105,7 +107,7 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
                 size="md"
                 title={
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbFolder}
                         iconVariant="soft"
                         title={t('header-action-buttons.feature.create-new-template')}
@@ -136,7 +138,7 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
                                 {t('common.cancel')}
                             </Button>
 
-                            <Button color="teal" loading={isPending} type="submit">
+                            <Button color={entityAccentColor} loading={isPending} type="submit">
                                 {t('common.create')}
                             </Button>
                         </Group>

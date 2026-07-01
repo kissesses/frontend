@@ -28,6 +28,7 @@ import { Logo } from '@shared/ui'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { handleFormErrors } from '@shared/utils/misc'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     brandingSettings: NonNullable<
@@ -36,6 +37,7 @@ interface IProps {
 }
 
 export const BrandingSettingsCardWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { brandingSettings } = props
     const { t } = useTranslation()
 
@@ -193,7 +195,6 @@ export const BrandingSettingsCardWidget = (props: IProps) => {
                             'branding-settings-card.widget.customize-your-remnawave-instance'
                         )}
                         icon={<Logo size={24} />}
-                        iconColor="cyan"
                         iconVariant="soft"
                         title={t('branding-settings-card.widget.branding-settings')}
                     />
@@ -227,7 +228,7 @@ export const BrandingSettingsCardWidget = (props: IProps) => {
 
                     <SettingsCardShared.Bottom>
                         <Group justify="flex-end">
-                            <Button color="teal" loading={isUpdatePending} size="md" type="submit">
+                            <Button color={entityAccentColor} loading={isUpdatePending} size="md" type="submit">
                                 {t('common.save')}
                             </Button>
                         </Group>

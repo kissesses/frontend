@@ -13,13 +13,13 @@
 }
 
 .card:hover {
-    border-color: light-dark(var(--mantine-color-cyan-4), var(--mantine-color-cyan-8));
+    border-color: light-dark(var(--app-nav-active), var(--app-accent-muted));
     box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
 }
 
 .card[data-selected] {
-    border-color: var(--mantine-color-cyan-6);
-    box-shadow: 0 0 0 1px var(--mantine-color-cyan-7);
+    border-color: var(--app-accent);
+    box-shadow: 0 0 0 1px var(--app-accent-light);
 }
 
 .inner {

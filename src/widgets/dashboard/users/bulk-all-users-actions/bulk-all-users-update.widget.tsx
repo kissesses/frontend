@@ -11,6 +11,7 @@ import { useBulkAllUpdateUsers, useGetExternalSquads, useGetUserTags } from '@sh
 import { BulkFormsUsersShared } from '@shared/ui/forms/users/bulk-forms-components'
 import { ModalFooter } from '@shared/ui/modal-footer'
 import { handleFormErrors } from '@shared/utils/misc'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)
@@ -38,6 +39,7 @@ interface IProps {
 }
 
 export const BulkAllUsersUpdateWidget = (props: IProps) => {
+    const primaryColor = usePrimaryColorName()
     const { isMobile } = props
 
     const { t } = useTranslation()
@@ -187,7 +189,7 @@ export const BulkAllUsersUpdateWidget = (props: IProps) => {
 
             <ModalFooter isMobile={isMobile}>
                 <Button
-                    color="cyan"
+                    color={primaryColor}
                     leftSection={<PiFloppyDiskDuotone size="16px" />}
                     loading={isUpdatePending}
                     onClick={() => {

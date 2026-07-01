@@ -20,7 +20,7 @@
     background: linear-gradient(
         90deg,
         transparent 0%,
-        var(--accent-color, var(--mantine-color-teal-6)) 50%,
+        var(--accent-color, var(--app-accent)) 50%,
         transparent 100%
     );
     z-index: 1;

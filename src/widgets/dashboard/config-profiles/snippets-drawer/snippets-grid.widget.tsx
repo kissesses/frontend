@@ -25,12 +25,14 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { EDIT_SNIPPET_MODAL_ID, EditSnippetModal } from './edit-snippet.modal'
 import classes from './SnippetsDrawer.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     snippets: GetSnippetsCommand.Response['response'] | undefined
 }
 
 export const SnippetsGridWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { snippets } = props
 
     const { mutate: deleteSnippet, isPending: isDeleting } = useDeleteSnippet({
@@ -79,7 +81,7 @@ export const SnippetsGridWidget = (props: IProps) => {
             modalId: EDIT_SNIPPET_MODAL_ID,
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCode}
                     iconVariant="soft"
                     title={t('snippets.drawer.widget.edit-snippet')}

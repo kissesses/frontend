@@ -21,8 +21,10 @@ import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const CreateHostModalWidget = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { isOpen } = useModalState(MODALS.CREATE_HOST_MODAL)
@@ -191,7 +193,7 @@ export const CreateHostModalWidget = () => {
             size="lg"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={PiListChecks}
                     iconVariant="soft"
                     title={t('create-host-modal.widget.new-host')}

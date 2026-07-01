@@ -17,8 +17,10 @@ import { handleFormErrors } from '@shared/utils/misc'
 import { toUtcDayISO } from '@shared/utils/time-utils'
 
 import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function CreateInfraBillingRecordDrawerWidget() {
+    const entityAccentColor = useEntityAccentColor()
     const isOpen = useModalIsOpen(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
     const close = useModalClose(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
 
@@ -97,7 +99,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
             opened={isOpen}
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbInvoice}
                     iconVariant="soft"
                     title={t('create-infra-billing-record.modal.widget.bill-record')}

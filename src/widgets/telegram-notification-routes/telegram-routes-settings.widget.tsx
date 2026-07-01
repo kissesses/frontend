@@ -9,6 +9,7 @@ import {
     Text,
     TextInput
 } from '@mantine/core'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 import { useForm } from '@mantine/form'
 import {
     GetTelegramNotificationRoutesCommand,
@@ -40,6 +41,7 @@ interface IProps {
 }
 
 export const TelegramRoutesSettingsWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { routes } = props
     const { t } = useTranslation()
 
@@ -116,7 +118,7 @@ export const TelegramRoutesSettingsWidget = (props: IProps) => {
                             {...form.getInputProps('chatId')}
                         />
 
-                        <Paper bg="dark.7" p="sm" withBorder>
+                        <Paper className="app-raised-surface" p="sm" withBorder>
                             <Stack gap="xs">
                                 {TELEGRAM_NOTIFICATION_ROUTE_CATEGORIES.map((category) => {
                                     const topicField = TELEGRAM_ROUTE_TOPIC_FIELD[category]
@@ -173,7 +175,7 @@ export const TelegramRoutesSettingsWidget = (props: IProps) => {
                             {t('telegram-routes.widget.create-topics')}
                         </Button>
                         <Button
-                            color="teal"
+                            color={entityAccentColor}
                             leftSection={<TbDeviceFloppy size="1.1rem" />}
                             loading={isUpdating}
                             type="submit"

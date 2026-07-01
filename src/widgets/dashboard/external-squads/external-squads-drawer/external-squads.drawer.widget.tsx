@@ -45,6 +45,7 @@ import {
 } from './tabs'
 import { ExternalSquadsCustomRemarksTabWidget } from './tabs/external-squads-custom-remarks.widget'
 import { ExternalSquadsResponseHeadersTabWidget } from './tabs/external-squads-response-headers.widget'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 const TAB_TYPE = {
     settings: 'settings',
@@ -59,6 +60,7 @@ const TAB_TYPE = {
 type TabType = (typeof TAB_TYPE)[keyof typeof TAB_TYPE]
 
 export const ExternalSquadsDrawer = memo(() => {
+    const primaryColor = usePrimaryColorName()
     const { t } = useTranslation()
 
     const [activeTab, setActiveTab] = useState<TabType>('templates')
@@ -165,7 +167,7 @@ export const ExternalSquadsDrawer = memo(() => {
                         tab: classes.tab,
                         tabLabel: classes.tabLabel
                     }}
-                    color="cyan"
+                    color={primaryColor}
                     defaultValue={TAB_TYPE.templates}
                     keepMountedMode="display-none"
                     onChange={(value) => {

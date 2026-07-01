@@ -24,8 +24,10 @@ import { InternalSquadsListSimpleWidgetShared } from '@shared/ui/internal-squads
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const ConfigProfileInboundsDrawerWidget = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { isOpen, internalState } = useModalState(MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER)
@@ -110,7 +112,7 @@ export const ConfigProfileInboundsDrawerWidget = () => {
                                                         ),
                                                         title: (
                                                             <BaseOverlayHeader
-                                                                iconColor="teal"
+                                                                iconColor={entityAccentColor}
                                                                 IconComponent={TbTag}
                                                                 iconVariant="soft"
                                                                 title={inbound.tag}
@@ -190,7 +192,7 @@ export const ConfigProfileInboundsDrawerWidget = () => {
             size="500px"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCirclesRelation}
                     iconVariant="soft"
                     title={t('config-profile-inbounds.drawer.widget.inbounds-with-active-squads')}

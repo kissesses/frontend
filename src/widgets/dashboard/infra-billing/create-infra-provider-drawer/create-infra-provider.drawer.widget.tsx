@@ -11,8 +11,10 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { handleFormErrors } from '@shared/utils/misc'
 
 import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function CreateInfraProviderDrawerWidget() {
+    const entityAccentColor = useEntityAccentColor()
     const isOpen = useModalIsOpen(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
     const close = useModalClose(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
 
@@ -64,7 +66,7 @@ export function CreateInfraProviderDrawerWidget() {
             size="md"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbServer}
                     iconVariant="soft"
                     title={t('view-infra-provider.drawer.widget.infra-provider')}

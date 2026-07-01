@@ -18,6 +18,7 @@ import { TbChartLine, TbMinus, TbPlus } from 'react-icons/tb'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     cardVariants: Variants
@@ -26,6 +27,7 @@ interface IProps {
 }
 
 export const NodeConsumptionCard = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
     const { cardVariants, form, motionWrapper } = props
     const handlersRef = useRef<NumberInputHandlers>(null)
@@ -78,7 +80,7 @@ export const NodeConsumptionCard = (props: IProps) => {
                             min={0}
                             rightSection={
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     onClick={() => handlersRef.current?.increment()}
                                     radius="md"
                                     size={rem(44)}
@@ -160,7 +162,7 @@ export const NodeConsumptionCard = (props: IProps) => {
                             min={0}
                             rightSection={
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     onClick={() => handlersRef.current?.increment()}
                                     radius="md"
                                     size={rem(44)}

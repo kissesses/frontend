@@ -9,6 +9,7 @@ import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlig
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { HOSTS_VIEW_MODE } from '@entities/dashboard/view-preferences-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     setViewMode: (viewMode: HOSTS_VIEW_MODE) => void
@@ -16,6 +17,7 @@ interface IProps {
 }
 
 export const HeaderActionButtonsFeature = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { setViewMode, viewMode } = props
 
     const { t } = useTranslation()
@@ -78,7 +80,7 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
 
             <ActionIconGroup>
                 <Tooltip label={t('header-action-buttons.feature.create-new-host')} withArrow>
-                    <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="soft">
+                    <ActionIcon color={entityAccentColor} onClick={handleCreate} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>

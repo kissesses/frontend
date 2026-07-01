@@ -22,6 +22,7 @@ import { z } from 'zod'
 
 import { queryClient } from '@shared/api'
 import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IFieldConfig {
     description?: string
@@ -53,6 +54,7 @@ interface IProps<T extends Record<string, unknown>> {
 export function ExternalSquadOverridesTab<T extends Record<string, unknown>>(props: IProps<T>) {
     const { externalSquad, isOpen, config } = props
     const { t } = useTranslation()
+    const entityAccentColor = useEntityAccentColor()
 
     const [overrides, setOverrides] = useState<T>({} as T)
     const [errors, setErrors] = useState<Record<string, string>>({})
@@ -309,7 +311,7 @@ export function ExternalSquadOverridesTab<T extends Record<string, unknown>>(pro
                             const isCheckbox = inputType === 'boolean'
 
                             return (
-                                <Paper bg="dark.7" key={String(field)} p="md" withBorder>
+                                <Paper className="app-raised-surface" key={String(field)} p="md" withBorder>
                                     <Group align="center" gap="xs" wrap="nowrap">
                                         <Box style={{ flex: 1 }}>
                                             {renderField(field as keyof T)}
@@ -350,7 +352,7 @@ export function ExternalSquadOverridesTab<T extends Record<string, unknown>>(pro
             </Stack>
 
             <Button
-                color="teal"
+                color={entityAccentColor}
                 fullWidth
                 leftSection={<TbDeviceFloppy size="1.2rem" />}
                 loading={isUpdatingExternalSquad}

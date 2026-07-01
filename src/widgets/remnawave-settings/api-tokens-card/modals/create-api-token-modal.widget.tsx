@@ -47,6 +47,7 @@ import {
     ScopeResource
 } from './scopes.utils'
 import { ViewApiTokenContentWidget } from './view-api-token-modal.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const DEFAULT_EXPIRES_IN_DAYS = 30
 
@@ -63,6 +64,7 @@ interface IProps {
 }
 
 export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { data: scopesData } = useGetScopes()
@@ -95,7 +97,7 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
                 modals.open({
                     title: (
                         <BaseOverlayHeader
-                            iconColor="teal"
+                            iconColor={entityAccentColor}
                             IconComponent={TbCookie}
                             iconVariant="soft"
                             title={data.name}
@@ -324,7 +326,7 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
                 </ActionIconGroup>
 
                 <Button
-                    color="teal"
+                    color={entityAccentColor}
                     disabled={!canCreate}
                     leftSection={<TbCookie size="24px" />}
                     loading={isPending}

@@ -10,8 +10,10 @@ import { ActionCardShared } from '@shared/ui/action-card'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { IProps } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function RevokeSubscriptionUserFeature(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { userUuid } = props
     const { t } = useTranslation()
 
@@ -72,7 +74,7 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
         modals.open({
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={PiKeyDuotone}
                     iconVariant="soft"
                     title={t('revoke-subscription-user.feature.revoke')}

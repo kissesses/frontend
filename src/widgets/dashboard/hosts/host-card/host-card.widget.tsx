@@ -45,6 +45,7 @@ import { openOrNavigate } from '@shared/utils/open-or-navigate'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
 import classes from './HostCard.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export interface IProps {
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'] | undefined
@@ -59,6 +60,7 @@ export interface IProps {
 }
 
 export function HostCardWidget(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const {
         nodesByUuid,
         item,
@@ -202,7 +204,7 @@ export function HostCardWidget(props: IProps) {
 
                         {isHostActive && !item.isHidden && (
                             <ActionIcon
-                                color="teal"
+                                color={entityAccentColor}
                                 size="lg"
                                 style={{ flexShrink: 0 }}
                                 variant="soft"
@@ -387,7 +389,7 @@ export function HostCardWidget(props: IProps) {
 
                             {isHostActive && !item.isHidden && (
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     size="md"
                                     style={{ flexShrink: 0 }}
                                     variant="soft"

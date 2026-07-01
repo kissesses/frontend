@@ -35,8 +35,10 @@ import { SectionCardRoot } from '@shared/ui/section-card/section-card.root'
 import { SectionCardSection } from '@shared/ui/section-card/section-card.section'
 
 import { IProps } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function GetUserSubscriptionLinksFeature(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { uuid } = props
     const { t } = useTranslation()
 
@@ -62,7 +64,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
             size: 'auto',
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={PiQrCodeDuotone}
                     iconVariant="soft"
                     title={remark}
@@ -185,7 +187,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                 size="md"
                 title={
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={PiLinkBreakDuotone}
                         iconVariant="soft"
                         title={t('get-user-subscription-links.feature.connection-keys')}
@@ -203,7 +205,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
 
             <Tooltip label={t('get-user-subscription-links.feature.connection-keys')}>
                 <ActionIcon
-                    color="teal"
+                    color={entityAccentColor}
                     loading={isLoading}
                     onClick={handlers.open}
                     size="lg"

@@ -2,6 +2,7 @@ import { Sparkline } from '@mantine/charts'
 import { Box, Card, SimpleGrid, Skeleton, Stack, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 
+import { useSparklineTrendColors } from '@shared/hocs/theme-applier'
 import { prettifyBytesUtil } from '@shared/utils/bytes'
 
 interface IProps {
@@ -11,6 +12,7 @@ interface IProps {
 
 export const UserUsageSparklineCardWidget = (props: IProps) => {
     const { sparklineData = [], isLoading } = props
+    const trendColors = useSparklineTrendColors()
 
     const { t } = useTranslation()
 
@@ -79,11 +81,7 @@ export const UserUsageSparklineCardWidget = (props: IProps) => {
                             fillOpacity={0.3}
                             h={100}
                             strokeWidth={2}
-                            trendColors={{
-                                negative: 'red.6',
-                                neutral: 'gray.5',
-                                positive: 'teal.6'
-                            }}
+                            trendColors={trendColors}
                             w="100%"
                         />
                     )}

@@ -43,8 +43,10 @@ import { USERS_VIEW_MODE } from '@entities/dashboard/view-preferences-store'
 
 import { UsersTableTemplatesFeature } from '../users-table-templates/users-table-templates.feature'
 import { IProps } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const UserActionGroupFeature = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const isMobile = useIsMobile()
@@ -181,7 +183,6 @@ export const UserActionGroupFeature = (props: IProps) => {
                                 modals.open({
                                     title: (
                                         <BaseOverlayHeader
-                                            iconColor="cyan"
                                             IconComponent={TbDots}
                                             iconVariant="soft"
                                             title={t(
@@ -217,7 +218,7 @@ export const UserActionGroupFeature = (props: IProps) => {
 
                     <Tooltip label={t('action-group.feature.new-user')} withArrow>
                         <ActionIcon
-                            color="teal"
+                            color={entityAccentColor}
                             onClick={handleOpenCreateUserModal}
                             size="input-md"
                             variant="soft"
@@ -238,7 +239,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 size="500px"
                 title={
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbQuestionMark}
                         iconVariant="soft"
                         title={t('action-group.feature.table-controls-help')}

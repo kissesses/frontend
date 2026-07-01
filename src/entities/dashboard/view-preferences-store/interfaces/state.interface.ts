@@ -1,3 +1,5 @@
+import { UI_THEME } from '@shared/constants/theme'
+
 import { CONFIG_PROFILES_VIEW_MODE, HOSTS_VIEW_MODE, LAYOUT_STYLE, NODES_VIEW_MODE, USERS_VIEW_MODE } from './enums'
 
 export interface IState {
@@ -8,4 +10,5 @@ export interface IState {
     nodesViewMode: NODES_VIEW_MODE
     usersViewMode: USERS_VIEW_MODE
     layoutStyle: LAYOUT_STYLE
+    uiTheme: UI_THEME
 }

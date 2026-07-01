@@ -37,7 +37,6 @@ export function openPlatformAppsModal(platform: IPlatformDatum, isMobile: boolea
         title: (
             <BaseOverlayHeader
                 IconComponent={PiAppWindowDuotone}
-                iconColor="cyan"
                 iconVariant="soft"
                 subtitle={formatCount(platform.value)}
                 title={platform.name}

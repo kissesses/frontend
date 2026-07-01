@@ -10,6 +10,8 @@ import '@mantine/spotlight/styles.css'
 import '@kastov/mantine-react-table-open/styles.css'
 import '@gfazioli/mantine-list-view-table/styles.css'
 import '@kastov/mantine-datatable/styles.css'
+import '@shared/constants/theme/app-tokens.css'
+import '@shared/constants/theme/themes/noctis/tokens.css'
 import './global.css'
 import { Center, DirectionProvider, MantineProvider, v8CssVariablesResolver } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
@@ -24,11 +26,14 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { Suspense, useEffect } from 'react'
 import { I18nextProvider } from 'react-i18next'
 
-import { theme } from '@shared/constants'
+import { getMantineTheme } from '@shared/constants/theme'
 import { AuthProvider } from '@shared/hocs/auth-provider'
+import { ThemeApplier } from '@shared/hocs/theme-applier'
 // import { StrictMode } from 'react'
 import { IsMobileProvider } from '@shared/hocs/is-mobile-provider'
 import { LoadingScreen } from '@shared/ui'
+
+import { useUiTheme } from '@entities/dashboard/view-preferences-store'
 
 import i18n from './app/i18n/i18n'
 import { Router } from './app/router/router'
@@ -37,6 +42,36 @@ import { queryClient } from './shared/api'
 dayjs.extend(customParseFormat)
 
 polyfillCountryFlagEmojis()
+
+function AppProviders() {
+    const uiTheme = useUiTheme()
+    const mantineTheme = getMantineTheme(uiTheme)
+
+    return (
+        <ThemeApplier>
+            <MantineProvider
+                cssVariablesResolver={v8CssVariablesResolver}
+                defaultColorScheme="dark"
+                deduplicateInlineStyles
+                theme={mantineTheme}
+            >
+                <ModalsProvider>
+                    <Notifications position="top-right" />
+                    <NavigationProgress />
+                    <Suspense
+                        fallback={
+                            <Center h="100%">
+                                <LoadingScreen height="60vh" />
+                            </Center>
+                        }
+                    >
+                        <Router />
+                    </Suspense>
+                </ModalsProvider>
+            </MantineProvider>
+        </ThemeApplier>
+    )
+}
 
 export function App() {
     const isDev = __NODE_ENV__ === 'development'
@@ -62,26 +97,7 @@ export function App() {
                 <AuthProvider>
                     <IsMobileProvider>
                         <DirectionProvider>
-                            <MantineProvider
-                                cssVariablesResolver={v8CssVariablesResolver}
-                                defaultColorScheme="dark"
-                                theme={theme}
-                                deduplicateInlineStyles
-                            >
-                                <ModalsProvider>
-                                    <Notifications position="top-right" />
-                                    <NavigationProgress />
-                                    <Suspense
-                                        fallback={
-                                            <Center h="100%">
-                                                <LoadingScreen height="60vh" />
-                                            </Center>
-                                        }
-                                    >
-                                        <Router />
-                                    </Suspense>
-                                </ModalsProvider>
-                            </MantineProvider>
+                            <AppProviders />
                         </DirectionProvider>
                     </IsMobileProvider>
                 </AuthProvider>

@@ -19,7 +19,6 @@ export function BrandingBlockComponent({ form }: IProps) {
         <Card className={styles.sectionCard} p="lg" radius="lg">
             <Stack gap="md" h="100%">
                 <BaseOverlayHeader
-                    iconColor="cyan"
                     IconComponent={IconPalette}
                     iconSize={20}
                     iconVariant="soft"

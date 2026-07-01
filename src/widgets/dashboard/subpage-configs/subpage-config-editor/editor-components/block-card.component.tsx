@@ -6,6 +6,7 @@ import {
 import { IconArrowDown, IconArrowUp, IconTrash } from '@tabler/icons-react'
 
 import styles from '../subpage-config-visual-editor.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     block: TSubscriptionPageBlockConfig
@@ -20,6 +21,7 @@ interface IProps {
 }
 
 export function BlockCard(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const {
         block,
         canMoveDown,
@@ -42,7 +44,7 @@ export function BlockCard(props: IProps) {
                 </Text>
 
                 <Group gap={4} wrap="nowrap">
-                    <Badge color="teal" size="xs" variant="light" visibleFrom="sm">
+                    <Badge color={entityAccentColor} size="xs" variant="light" visibleFrom="sm">
                         {block.buttons.length} buttons
                     </Badge>
 

@@ -14,6 +14,8 @@ import { TbExternalLink, TbLockOff, TbShieldLock } from 'react-icons/tb'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { formatTimeUtil } from '@shared/utils/time-utils'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     device: GetUserHwidDevicesCommand.Response['response']['devices'][number]
@@ -26,6 +28,8 @@ interface IProps {
 }
 
 export const UserHwidDeviceItem = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { index, device, isBlocked, isBlocking, onBlock, onDelete, onUnblock } = props
     const { t, i18n } = useTranslation()
 
@@ -71,7 +75,7 @@ export const UserHwidDeviceItem = (props: IProps) => {
                         <Tooltip label={t('blocked-hwids-table.widget.unblock')} withArrow>
                             <ActionIcon
                                 aria-label={t('blocked-hwids-table.widget.unblock')}
-                                color="teal"
+                                color={entityAccentColor}
                                 loading={isBlocking}
                                 onClick={() => onUnblock(device.hwid)}
                                 size="lg"
@@ -123,7 +127,7 @@ export const UserHwidDeviceItem = (props: IProps) => {
 
                         {device.requestIp && (
                             <ActionIcon
-                                color="cyan"
+                                color={primaryColor}
                                 component="a"
                                 href={`https://ipinfo.io/${device.requestIp}`}
                                 rel="noopener noreferrer"

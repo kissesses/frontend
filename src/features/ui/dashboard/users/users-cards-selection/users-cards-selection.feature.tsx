@@ -63,7 +63,6 @@ export const UsersCardsSelectionFeature = (props: IProps) => {
                         modals.open({
                             title: (
                                 <BaseOverlayHeader
-                                    iconColor="cyan"
                                     IconComponent={TbDots}
                                     iconVariant="soft"
                                     subtitle={t(

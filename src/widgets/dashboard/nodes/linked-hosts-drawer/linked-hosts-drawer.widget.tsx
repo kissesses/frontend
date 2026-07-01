@@ -11,8 +11,10 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const LinkedHostsDrawer = memo(() => {
+    const entityAccentColor = useEntityAccentColor()
     const { isOpen, internalState: nodeUuid } = useModalState(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)
     const close = useModalClose(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)
 
@@ -39,7 +41,7 @@ export const LinkedHostsDrawer = memo(() => {
                 size="500px"
                 title={
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={PiListChecks}
                         iconVariant="soft"
                         title={t('linked-hosts-drawer.widget.assigned-hosts')}
@@ -64,7 +66,7 @@ export const LinkedHostsDrawer = memo(() => {
             size="800px"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={PiListChecks}
                     iconVariant="soft"
                     title={t('linked-hosts-drawer.widget.assigned-hosts')}

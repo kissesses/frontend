@@ -1,10 +1,14 @@
 import { Box, Divider, Group, Stack, Text, ThemeIcon, ThemeIconProps, Title } from '@mantine/core'
 import { ReactNode } from 'react'
 
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+
+import classes from './settings-card.module.css'
+
 interface SettingsCardHeaderProps {
     description: ReactNode | string
     icon: ReactNode
-    iconColor: ThemeIconProps['color']
+    iconColor?: ThemeIconProps['color']
     iconVariant: ThemeIconProps['variant']
     title: string
 }
@@ -12,10 +16,12 @@ interface SettingsCardHeaderProps {
 export function SettingsCardHeader({
     description,
     icon,
-    iconColor,
+    iconColor: iconColorProp,
     iconVariant,
     title
 }: SettingsCardHeaderProps) {
+    const primaryColor = usePrimaryColorName()
+    const iconColor = iconColorProp ?? primaryColor
     return (
         <Box>
             <Group align="flex-start" justify="space-between">
@@ -33,12 +39,7 @@ export function SettingsCardHeader({
                 </Group>
             </Group>
 
-            <Divider
-                my="md"
-                style={{
-                    opacity: 0.3
-                }}
-            />
+            <Divider className={classes.divider} my="md" />
         </Box>
     )
 }

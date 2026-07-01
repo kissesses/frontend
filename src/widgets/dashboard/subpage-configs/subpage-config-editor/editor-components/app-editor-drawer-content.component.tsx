@@ -16,6 +16,7 @@ import styles from '../subpage-config-visual-editor.module.css'
 import { BlockCard } from './block-card.component'
 import { BlockEditorModal } from './block-editor.modal.component'
 import { SvgIconSelect } from './svg-icon-select.component'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     app: TSubscriptionPageAppConfig
@@ -25,6 +26,7 @@ interface IProps {
 }
 
 export function AppEditorDrawerContent(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { app, enabledLocales, onChange, svgLibrary } = props
     const { t } = useTranslation()
 
@@ -103,7 +105,6 @@ export function AppEditorDrawerContent(props: IProps) {
                     <Stack gap="md">
                         <Group gap="sm" justify="space-between">
                             <BaseOverlayHeader
-                                iconColor="cyan"
                                 IconComponent={IconStar}
                                 iconSize={16}
                                 iconVariant="soft"
@@ -113,7 +114,7 @@ export function AppEditorDrawerContent(props: IProps) {
 
                             <Switch
                                 checked={app.featured}
-                                color="teal"
+                                color={entityAccentColor}
                                 label={t('app-editor-drawer-content.component.featured')}
                                 onChange={(e) =>
                                     onChange({

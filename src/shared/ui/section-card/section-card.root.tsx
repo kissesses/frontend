@@ -1,5 +1,8 @@
 import { Card, CardProps, Divider, MantineSpacing, Stack } from '@mantine/core'
+import clsx from 'clsx'
 import { Children, ReactNode, RefObject } from 'react'
+
+import classes from './section-card.module.css'
 
 interface ISectionCardRootProps extends Omit<CardProps, 'children'> {
     children: ReactNode
@@ -10,11 +13,11 @@ interface ISectionCardRootProps extends Omit<CardProps, 'children'> {
 
 export function SectionCardRoot({
     children,
-    dividerOpacity = 0.3,
+    dividerOpacity,
     gap = 'md',
     p = 'md',
-    radius = 'md',
-    style,
+    radius = 'lg',
+    className,
     ref,
     ...props
 }: ISectionCardRootProps) {
@@ -24,24 +27,20 @@ export function SectionCardRoot({
         acc.push(child)
 
         if (index < childArray.length - 1) {
-            acc.push(<Divider key={`divider-${index}`} style={{ opacity: dividerOpacity }} />)
+            acc.push(
+                <Divider
+                    key={`divider-${index}`}
+                    className={classes.divider}
+                    style={dividerOpacity !== undefined ? { opacity: dividerOpacity } : undefined}
+                />
+            )
         }
 
         return acc
     }, [])
 
     return (
-        <Card
-            p={p}
-            radius={radius}
-            ref={ref}
-            style={{
-                background: 'rgba(255, 255, 255, 0.02)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                ...style
-            }}
-            {...props}
-        >
+        <Card className={clsx(classes.root, className)} p={p} radius={radius} ref={ref} withBorder {...props}>
             <Stack gap={gap}>{childrenWithDividers}</Stack>
         </Card>
     )

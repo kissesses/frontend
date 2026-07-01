@@ -10,6 +10,7 @@ import { queryClient } from '@shared/api'
 import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
 
 import { RemarksManager } from '../../../subscription-settings/settings/cards/managers/remarks-manager.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     externalSquad: GetExternalSquadByUuidCommand.Response['response']
@@ -27,6 +28,7 @@ const DEFAULT_REMARKS = {
 }
 
 export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { externalSquad, isOpen } = props
     const { t } = useTranslation()
 
@@ -208,7 +210,7 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                     </Stack>
                 </Group>
 
-                <Paper bg="dark.7" p="md" withBorder>
+                <Paper className="app-raised-surface" p="md" withBorder>
                     <Group justify="space-between" wrap="nowrap">
                         <Group gap="xs" justify="start" wrap="nowrap">
                             <Text fw={500} size="sm">
@@ -295,7 +297,7 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                 </Transition>
 
                 <Button
-                    color="teal"
+                    color={entityAccentColor}
                     fullWidth
                     leftSection={<TbDeviceFloppy size="1.2rem" />}
                     loading={isUpdatingExternalSquad}

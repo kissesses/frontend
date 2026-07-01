@@ -14,6 +14,7 @@ import { ModalFooter } from '@shared/ui/modal-footer'
 import { handleFormErrors } from '@shared/utils/misc'
 
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)
@@ -53,6 +54,7 @@ const customSchema = z.object({
 })
 
 export const BulkUsersUpdateWidget = (props: IProps) => {
+    const primaryColor = usePrimaryColorName()
     const { isMobile } = props
 
     const { t } = useTranslation()
@@ -211,7 +213,7 @@ export const BulkUsersUpdateWidget = (props: IProps) => {
 
             <ModalFooter isMobile={isMobile}>
                 <Button
-                    color="cyan"
+                    color={primaryColor}
                     leftSection={<PiFloppyDiskDuotone size="16px" />}
                     loading={isUpdatePending}
                     onClick={() => {

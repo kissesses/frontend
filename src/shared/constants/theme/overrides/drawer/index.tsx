@@ -10,7 +10,8 @@ export default {
             body: classes.drawerBody
         },
         defaultProps: {
-            radius: 'md'
+            radius: 'md',
+            transitionProps: { duration: 200, transition: 'slide-left' }
         }
     }),
     DrawerOverlay: DrawerOverlay.extend({

@@ -1,3 +1,5 @@
+import { UI_THEME } from '@shared/constants/theme'
+
 import { CONFIG_PROFILES_VIEW_MODE, HOSTS_VIEW_MODE, NODES_VIEW_MODE, USERS_VIEW_MODE } from './enums'
 
 export interface IActions {
@@ -9,6 +11,7 @@ export interface IActions {
         setNodesActiveTag: (tag: null | string) => void
         setNodesViewMode: (mode: NODES_VIEW_MODE) => void
         setUsersViewMode: (mode: USERS_VIEW_MODE) => void
+        setUiTheme: (theme: UI_THEME) => void
         toggleLayoutStyle: () => void
     }
 }

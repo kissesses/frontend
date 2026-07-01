@@ -371,7 +371,11 @@ function buildBooleanColumn(
     }
 }
 
-function buildStatusColumn(t: TFunction, filters: HostsTableFilters): DataTableColumn<HostType> {
+function buildStatusColumn(
+    t: TFunction,
+    filters: HostsTableFilters,
+    accentColor: string
+): DataTableColumn<HostType> {
     return {
         accessor: 'isDisabled',
         sortable: true,
@@ -402,7 +406,7 @@ function buildStatusColumn(t: TFunction, filters: HostsTableFilters): DataTableC
                         )}
                         {option.value === 'enabled' && (
                             <ActionIcon
-                                color="teal"
+                                color={accentColor}
                                 size="lg"
                                 style={{ flexShrink: 0 }}
                                 variant="soft"
@@ -443,7 +447,7 @@ function buildStatusColumn(t: TFunction, filters: HostsTableFilters): DataTableC
                 )}
 
                 {!isDisabled && !isHidden && (
-                    <ActionIcon color="teal" size="lg" style={{ flexShrink: 0 }} variant="soft">
+                    <ActionIcon color={accentColor} size="lg" style={{ flexShrink: 0 }} variant="soft">
                         <PiPulse size={16} />
                     </ActionIcon>
                 )}
@@ -465,7 +469,8 @@ export function getHostColumnLabels(t: TFunction): Record<string, string> {
 export function getHostsTableColumns(
     t: TFunction,
     handleViewHost: (hostUuid: string) => void,
-    filters: HostsTableFilters
+    filters: HostsTableFilters,
+    accentColor: string
 ): DataTableColumn<HostType>[] {
     const [remarkColumn, ...textColumns] = HOST_TEXT_FIELDS.map((cfg) =>
         buildTextColumn(cfg, t, filters)
@@ -475,7 +480,7 @@ export function getHostsTableColumns(
 
     const actionsColumn: DataTableColumn<HostType> = {
         accessor: 'actions',
-        cellsStyle: () => ({ backgroundColor: 'var(--mantine-color-dark-7)' }),
+        cellsStyle: () => ({ backgroundColor: 'var(--app-surface-raised)' }),
         draggable: false,
         resizable: false,
         textAlign: 'right',
@@ -484,12 +489,12 @@ export function getHostsTableColumns(
                 <TbEdit size={18} />
             </Group>
         ),
-        titleStyle: { backgroundColor: 'var(--mantine-color-dark-7)' },
+        titleStyle: { backgroundColor: 'var(--app-surface-raised)' },
         toggleable: false,
         render: ({ uuid }) => (
             <Group gap={4} justify="flex-end" wrap="nowrap">
                 <ActionIcon
-                    color="teal"
+                    color={accentColor}
                     onClick={() => handleViewHost(uuid)}
                     size="md"
                     variant="outline"
@@ -502,7 +507,7 @@ export function getHostsTableColumns(
 
     return [
         remarkColumn,
-        buildStatusColumn(t, filters),
+        buildStatusColumn(t, filters, accentColor),
         ...textColumns,
         ...selectColumns,
         ...booleanColumns,

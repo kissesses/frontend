@@ -18,7 +18,7 @@
 }
 
 .item:hover {
-    border-color: var(--mantine-color-cyan-filled);
+    border-color: var(--app-accent);
 }
 
 .label {
@@ -80,8 +80,8 @@
 }
 
 .statusActive {
-    background-color: light-dark(var(--mantine-color-teal-1), var(--mantine-color-teal-9));
-    color: var(--mantine-color-teal-7);
+    background-color: var(--app-accent-subtle);
+    color: var(--app-accent);
 }
 
 .statusInactive {

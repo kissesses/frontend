@@ -33,8 +33,10 @@ import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-st
 
 import { NodeDetailsCard } from './node-details-card'
 import styles from './NodeDetails.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const NodeMetricsWidget = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { data: nodeMetrics, isLoading } = useGetNodesMetrics()
     const openModalWithData = useModalsStoreOpenWithData()
     const isMobile = useIsMobile()
@@ -121,7 +123,7 @@ export const NodeMetricsWidget = () => {
                     value={overallStats?.totalNodes || 0}
                 />
                 <MetricCardShared
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={PiPulseDuotone}
                     iconVariant="soft"
                     isLoading={isLoading}
@@ -157,7 +159,7 @@ export const NodeMetricsWidget = () => {
                     <Group align="center" gap="sm">
                         <HoverCard position="bottom" shadow="lg" width={320} withArrow>
                             <HoverCard.Target>
-                                <ThemeIcon color="teal" size="md" variant="light">
+                                <ThemeIcon color={entityAccentColor} size="md" variant="light">
                                     <PiInfo size={px('1.2rem')} />
                                 </ThemeIcon>
                             </HoverCard.Target>

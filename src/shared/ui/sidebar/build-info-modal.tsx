@@ -30,6 +30,8 @@ import { formatTimeUtil } from '@shared/utils/time-utils'
 import { CopyableCodeBlock } from '../copyable-code-block'
 import { Logo } from '../logo'
 import classes from './build-info-modal.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface BuildInfoModalProps {
     isNewVersionAvailable: boolean
@@ -37,6 +39,8 @@ interface BuildInfoModalProps {
 }
 
 export function BuildInfoModal({ remnawaveMetadata, isNewVersionAvailable }: BuildInfoModalProps) {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     return (
         <Stack gap="md">
             {isNewVersionAvailable && (
@@ -57,7 +61,7 @@ export function BuildInfoModal({ remnawaveMetadata, isNewVersionAvailable }: Bui
                         </Group>
 
                         <Button
-                            color="teal"
+                            color={entityAccentColor}
                             component="a"
                             href="https://t.me/remnalog"
                             leftSection={<TbBrandTelegram size={14} />}
@@ -78,7 +82,7 @@ export function BuildInfoModal({ remnawaveMetadata, isNewVersionAvailable }: Bui
                     <Group justify="space-between">
                         <Group gap="sm">
                             <Badge
-                                color="cyan"
+                                color={primaryColor}
                                 leftSection={<Logo size={16} />}
                                 size="lg"
                                 variant="light"
@@ -161,7 +165,7 @@ export function BuildInfoModal({ remnawaveMetadata, isNewVersionAvailable }: Bui
                             </Group>
                             <Tooltip label="View on GitHub">
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     component="a"
                                     href={remnawaveMetadata.git.backend.commitUrl}
                                     size="sm"
@@ -191,7 +195,7 @@ export function BuildInfoModal({ remnawaveMetadata, isNewVersionAvailable }: Bui
                             </Group>
                             <Tooltip label="View on GitHub">
                                 <ActionIcon
-                                    color="cyan"
+                                    color={primaryColor}
                                     component="a"
                                     href={remnawaveMetadata.git.frontend.commitUrl}
                                     size="sm"
@@ -213,7 +217,7 @@ export function BuildInfoModal({ remnawaveMetadata, isNewVersionAvailable }: Bui
 
             <Group gap="sm" grow>
                 <Button
-                    color="cyan"
+                    color={primaryColor}
                     component="a"
                     href="https://t.me/remnawave"
                     leftSection={<TbBrandTelegram size={16} />}

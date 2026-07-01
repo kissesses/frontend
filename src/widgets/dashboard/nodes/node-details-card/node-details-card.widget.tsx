@@ -36,12 +36,14 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 import { prettifyBytesUtil } from '@shared/utils/bytes'
 import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     node: GetOneNodeCommand.Response['response']
 }
 
 export const NodeDetailsCardWidget = memo((props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { node } = props
 
     const { t } = useTranslation()
@@ -162,7 +164,7 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
                                 label={t('node-stats.card.represents-the-uptime-of-the-xray-core')}
                             >
                                 <Badge
-                                    color="teal"
+                                    color={entityAccentColor}
                                     h={28}
                                     leftSection={<XrayLogo size={14} />}
                                     size="lg"
@@ -258,7 +260,7 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
                     <Group gap="xs" justify="center">
                         <Tooltip label="Metadata">
                             <ActionIcon
-                                color="teal"
+                                color={entityAccentColor}
                                 disabled={!metadata}
                                 loading={isMetadataLoading}
                                 onClick={() => {
@@ -268,7 +270,7 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
                                         size: 'auto',
                                         title: (
                                             <BaseOverlayHeader
-                                                iconColor="teal"
+                                                iconColor={entityAccentColor}
                                                 IconComponent={TbJson}
                                                 iconVariant="soft"
                                                 title="Metadata"

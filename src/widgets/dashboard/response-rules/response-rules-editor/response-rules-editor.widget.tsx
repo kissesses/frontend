@@ -4,12 +4,14 @@ import { MonacoSetupResponseRulesFeature } from '@features/dashboard/config-prof
 import { ResponseRulesEditorActionsFeature } from '@features/dashboard/response-rules/response-rules-editor-actions'
 import { Box, Card, Code, Paper, Stack } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import Editor, { Monaco } from '@monaco-editor/react'
+import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
 import clsx from 'clsx'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
+
+import { applyMonacoTheme, MONACO_THEME_NAME, useApplyMonacoTheme } from '@shared/constants/monaco-theme'
 
 import { usePseudoFullscreen } from '@shared/hooks'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
@@ -35,6 +37,8 @@ export function ResponseRulesEditorWidget(props: IProps) {
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
     const monacoRef = useRef<Monaco | null>(null)
+    const monaco = useMonaco()
+    useApplyMonacoTheme(monaco)
 
     const blocker = useBlocker(
         ({ currentLocation, nextLocation }) =>
@@ -81,8 +85,9 @@ export function ResponseRulesEditorWidget(props: IProps) {
         }
     }, [blocker])
 
-    const handleEditorDidMount = (monaco: Monaco) => {
-        MonacoSetupResponseRulesFeature.setup(monaco, groupedTemplates)
+    const handleEditorDidMount = (monacoInstance: Monaco) => {
+        applyMonacoTheme(monacoInstance)
+        MonacoSetupResponseRulesFeature.setup(monacoInstance, groupedTemplates)
     }
 
     const checkForChanges = () => {
@@ -185,7 +190,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
                         }
                     }}
                     path="response-rules://*"
-                    theme="GithubDark"
+                    theme={MONACO_THEME_NAME}
                     value={JSON.stringify(responseRules, null, 2)}
                 />
             </Paper>

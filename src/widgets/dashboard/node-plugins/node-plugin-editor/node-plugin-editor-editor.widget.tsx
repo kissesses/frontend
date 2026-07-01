@@ -4,12 +4,14 @@ import { MonacoSetupNodePluginEditorFeature } from '@features/dashboard/config-p
 import { NodePluginsEditorActionsFeature } from '@features/dashboard/node-plugins/node-plugins-editor-actions'
 import { Box, Card, Code, Paper } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import Editor, { Monaco } from '@monaco-editor/react'
+import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
 import { GetNodePluginCommand } from '@kissesses/backend-contract'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
+
+import { applyMonacoTheme, MONACO_THEME_NAME, useApplyMonacoTheme } from '@shared/constants/monaco-theme'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
@@ -35,6 +37,8 @@ export function NodePluginEditorWidget(props: IProps) {
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
     const monacoRef = useRef<Monaco | null>(null)
+    const monaco = useMonaco()
+    useApplyMonacoTheme(monaco)
 
     const blocker = useBlocker(
         ({ currentLocation, nextLocation }) =>
@@ -81,8 +85,9 @@ export function NodePluginEditorWidget(props: IProps) {
         }
     }, [blocker])
 
-    const handleEditorDidMount = (monaco: Monaco) => {
-        MonacoSetupNodePluginEditorFeature.setup(monaco)
+    const handleEditorDidMount = (monacoInstance: Monaco) => {
+        applyMonacoTheme(monacoInstance)
+        MonacoSetupNodePluginEditorFeature.setup(monacoInstance)
     }
 
     const checkForChanges = () => {
@@ -213,7 +218,7 @@ export function NodePluginEditorWidget(props: IProps) {
                         }
                     }}
                     path="node-plugin://*"
-                    theme="GithubDark"
+                    theme={MONACO_THEME_NAME}
                     value={JSON.stringify(nodePlugin, null, 2)}
                 />
             </Paper>

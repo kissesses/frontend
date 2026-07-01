@@ -25,6 +25,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 
 import { CONFIG_PROFILES_VIEW_MODE } from '@entities/dashboard/view-preferences-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     configProfileCount: number
@@ -72,6 +73,7 @@ const generateDefaultConfig = () => {
 }
 
 export const ConfigProfilesHeaderActionButtonsFeature = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { configProfileCount, setViewMode, viewMode } = props
     const { isFetching } = useGetConfigProfiles()
     const { t } = useTranslation()
@@ -155,7 +157,7 @@ export const ConfigProfilesHeaderActionButtonsFeature = (props: IProps) => {
                     label={t('config-profiles-header-action-buttons.feature.create-config-profile')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} size="input-md" variant="soft">
+                    <ActionIcon color={entityAccentColor} onClick={open} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
@@ -212,7 +214,7 @@ export const ConfigProfilesHeaderActionButtonsFeature = (props: IProps) => {
                                 {t('common.cancel')}
                             </Button>
 
-                            <Button color="teal" loading={isPending} type="submit">
+                            <Button color={entityAccentColor} loading={isPending} type="submit">
                                 {t('common.create')}
                             </Button>
                         </Group>

@@ -33,10 +33,12 @@ import {
 
 import classes from './config-editor-actions.module.css'
 import { Props } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const MODAL_KEY = MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER
 
 export function ConfigEditorActionsFeature(props: Props) {
+    const entityAccentColor = useEntityAccentColor()
     const {
         editorRef,
         isConfigValid,
@@ -297,7 +299,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                                 modals.open({
                                     title: (
                                         <BaseOverlayHeader
-                                            iconColor="teal"
+                                            iconColor={entityAccentColor}
                                             IconComponent={TbTools}
                                             iconVariant="soft"
                                             title={t('config-editor-actions.feature.tools')}

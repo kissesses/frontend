@@ -90,7 +90,6 @@ export const ImportConfigSectionsModalContent = (props: IProps) => {
                             'import-config-sections.modal.import-platforms-descriptions'
                         )}
                         icon={<TbDevices size={22} />}
-                        iconColor="cyan"
                         onClick={handleImportPlatforms}
                         title={t('import-config-sections.modal.import-platforms')}
                         variant="soft"

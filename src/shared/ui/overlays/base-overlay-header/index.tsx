@@ -3,6 +3,8 @@ import { useClipboard } from '@mantine/hooks'
 import { ReactNode } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+
 type IProps = {
     countryCode?: string
     hideIcon?: boolean
@@ -26,7 +28,7 @@ export const BaseOverlayHeader = (props: IProps) => {
         countryCode,
         iconSize = 20,
         iconVariant,
-        iconColor = 'cyan',
+        iconColor: iconColorProp,
         subtitle,
         title,
         titleOrder = 4,
@@ -35,6 +37,9 @@ export const BaseOverlayHeader = (props: IProps) => {
         icon,
         truncateTitle = false
     } = props
+
+    const primaryColor = usePrimaryColorName()
+    const iconColor = iconColorProp ?? primaryColor
 
     const { copy } = useClipboard()
 

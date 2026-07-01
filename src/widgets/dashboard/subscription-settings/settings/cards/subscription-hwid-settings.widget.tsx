@@ -12,12 +12,14 @@ import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { handleFormErrors } from '@shared/utils/misc'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     subscriptionSettings: UpdateSubscriptionSettingsCommand.Response['response']
 }
 
 export const SubscriptionHwidSettingsWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { subscriptionSettings } = props
     const { t } = useTranslation()
 
@@ -61,7 +63,6 @@ export const SubscriptionHwidSettingsWidget = (props: IProps) => {
                 <SettingsCardShared.Header
                     description={t('subscription-hwid-settings.widget.hwid-card-description')}
                     icon={<PiIdentificationBadge size={24} />}
-                    iconColor="cyan"
                     iconVariant="soft"
                     title={t('subscription-hwid-settings.widget.hwid-settings')}
                 />
@@ -131,7 +132,7 @@ export const SubscriptionHwidSettingsWidget = (props: IProps) => {
                         >
                             {t('subscription-hwid-settings.widget.documentation')}
                         </Button>
-                        <Button color="teal" loading={isPending} size="md" type="submit">
+                        <Button color={entityAccentColor} loading={isPending} size="md" type="submit">
                             {t('common.save')}
                         </Button>
                     </Group>

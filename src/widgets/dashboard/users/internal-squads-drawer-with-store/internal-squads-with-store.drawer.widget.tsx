@@ -37,8 +37,10 @@ import { formatInt } from '@shared/utils/misc'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 import classes from './internal-squads-with-store.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const InternalSquadsDrawerWithStore = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { isOpen, internalState: internalSquadModalState } = useModalState(
         MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS
     )
@@ -321,7 +323,7 @@ export const InternalSquadsDrawerWithStore = () => {
                             </Stack>
 
                             <ActionIcon
-                                color="teal"
+                                color={entityAccentColor}
                                 disabled={selectedInbounds.size === 0}
                                 loading={isUpdatingInternalSquad}
                                 onClick={handleUpdateInternalSquad}
@@ -474,7 +476,7 @@ export const InternalSquadsDrawerWithStore = () => {
             }}
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCirclesRelation}
                     iconVariant="soft"
                     title={t('internal-squads.drawer.widget.edit-internal-squad')}

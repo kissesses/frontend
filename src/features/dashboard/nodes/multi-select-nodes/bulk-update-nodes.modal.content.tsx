@@ -35,6 +35,7 @@ import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { SectionCard } from '@shared/ui/section-card'
 import { TagInputPill } from '@shared/ui/tag-input-pill'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 type NodeType = GetAllNodesCommand.Response['response'][number]
 
@@ -44,6 +45,7 @@ interface IProps {
 }
 
 export const BulkUpdateNodesModalContent = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { selectedRecords, setSelectedRecords } = props
     const { t } = useTranslation()
     const { mutateAsync: bulkUpdate, isPending } = useBulkNodesUpdate()
@@ -217,7 +219,7 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                             min={0}
                             rightSection={
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     onClick={() => handlersRef.current?.increment()}
                                     radius="md"
                                     size={rem(44)}
@@ -299,7 +301,7 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                             min={0}
                             rightSection={
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     onClick={() => handlersRef.current?.increment()}
                                     radius="md"
                                     size={rem(44)}
@@ -358,7 +360,7 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                 <SectionCard.Section>
                     <Group justify="flex-end">
                         <Button
-                            color="teal"
+                            color={entityAccentColor}
                             leftSection={<TbCheck size={16} />}
                             onClick={handleUpdate}
                             size="md"

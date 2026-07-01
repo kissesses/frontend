@@ -1,0 +1,7 @@
+.controls {
+    padding-top: var(--mantine-spacing-xs);
+}
+
+.controls :global(.mantine-Button-root) {
+    font-weight: 500;
+}

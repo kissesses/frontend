@@ -1,0 +1,163 @@
+[data-theme='noctis'] {
+    --app-bg: #0a0a0b;
+    --app-surface: #141416;
+    --app-surface-raised: #1c1c1f;
+    --app-border: rgba(255, 255, 255, 0.06);
+    --app-border-strong: rgba(255, 255, 255, 0.1);
+    --app-accent: #694bca;
+    --app-accent-light: #8c69fb;
+    --app-accent-muted: #58389a;
+    --app-accent-glow: rgba(105, 75, 202, 0.25);
+    --app-accent-subtle: rgba(105, 75, 202, 0.08);
+    --app-accent-border: rgba(140, 105, 251, 0.22);
+    --app-text-muted: #71717a;
+    --app-nav-active: var(--mantine-color-violet-4);
+    --app-accent-rgb: 105, 75, 202;
+
+    --app-card-bg: var(--app-surface);
+    --app-card-bg-entity: var(--app-surface);
+    --app-card-hover-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.32), 0 0 0 1px var(--app-accent-border),
+        0 0 24px -8px var(--app-accent-glow);
+    --app-card-hover-border: var(--app-accent-light);
+    --app-card-accent-bar: linear-gradient(
+        90deg,
+        var(--app-accent-muted) 0%,
+        var(--app-accent-light) 50%,
+        var(--app-accent-muted) 100%
+    );
+    --app-card-glow: radial-gradient(circle at center, rgba(105, 75, 202, 0.1) 0%, transparent 55%);
+    --app-card-title-hover: var(--app-accent-light);
+    --app-card-subtitle-hover: var(--app-accent);
+    --app-card-info-bg: rgba(255, 255, 255, 0.03);
+    --app-card-info-border: var(--app-border);
+    --app-card-info-hover-bg: var(--app-accent-subtle);
+    --app-card-info-hover-border: var(--app-accent-border);
+    --app-card-inactive-hover-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.28), 0 0 0 1px var(--app-border);
+    --app-card-inactive-hover-border: rgba(255, 255, 255, 0.12);
+    --app-card-inactive-bar: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.14) 50%,
+        rgba(255, 255, 255, 0.08) 100%
+    );
+    --app-card-inactive-glow: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 55%
+    );
+    --app-card-inactive-title-hover: var(--mantine-color-dark-1);
+    --app-card-inactive-subtitle-hover: var(--app-text-muted);
+    --app-card-inactive-info-hover-bg: rgba(255, 255, 255, 0.04);
+    --app-card-inactive-info-hover-border: var(--app-border-strong);
+
+    --app-divider-opacity: 0.2;
+
+    --app-overlay-bg: rgba(0, 0, 0, 0.65);
+    --app-modal-header-bg: var(--app-surface);
+    --app-modal-border: var(--app-border);
+    --app-modal-divider: var(--app-border);
+
+    --app-page-max-width: 1440px;
+    --app-page-gap: calc(var(--mantine-spacing-xl) * 1.25);
+
+    --app-skeleton-base: var(--app-surface-raised);
+    --app-skeleton-highlight: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme='noctis'] body {
+    background-color: var(--app-bg);
+    letter-spacing: -0.011em;
+}
+
+[data-theme='noctis'] .safe-area-bottom {
+    background: var(--app-bg);
+}
+
+[data-theme='noctis'] ::-webkit-scrollbar-track {
+    background: rgba(10, 10, 11, 0.8);
+}
+
+[data-theme='noctis'] ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #58389a 0%, #694bca 100%);
+    border: 1px solid rgba(10, 10, 11, 0.8);
+}
+
+[data-theme='noctis'] ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #694bca 0%, #8c69fb 100%);
+}
+
+[data-theme='noctis'] .mantine-Spotlight-action[data-selected] {
+    background-color: var(--app-surface-raised) !important;
+}
+
+/* Layout shell */
+[data-theme='noctis'] .sidebarWrapper {
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    box-shadow: var(--mantine-shadow-sm);
+}
+
+[data-theme='noctis'] .sidebarWrapper::before {
+    background: radial-gradient(circle at 20% 20%, rgba(105, 75, 202, 0.08) 0%, transparent 55%);
+}
+
+[data-theme='noctis'] .header {
+    background-color: var(--app-bg);
+    border-bottom: 1px solid var(--app-border);
+}
+
+[data-theme='noctis'] .logoSection::after,
+[data-theme='noctis'] .footerSection::after {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(140, 105, 251, 0.35) 50%,
+        transparent 100%
+    );
+}
+
+/* Navigation — theme-aware via --app-nav-active in desktop/mobile CSS */
+
+[data-theme='noctis'] .sectionTitle::before {
+    background: linear-gradient(45deg, var(--app-accent-light), var(--app-accent));
+}
+
+[data-theme='noctis'] .sectionLink[data-active='true'] {
+    border-left-color: var(--app-accent);
+    color: var(--app-nav-active);
+}
+
+[data-theme='noctis'] [data-mantine-color-scheme='dark'] .mantine-datatable {
+    --mantine-datatable-highlight-on-hover-color-dark: rgba(255, 255, 255, 0.02);
+}
+
+[data-theme='noctis'] [data-mantine-color-scheme='dark'] .mantine-datatable-header th {
+    background: var(--app-bg);
+    border-bottom-color: var(--app-border);
+}
+
+[data-theme='noctis'] .app-table-card {
+    background: var(--app-surface);
+    border-radius: var(--mantine-radius-lg);
+}
+
+[data-theme='noctis'] .mantine-Skeleton-root {
+    --skeleton-color: var(--app-skeleton-base);
+}
+
+[data-theme='noctis'] .mantine-Modal-content {
+    border-radius: var(--mantine-radius-lg);
+    box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.4),
+        0 0 0 1px var(--app-border);
+}
+
+[data-theme='noctis'] .mantine-Drawer-content {
+    border-left: 1px solid var(--app-border);
+}
+
+[data-theme='noctis'] .app-page-content {
+    padding-inline: clamp(var(--mantine-spacing-md), 3vw, var(--mantine-spacing-xl));
+}

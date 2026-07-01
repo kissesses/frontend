@@ -1712,7 +1712,12 @@
       "layout-style": "布局样式",
       "choose-how-the-desktop-navigation-is-displayed": "选择桌面导航的显示方式",
       "compact": "紧凑",
-      "sidebar": "侧边栏"
+      "sidebar": "侧边栏",
+      "theme-style": "视觉主题",
+      "theme-default": "默认",
+      "theme-default-description": "GitHub 风格深色主题，cyan 强调色",
+      "theme-noctis": "Noctis",
+      "theme-noctis-description": "Linear 与 Stripe 风格的 premium 极简主题"
     }
   },
   "api-tokens-card": {

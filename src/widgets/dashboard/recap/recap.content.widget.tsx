@@ -31,8 +31,10 @@ import {
     SWATCHES
 } from './recap.constants'
 import classes from './recap.content.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 export function RecapContent() {
+    const primaryColor = usePrimaryColorName()
     const { data: recap, isLoading } = useGetRecap()
     const { t } = useTranslation()
 
@@ -96,7 +98,7 @@ export function RecapContent() {
     if (isLoading || !recap) {
         return (
             <Center h={600}>
-                <Loader color="cyan" size="sm" />
+                <Loader color={primaryColor} size="sm" />
             </Center>
         )
     }

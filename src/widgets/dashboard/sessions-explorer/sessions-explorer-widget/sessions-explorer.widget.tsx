@@ -42,8 +42,10 @@ import { SessionsExplorerCard } from './sessions-explorer-card'
 import { SessionsExplorerIdle } from './sessions-explorer-idle'
 import { SessionsExplorerProgress } from './sessions-explorer-progress'
 import { useSessionsExplorer } from './use-sessions-explorer'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function SessionsExplorerWidget() {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { data: nodes } = useGetNodes()
@@ -116,7 +118,7 @@ export function SessionsExplorerWidget() {
                             {t('sessions-explorer.widget.all-nodes-failed-to-return-session-data')}
                         </Text>
                         <Button
-                            color="teal"
+                            color={entityAccentColor}
                             leftSection={<TbRefresh size={20} />}
                             onClick={handleReset}
                             size="sm"
@@ -142,7 +144,7 @@ export function SessionsExplorerWidget() {
                         value={stats.totalIps}
                     />
                     <MetricCardShared
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbFingerprint}
                         iconVariant="soft"
                         title={t('sessions-explorer.widget.unique-ips')}
@@ -187,7 +189,7 @@ export function SessionsExplorerWidget() {
                         value={ipSearch}
                     />
                     {isSearchActive && (
-                        <Badge color="teal" size="xl" variant="soft">
+                        <Badge color={entityAccentColor} size="xl" variant="soft">
                             {filteredUsers.length}
                         </Badge>
                     )}
@@ -253,7 +255,7 @@ export function SessionsExplorerWidget() {
                             <>
                                 <Tooltip label={t('sessions-explorer.widget.restart-scan')}>
                                     <ActionIcon
-                                        color="teal"
+                                        color={entityAccentColor}
                                         onClick={handleStart}
                                         size="input-md"
                                         variant="soft"
@@ -290,7 +292,7 @@ export function SessionsExplorerWidget() {
                 <Transition mounted={scroll.y > 300} transition="slide-up">
                     {(transitionStyles) => (
                         <ActionIcon
-                            color="teal"
+                            color={entityAccentColor}
                             onClick={() => {
                                 if (virtuosoRef.current) {
                                     virtuosoRef.current.scrollToIndex({

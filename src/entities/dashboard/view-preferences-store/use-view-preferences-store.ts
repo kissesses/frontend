@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 
+import { UI_THEME } from '@shared/constants/theme'
+
 import {
     CONFIG_PROFILES_VIEW_MODE,
     HOSTS_VIEW_MODE,
@@ -18,7 +20,8 @@ const initialState: IState = {
     hostsViewMode: HOSTS_VIEW_MODE.CARDS,
     hostsActiveTag: null,
     usersViewMode: USERS_VIEW_MODE.TABLE,
-    layoutStyle: LAYOUT_STYLE.COMPACT
+    layoutStyle: LAYOUT_STYLE.COMPACT,
+    uiTheme: UI_THEME.DEFAULT
 }
 
 export const useViewPreferencesStore = create<IActions & IState>()(
@@ -33,6 +36,7 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                     setHostsViewMode: (mode) => set({ hostsViewMode: mode }),
                     setHostsActiveTag: (tag) => set({ hostsActiveTag: tag }),
                     setUsersViewMode: (mode) => set({ usersViewMode: mode }),
+                    setUiTheme: (theme) => set({ uiTheme: theme }),
                     toggleLayoutStyle: () =>
                         set((state) => ({
                             layoutStyle:
@@ -47,7 +51,7 @@ export const useViewPreferencesStore = create<IActions & IState>()(
         ),
         {
             name: 'viewPreferencesStore',
-            version: 2,
+            version: 3,
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 nodesViewMode: state.nodesViewMode,
@@ -56,11 +60,14 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                 hostsViewMode: state.hostsViewMode,
                 hostsActiveTag: state.hostsActiveTag,
                 usersViewMode: state.usersViewMode,
-                layoutStyle: state.layoutStyle
+                layoutStyle: state.layoutStyle,
+                uiTheme: state.uiTheme
             }),
             migrate: (persistedState) => ({
                 ...initialState,
-                ...(persistedState as Partial<IState>)
+                ...(persistedState as Partial<IState>),
+                uiTheme:
+                    (persistedState as Partial<IState>).uiTheme ?? UI_THEME.DEFAULT
             })
         }
     )
@@ -76,5 +83,7 @@ export const useHostsViewMode = () => useViewPreferencesStore((state) => state.h
 export const useHostsActiveTag = () => useViewPreferencesStore((state) => state.hostsActiveTag)
 export const useUsersViewMode = () => useViewPreferencesStore((state) => state.usersViewMode)
 export const useLayoutStyle = () => useViewPreferencesStore((state) => state.layoutStyle)
+export const useUiTheme = () => useViewPreferencesStore((state) => state.uiTheme)
+export const useSetUiThemeAction = () => useViewPreferencesStore((state) => state.actions.setUiTheme)
 export const useToggleLayoutStyleAction = () =>
     useViewPreferencesStore((state) => state.actions.toggleLayoutStyle)

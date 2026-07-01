@@ -8,6 +8,7 @@ import { PiEmpty } from 'react-icons/pi'
 
 import { useGetConfigProfiles, useGetNodePlugins, useGetNodes } from '@shared/api/hooks'
 import { usePreventTableBackScroll } from '@shared/hooks'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 import { DataTableControls, LoadingScreen, sortRecords } from '@shared/ui'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -36,6 +37,7 @@ const DEFAULT_SORT_STATUS: DataTableSortStatus<NodeType> = {
 export const NodesDataTableWidget = memo((props: IProps) => {
     const { nodes, selectedRecords, setSelectedRecords } = props
     const { t } = useTranslation()
+    const entityAccentColor = useEntityAccentColor()
 
     const [sortStatus, setSortStatus] = useState<DataTableSortStatus<NodeType>>(DEFAULT_SORT_STATUS)
 
@@ -128,7 +130,8 @@ export const NodesDataTableWidget = memo((props: IProps) => {
         configProfiles?.configProfiles ?? [],
         nodePlugins?.nodePlugins ?? [],
         handleViewNode,
-        filters
+        filters,
+        entityAccentColor
     ).map((column) => ({ draggable: true, resizable: true, toggleable: true, ...column }))
 
     const {

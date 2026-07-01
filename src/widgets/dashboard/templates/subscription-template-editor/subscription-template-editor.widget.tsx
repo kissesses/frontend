@@ -2,7 +2,7 @@ import type { editor } from 'monaco-editor'
 
 import { TemplateEditorActionsFeature } from '@features/dashboard/subscription-templates/template-editor-actions'
 import { Box, Card, Paper } from '@mantine/core'
-import Editor, { Monaco } from '@monaco-editor/react'
+import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
 import 'monaco-yaml/yaml.worker.js'
 import { GetAllHostsCommand, GetSubscriptionTemplateCommand } from '@kissesses/backend-contract'
 import { decode } from '@stablelib/base64'
@@ -10,7 +10,7 @@ import clsx from 'clsx'
 import { useLayoutEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
+import { applyMonacoTheme, MONACO_THEME_NAME, useApplyMonacoTheme } from '@shared/constants/monaco-theme'
 import { usePseudoFullscreen } from '@shared/hooks'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui'
 import { preventBackScroll } from '@shared/utils/misc'
@@ -33,6 +33,9 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
     const monacoRef = useRef<Monaco | null>(null)
 
+    const monaco = useMonaco()
+    useApplyMonacoTheme(monaco)
+
     const getConfig = () => {
         if (editorType === 'yaml') {
             return template.encodedTemplateYaml
@@ -42,12 +45,9 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
         return JSON.stringify(template.templateJson, null, 2)
     }
 
-    const handleEditorWillMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
-        configureMonaco(monaco, editorType, hosts)
+    const handleEditorWillMount = (monacoInstance: Monaco) => {
+        applyMonacoTheme(monacoInstance)
+        configureMonaco(monacoInstance, editorType, hosts)
     }
 
     const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
@@ -144,7 +144,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                             bottom: 10
                         }
                     }}
-                    theme="GithubDark"
+                    theme={MONACO_THEME_NAME}
                     value={getConfig() || ''}
                 />
             </Paper>

@@ -15,6 +15,7 @@ import { ButtonEditor } from './button-editor.component'
 import { LocalizedTextEditor } from './localized-text-editor.component'
 import { SubpageTooltips } from './subpage-tooltips.component'
 import { SvgIconSelect } from './svg-icon-select.component'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     block: null | TSubscriptionPageBlockConfig
@@ -44,6 +45,7 @@ const DEFAULT_COLOR = [
 ] as const
 
 export function BlockEditorModal(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { block, enabledLocales, onChange, onClose, onExited, opened, svgLibrary } = props
     const { t } = useTranslation()
 
@@ -126,7 +128,6 @@ export function BlockEditorModal(props: IProps) {
                     <Card className={styles.sectionCard} p="md" radius="md">
                         <Stack gap="md">
                             <BaseOverlayHeader
-                                iconColor="cyan"
                                 IconComponent={IconPalette}
                                 iconSize={16}
                                 iconVariant="soft"
@@ -179,7 +180,7 @@ export function BlockEditorModal(props: IProps) {
                     <Card className={styles.sectionCard} p="md" radius="md">
                         <Stack gap="md">
                             <BaseOverlayHeader
-                                iconColor="teal"
+                                iconColor={entityAccentColor}
                                 IconComponent={IconPlus}
                                 iconSize={16}
                                 iconVariant="soft"

@@ -13,12 +13,14 @@ import { formatTimeUtil } from '@shared/utils/time-utils'
 
 import classes from './api-token-card.module.css'
 import { ViewApiTokenContentWidget } from './modals/view-api-token-modal.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     apiToken: FindAllApiTokensCommand.Response['response']['tokens'][number]
 }
 
 export const ApiTokenItem = ({ apiToken }: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t, i18n } = useTranslation()
     const isMobile = useIsMobile()
 
@@ -98,7 +100,7 @@ export const ApiTokenItem = ({ apiToken }: IProps) => {
                             modals.open({
                                 title: (
                                     <BaseOverlayHeader
-                                        iconColor="teal"
+                                        iconColor={entityAccentColor}
                                         IconComponent={TbCookie}
                                         iconVariant="soft"
                                         title={apiToken.name}

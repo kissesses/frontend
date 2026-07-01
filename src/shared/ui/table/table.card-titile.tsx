@@ -13,6 +13,7 @@ import { motion } from 'motion/react'
 import { forwardRef, ReactNode } from 'react'
 
 import classes from './table.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 export interface CardTitleProps extends Omit<CardSectionProps, 'c' | 'fw' | 'size' | 'tt'> {
     actions?: ReactNode
@@ -23,7 +24,10 @@ export interface CardTitleProps extends Omit<CardSectionProps, 'c' | 'fw' | 'siz
 }
 
 export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
-    ({ title, description, style, actions, withBorder = true, icon, iconProps, ...props }, ref) => (
+    ({ title, description, style, actions, withBorder = true, icon, iconProps, ...props }, ref) => {
+        const primaryColor = usePrimaryColorName()
+
+        return (
         <CardSection
             className={classes.card}
             data-orientation="vertical"
@@ -55,7 +59,7 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
                             >
                                 <ActionIcon
                                     className={classes.actionIcon}
-                                    color="cyan"
+                                    color={primaryColor}
                                     size="input-md"
                                     variant="soft"
                                     {...iconProps}
@@ -113,5 +117,6 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
                 </Box>
             </motion.div>
         </CardSection>
-    )
+        )
+    }
 )

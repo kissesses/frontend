@@ -18,18 +18,21 @@
     justify-content: flex-end;
 }
 
+.card {
+    animation: fadeIn var(--app-transition-base) both;
+    position: relative;
+    background: var(--app-card-bg);
+    border-color: var(--app-border);
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
-}
-
-.card {
-    animation: fadeIn 200ms linear both;
-    position: relative;
 }
 
 .actionIcon {

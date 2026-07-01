@@ -36,6 +36,7 @@ import { ModalFooter } from '@shared/ui/modal-footer'
 import { handleFormErrors } from '@shared/utils/misc'
 
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store/user-modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)
@@ -63,6 +64,7 @@ interface IProps {
 }
 
 export const ViewUserModalContent = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { userUuid } = props
 
     const { t } = useTranslation()
@@ -318,7 +320,7 @@ export const ViewUserModalContent = (props: IProps) => {
                 </Menu>
 
                 <Button
-                    color="teal"
+                    color={entityAccentColor}
                     leftSection={<PiFloppyDiskDuotone size="16px" />}
                     loading={isUpdateUserPending}
                     onClick={() => {

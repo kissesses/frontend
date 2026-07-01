@@ -10,12 +10,14 @@ import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { handleFormErrors } from '@shared/utils/misc'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     subscriptionSettings: UpdateSubscriptionSettingsCommand.Response['response']
 }
 
 export const SubscriptionAnnounceRoutingCardWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { subscriptionSettings } = props
     const { t } = useTranslation()
 
@@ -61,7 +63,6 @@ export const SubscriptionAnnounceRoutingCardWidget = (props: IProps) => {
                 <SettingsCardShared.Header
                     description={t('subscription-tabs.widget.announce-and-routing-description')}
                     icon={<PiDeviceMobile size={24} />}
-                    iconColor="cyan"
                     iconVariant="soft"
                     title={t('subscription-tabs.widget.announce-and-routing')}
                 />
@@ -114,7 +115,7 @@ export const SubscriptionAnnounceRoutingCardWidget = (props: IProps) => {
                         >
                             {t('subscription-settings.widget.configure-happ-routing')}
                         </Button>
-                        <Button color="teal" loading={isPending} size="md" type="submit">
+                        <Button color={entityAccentColor} loading={isPending} size="md" type="submit">
                             {t('common.save')}
                         </Button>
                     </Group>

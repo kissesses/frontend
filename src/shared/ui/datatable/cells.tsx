@@ -13,6 +13,7 @@ import { useClipboard } from '@mantine/hooks'
 import { ReactNode } from 'react'
 import { PiCheckCircleDuotone, PiXCircleDuotone } from 'react-icons/pi'
 import { TbSearch, TbX } from 'react-icons/tb'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export type BooleanFilterValue = 'all' | 'no' | 'yes'
 
@@ -58,8 +59,9 @@ export function CopyableCell({ value }: { value: string }) {
 }
 
 export function BooleanCell({ value }: { value: boolean }) {
+    const entityAccentColor = useEntityAccentColor()
     return value ? (
-        <ThemeIcon color="teal" size="md" variant="light">
+        <ThemeIcon color={entityAccentColor} size="md" variant="light">
             <PiCheckCircleDuotone size={18} />
         </ThemeIcon>
     ) : (

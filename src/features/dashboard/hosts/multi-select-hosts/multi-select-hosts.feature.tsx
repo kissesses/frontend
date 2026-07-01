@@ -37,8 +37,10 @@ import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-st
 import { useHostsActiveTag } from '@entities/dashboard/view-preferences-store'
 
 import { IProps } from './interfaces/props.interface'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 export const MultiSelectHostsFeature = (props: IProps) => {
+    const primaryColor = usePrimaryColorName()
     const { configProfiles, hosts, moveSelected, selectedHosts, setSelectedHosts } = props
 
     const openModalWithData = useModalsStoreOpenWithData()
@@ -303,7 +305,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                 </Group>
                                 <Stack>
                                     <Button
-                                        color="cyan"
+                                        color={primaryColor}
                                         fullWidth
                                         leftSection={<TbCategoryPlus size={18} />}
                                         onClick={() =>

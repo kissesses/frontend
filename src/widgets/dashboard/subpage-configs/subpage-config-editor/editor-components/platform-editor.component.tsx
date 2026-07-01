@@ -183,7 +183,6 @@ export function PlatformEditor(props: IProps) {
                 size="lg"
                 title={
                     <BaseOverlayHeader
-                        iconColor="cyan"
                         IconComponent={IconEdit}
                         iconVariant="soft"
                         subtitle={editingApp?.name || t('platform-editor.component.unnamed-app')}

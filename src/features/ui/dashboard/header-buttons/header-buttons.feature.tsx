@@ -9,8 +9,10 @@ import { useAuth } from '@shared/hooks'
 import { LanguagePicker } from '@shared/ui/language-picker/language-picker.shared'
 
 import { removeToken } from '@entities/auth'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 export const HeaderButtons = () => {
+    const primaryColor = usePrimaryColorName()
     const { setIsAuthenticated } = useAuth()
     const navigate = useNavigate()
 
@@ -36,7 +38,7 @@ export const HeaderButtons = () => {
                 <PiArrowsClockwise size="24px" />
             </ActionIcon>
 
-            <ActionIcon color="cyan" onClick={handleLogout} size="xl">
+            <ActionIcon color={primaryColor} onClick={handleLogout} size="xl">
                 <PiSignOutDuotone size="24px" />
             </ActionIcon>
         </Group>

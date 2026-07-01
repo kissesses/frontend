@@ -10,6 +10,7 @@ import { LottieDuckProgressShared, LottieGlobeShared, LottieJailShared } from '@
 import { SectionCard } from '@shared/ui/section-card'
 
 import styles from './sessions-explorer.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const PROGRESS_LOTTIES: FC[] = [LottieDuckProgressShared, LottieGlobeShared, LottieJailShared]
 
@@ -20,6 +21,7 @@ interface IProps {
 }
 
 export function SessionsExplorerProgress({ progress }: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
     const [LottieComponent] = useState(pickRandomLottie)
 
@@ -61,7 +63,7 @@ export function SessionsExplorerProgress({ progress }: IProps) {
                     <Box px="xl" w="100%">
                         <Progress
                             animated
-                            color="teal"
+                            color={entityAccentColor}
                             radius="xl"
                             size="lg"
                             striped
@@ -84,7 +86,7 @@ export function SessionsExplorerProgress({ progress }: IProps) {
                                     }}
                                 >
                                     <Badge
-                                        color="teal"
+                                        color={entityAccentColor}
                                         leftSection={<CountryFlag countryCode={node.countryCode} />}
                                         size="lg"
                                         variant="soft"

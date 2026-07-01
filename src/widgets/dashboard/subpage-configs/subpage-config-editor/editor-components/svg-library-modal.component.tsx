@@ -25,6 +25,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { sanitizeSvg } from '@shared/utils/sanitize-html/sanitize-html.util'
 
 import styles from '../subpage-config-visual-editor.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 interface IProps {
     onChange: (library: TSubscriptionPageSvgLibrary) => void
@@ -34,6 +35,7 @@ interface IProps {
 }
 
 export function SvgLibraryModal(props: IProps) {
+    const primaryColor = usePrimaryColorName()
     const { onChange, onClose, opened, svgLibrary } = props
     const { t } = useTranslation()
 
@@ -188,7 +190,7 @@ export function SvgLibraryModal(props: IProps) {
                                             <div className={styles.svgPreviewBox}>
                                                 {isSvg(svg) ? (
                                                     <ThemeIcon
-                                                        color="cyan"
+                                                        color={primaryColor}
                                                         radius="xl"
                                                         size={44}
                                                         style={{
@@ -251,7 +253,6 @@ export function SvgLibraryModal(props: IProps) {
                 size="md"
                 title={
                     <BaseOverlayHeader
-                        iconColor="cyan"
                         IconComponent={editingKey ? IconPhoto : IconPlus}
                         iconVariant="soft"
                         title={
@@ -300,7 +301,7 @@ export function SvgLibraryModal(props: IProps) {
                                     <div className={styles.svgPreviewBox}>
                                         {isSvg(newSvg) ? (
                                             <ThemeIcon
-                                                color="cyan"
+                                                color={primaryColor}
                                                 radius="xl"
                                                 size={44}
                                                 style={{

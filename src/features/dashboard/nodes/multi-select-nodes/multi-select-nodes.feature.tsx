@@ -25,6 +25,7 @@ import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-st
 
 import { BulkUpdateNodesModalContent } from './bulk-update-nodes.modal.content'
 import { MultiSelectNodesModalContent } from './multi-select-modal.content'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 interface IProps {
     selectedRecords: GetAllNodesCommand.Response['response'][number][]
@@ -32,6 +33,7 @@ interface IProps {
 }
 
 export const MultiSelectNodesFeature = (props: IProps) => {
+    const primaryColor = usePrimaryColorName()
     const { selectedRecords, setSelectedRecords } = props
     const { t } = useTranslation()
 
@@ -103,7 +105,7 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                 </Group>
 
                                 <Button
-                                    color="cyan"
+                                    color={primaryColor}
                                     fullWidth
                                     leftSection={<TbChartArcs3 size={18} />}
                                     onClick={() => {
@@ -123,14 +125,13 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                 </Button>
 
                                 <Button
-                                    color="cyan"
+                                    color={primaryColor}
                                     fullWidth
                                     leftSection={<TbCategoryPlus size={18} />}
                                     onClick={() =>
                                         modals.open({
                                             title: (
                                                 <BaseOverlayHeader
-                                                    iconColor="cyan"
                                                     IconComponent={TbCategoryPlus}
                                                     iconVariant="soft"
                                                     title={t('common.update')}
@@ -153,7 +154,7 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                 </Button>
 
                                 <Button
-                                    color="cyan"
+                                    color={primaryColor}
                                     fullWidth
                                     leftSection={<XrayLogo size={18} />}
                                     onClick={handlers.open}
@@ -164,14 +165,13 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                 </Button>
 
                                 <Button
-                                    color="cyan"
+                                    color={primaryColor}
                                     fullWidth
                                     leftSection={<TbDots size={18} />}
                                     onClick={() =>
                                         modals.open({
                                             title: (
                                                 <BaseOverlayHeader
-                                                    iconColor="cyan"
                                                     IconComponent={TbDots}
                                                     iconVariant="soft"
                                                     title={t('base-node-form.more-actions')}

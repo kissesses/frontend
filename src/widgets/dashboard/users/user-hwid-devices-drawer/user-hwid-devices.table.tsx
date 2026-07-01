@@ -24,6 +24,7 @@ import {
     TextSearchFilter
 } from '@shared/ui'
 import { formatTimeUtil } from '@shared/utils/time-utils'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 type TDevice = GetUserHwidDevicesCommand.Response['response']['devices'][number]
 
@@ -63,6 +64,7 @@ const resolvePlatformIcon = (platform: null | string) => {
 }
 
 export const UserHwidDevicesTable = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { blockedHwidMap, devices, isBlocking, onBlock, onDelete, onUnblock, isLoading } = props
     const { t, i18n } = useTranslation()
 
@@ -217,7 +219,7 @@ export const UserHwidDevicesTable = (props: IProps) => {
                             <Tooltip label={t('blocked-hwids-table.widget.unblock')} withArrow>
                                 <ActionIcon
                                     aria-label={t('blocked-hwids-table.widget.unblock')}
-                                    color="teal"
+                                    color={entityAccentColor}
                                     loading={isBlocking}
                                     onClick={() => onUnblock(device.hwid)}
                                     size="md"

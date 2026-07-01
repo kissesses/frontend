@@ -7,6 +7,7 @@ import { TbReload, TbRocket } from 'react-icons/tb'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { RestartNodeModalContentFeature } from './restart-node.modal-content.feature'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     handleClose: () => void
@@ -14,6 +15,7 @@ interface IProps {
 }
 
 export function RestartNodeButtonFeature(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { handleClose, node } = props
@@ -22,14 +24,14 @@ export function RestartNodeButtonFeature(props: IProps) {
 
     return (
         <Menu.Item
-            color="teal"
+            color={entityAccentColor}
             disabled={node.isDisabled}
             leftSection={<TbReload size="1rem" />}
             onClick={() => {
                 modals.open({
                     title: (
                         <BaseOverlayHeader
-                            iconColor="teal"
+                            iconColor={entityAccentColor}
                             IconComponent={TbRocket}
                             iconVariant="soft"
                             title={t('restart-node-button.feature.restart')}

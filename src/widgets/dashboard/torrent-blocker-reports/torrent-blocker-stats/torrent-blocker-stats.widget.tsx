@@ -12,8 +12,10 @@ import { SectionCard } from '@shared/ui/section-card'
 import { formatInt } from '@shared/utils/misc'
 
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function TorrentBlockerStatsWidget() {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { data: stats, isLoading: isStatsLoading } = useGetTorrentBlockerStats()
@@ -125,7 +127,7 @@ export function TorrentBlockerStatsWidget() {
                         <SectionCard.Root>
                             <SectionCard.Section>
                                 <BaseOverlayHeader
-                                    iconColor="teal"
+                                    iconColor={entityAccentColor}
                                     IconComponent={TbServer}
                                     iconVariant="soft"
                                     subtitle={t('torrent-blocker-stats.widget.by-report-count')}

@@ -1,1 +1,5 @@
-export * from './monaco-theme'
+export * from './apply-monaco-theme'
+export * from './default.monaco-theme'
+export * from './noctis.monaco-theme'
+export { defaultMonacoTheme as monacoTheme } from './default.monaco-theme'
+export * from './use-apply-monaco-theme'

@@ -23,6 +23,7 @@ import { useIsMobile } from '@shared/hooks'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 
 import classes from './template-editor-actions.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface Props {
     editorRef: RefObject<editor.IStandaloneCodeEditor | null>
@@ -31,6 +32,7 @@ interface Props {
 }
 
 export function TemplateEditorActionsFeature(props: Props) {
+    const entityAccentColor = useEntityAccentColor()
     const { editorRef, editorType, template } = props
     const { t } = useTranslation()
 
@@ -155,7 +157,7 @@ export function TemplateEditorActionsFeature(props: Props) {
     return (
         <Group grow={isMobile} preventGrowOverflow={false} wrap="wrap">
             <Button
-                color="teal"
+                color={entityAccentColor}
                 leftSection={<PiFloppyDisk size={16} />}
                 loading={isUpdating}
                 onClick={handleSave}

@@ -1824,7 +1824,12 @@
       "layout-style": "Layout Style",
       "choose-how-the-desktop-navigation-is-displayed": "Choose how the desktop navigation is displayed",
       "compact": "Compact",
-      "sidebar": "Sidebar"
+      "sidebar": "Sidebar",
+      "theme-style": "Visual Theme",
+      "theme-default": "Default",
+      "theme-default-description": "GitHub-inspired dark theme with cyan accents",
+      "theme-noctis": "Noctis",
+      "theme-noctis-description": "Premium minimal theme inspired by Linear and Stripe"
     }
   },
   "api-tokens-card": {

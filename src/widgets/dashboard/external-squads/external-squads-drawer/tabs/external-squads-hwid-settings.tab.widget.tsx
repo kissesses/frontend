@@ -22,6 +22,7 @@ import { TbDeviceFloppy, TbDevices2 } from 'react-icons/tb'
 import { queryClient } from '@shared/api'
 import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     externalSquad: GetExternalSquadByUuidCommand.Response['response']
@@ -29,6 +30,7 @@ interface IProps {
 }
 
 export const ExternalSquadsHwidSettingsTabWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { externalSquad, isOpen } = props
     const { t } = useTranslation()
 
@@ -154,7 +156,7 @@ export const ExternalSquadsHwidSettingsTabWidget = (props: IProps) => {
                     </Stack>
                 </Group>
 
-                <Paper bg="dark.7" p="md" withBorder>
+                <Paper className="app-raised-surface" p="md" withBorder>
                     <Group justify="space-between" wrap="nowrap">
                         <Group gap="xs" justify="start" wrap="nowrap">
                             <Text fw={500} size="sm">
@@ -177,7 +179,7 @@ export const ExternalSquadsHwidSettingsTabWidget = (props: IProps) => {
                 >
                     {(styles) => (
                         <Stack gap="md" style={styles}>
-                            <Paper bg="dark.7" p="md" withBorder>
+                            <Paper className="app-raised-surface" p="md" withBorder>
                                 <Group justify="space-between" wrap="nowrap">
                                     <Group gap="xs" justify="start" wrap="nowrap">
                                         <Text fw={500} size="sm">
@@ -194,7 +196,7 @@ export const ExternalSquadsHwidSettingsTabWidget = (props: IProps) => {
                                 </Group>
                             </Paper>
 
-                            <Paper bg="dark.7" p="md" withBorder>
+                            <Paper className="app-raised-surface" p="md" withBorder>
                                 <Box style={{ flex: 1 }}>
                                     <NumberInput
                                         error={errors.fallbackDeviceLimit}
@@ -220,7 +222,7 @@ export const ExternalSquadsHwidSettingsTabWidget = (props: IProps) => {
                                 </Box>
                             </Paper>
 
-                            <Paper bg="dark.7" p="md" withBorder>
+                            <Paper className="app-raised-surface" p="md" withBorder>
                                 <Box style={{ flex: 1 }}>
                                     <Textarea
                                         error={errors.maxDevicesAnnounce}
@@ -249,7 +251,7 @@ export const ExternalSquadsHwidSettingsTabWidget = (props: IProps) => {
                 </Transition>
 
                 <Button
-                    color="teal"
+                    color={entityAccentColor}
                     fullWidth
                     leftSection={<TbDeviceFloppy size="1.2rem" />}
                     loading={isUpdatingExternalSquad}

@@ -19,6 +19,7 @@ import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { UserSubscriptionRequestItem } from './user-subscription-request-item'
 import classes from './user-subscription-requests.module.css'
 import { UserSubscriptionRequestsTable } from './user-subscription-requests.table'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 interface IProps {
     mobile: boolean
@@ -26,6 +27,7 @@ interface IProps {
 }
 
 export const UserSubscriptionRequestsContentWidget = (props: IProps) => {
+    const primaryColor = usePrimaryColorName()
     const { userUuid, mobile } = props
     const { t } = useTranslation()
 
@@ -58,7 +60,7 @@ export const UserSubscriptionRequestsContentWidget = (props: IProps) => {
                                     }}
                                 >
                                     {isLoading ? (
-                                        <Loader color="cyan" size="sm" type="oval" />
+                                        <Loader color={primaryColor} size="sm" type="oval" />
                                     ) : (
                                         <Text c="white" fw={700} size="xl">
                                             {records?.total ?? 0}

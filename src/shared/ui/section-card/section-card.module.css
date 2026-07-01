@@ -1,0 +1,23 @@
+.root {
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    box-shadow: var(--mantine-shadow-xs);
+    animation: sectionFadeIn var(--app-transition-base) both;
+}
+
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.divider {
+    opacity: var(--app-divider-opacity);
+    border-color: var(--app-border);
+}

@@ -8,6 +8,7 @@ import { faviconResolver, formatCurrencyWithIntl } from '@shared/utils/misc'
 import { formatTimeUtil } from '@shared/utils/time-utils'
 
 import { BillingRecord } from './group-records-by-month'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface RecordCardProps {
     onDelete: (uuid: string) => void
@@ -15,6 +16,7 @@ interface RecordCardProps {
 }
 
 export function RecordCard(props: RecordCardProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { record, onDelete } = props
     const { i18n } = useTranslation()
 
@@ -40,7 +42,7 @@ export function RecordCard(props: RecordCardProps) {
                                 src={faviconResolver(record.provider.faviconLink)}
                             />
                         }
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbCreditCard}
                         iconVariant="soft"
                         subtitle={formatTimeUtil({

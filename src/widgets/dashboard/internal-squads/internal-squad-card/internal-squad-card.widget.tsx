@@ -9,6 +9,7 @@ import { EntityCardShared } from '@shared/ui/entity-card'
 import { formatInt } from '@shared/utils/misc'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     handleAddToUsers: (internalSquadUuid: string, internalSquadName: string) => void
@@ -19,6 +20,7 @@ interface IProps {
 }
 
 export function InternalSquadCardWidget(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const {
         handleAddToUsers,
         handleDeleteInternalSquad,
@@ -91,7 +93,7 @@ export function InternalSquadCardWidget(props: IProps) {
                     </EntityCardShared.Button>
                     <EntityCardShared.Menu>
                         <Menu.Item
-                            color="teal"
+                            color={entityAccentColor}
                             leftSection={<TbUsersPlus size={18} />}
                             onClick={() => handleAddToUsers(internalSquad.uuid, internalSquad.name)}
                         >

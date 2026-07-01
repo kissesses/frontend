@@ -22,9 +22,9 @@
     box-shadow:
         0 8px 16px -5px rgba(0, 0, 0, 0.3),
         0 4px 6px -2px rgba(0, 0, 0, 0.2),
-        0 0 0 1px var(--mantine-color-teal-5),
-        0 0 20px -5px rgba(20, 184, 166, 0.3);
-    border-color: var(--mantine-color-teal-6);
+        0 0 0 1px var(--app-accent-muted),
+        0 0 20px -5px rgba(var(--app-accent-rgb), 0.3);
+    border-color: var(--app-accent);
 }
 
 .cardWrapperInactive:hover .card {
@@ -44,9 +44,9 @@
     height: 3px;
     background: linear-gradient(
         90deg,
-        var(--mantine-color-teal-6) 0%,
-        var(--mantine-color-cyan-5) 50%,
-        var(--mantine-color-teal-6) 100%
+        var(--app-accent) 0%,
+        var(--app-accent) 50%,
+        var(--app-accent) 100%
     );
     z-index: 2;
     border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
@@ -74,7 +74,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at center, rgba(20, 184, 166, 0.08) 0%, transparent 50%);
+    background: radial-gradient(circle at center, rgba(var(--app-accent-rgb), 0.08) 0%, transparent 50%);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;

@@ -35,6 +35,7 @@ import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra
 import { TagInputPill } from '@shared/ui/tag-input-pill'
 
 import { CopyDockerComposeWidget } from './copy-docker-compose.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,6 +46,7 @@ interface IProps {
 }
 
 export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { data: nodePlugins } = useGetNodePlugins()
@@ -276,7 +278,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps
 
                     <Group justify="flex-end" mt="auto">
                         <Button
-                            color="teal"
+                            color={entityAccentColor}
                             rightSection={<PiArrowRight size={18} />}
                             size="md"
                             type="submit"

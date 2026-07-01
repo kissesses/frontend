@@ -42,10 +42,10 @@
     &[data-active] {
         z-index: 1;
         background-color: transparent;
-        border: 2px solid var(--mantine-color-cyan-filled);
+        border: 2px solid var(--app-accent);
 
         @mixin hover {
-            background-color: var(--mantine-color-cyan-outline-hover);
+            background-color: var(--app-accent-subtle);
         }
     }
 }

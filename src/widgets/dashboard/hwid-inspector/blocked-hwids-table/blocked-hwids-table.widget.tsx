@@ -10,8 +10,10 @@ import { useGetBlockedHwids, useUnblockHwidWithInvalidation } from '@shared/api/
 import { DEFAULT_PAGINATION_STATE } from '@shared/lib/mrt-table-store'
 import { DataTableShared } from '@shared/ui/table'
 import { formatTimeUtil, sToMs } from '@shared/utils/time-utils'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function BlockedHwidsTableWidget() {
+    const entityAccentColor = useEntityAccentColor()
     const { t, i18n } = useTranslation()
     const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 25 })
 
@@ -101,7 +103,7 @@ export function BlockedHwidsTableWidget() {
         renderRowActions: ({ row }) => (
             <Tooltip label={t('blocked-hwids-table.widget.unblock')} withArrow>
                 <ActionIcon
-                    color="teal"
+                    color={entityAccentColor}
                     loading={isUnblocking}
                     onClick={() => {
                         modals.openConfirmModal({

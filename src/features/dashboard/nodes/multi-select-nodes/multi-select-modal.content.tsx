@@ -12,6 +12,7 @@ import { TbCancel, TbRefresh, TbRocket } from 'react-icons/tb'
 import { QueryKeys, useBulkNodesActions } from '@shared/api/hooks'
 import { queryClient } from '@shared/api/query-client'
 import { ActionCardShared } from '@shared/ui'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 type NodeType = GetAllNodesCommand.Response['response'][number]
 
@@ -21,6 +22,7 @@ interface IProps {
 }
 
 export const MultiSelectNodesModalContent = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { selectedRecords, setSelectedRecords } = props
     const { t } = useTranslation()
     const { mutateAsync: bulkAction, isPending } = useBulkNodesActions()
@@ -41,7 +43,7 @@ export const MultiSelectNodesModalContent = (props: IProps) => {
             <ActionCardShared
                 description={`${uuids.length} node(s)`}
                 icon={<TbRocket size={20} />}
-                iconColor="teal"
+                iconColor={entityAccentColor}
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.RESTART)}
                 title={t('restart-node-button.feature.restart')}
@@ -59,7 +61,6 @@ export const MultiSelectNodesModalContent = (props: IProps) => {
             <ActionCardShared
                 description={`${uuids.length} node(s)`}
                 icon={<PiPulse size={20} />}
-                iconColor="cyan"
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.ENABLE)}
                 title={t('common.enable')}

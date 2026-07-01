@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { queryClient } from '@shared/api'
 import { useUpdateSnippet } from '@shared/api/hooks'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
-import { monacoTheme } from '@shared/constants/monaco-theme'
+import { applyMonacoTheme, MONACO_THEME_NAME, useApplyMonacoTheme } from '@shared/constants/monaco-theme'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 
 import classes from './SnippetsDrawer.module.css'
@@ -31,6 +31,7 @@ export const EditSnippetModal = (props: IProps) => {
     const { i18n } = useTranslation()
 
     const monaco = useMonaco()
+    useApplyMonacoTheme(monaco)
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 
     const { mutate: updateSnippet, isPending: isUpdating } = useUpdateSnippet({
@@ -53,11 +54,8 @@ export const EditSnippetModal = (props: IProps) => {
         }
     })
 
-    const handleEditorDidMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
+    const handleEditorDidMount = (monacoInstance: Monaco) => {
+        applyMonacoTheme(monacoInstance)
     }
 
     const handleUpdate = (values: UpdateSnippetCommand.Request) => {
@@ -181,7 +179,7 @@ export const EditSnippetModal = (props: IProps) => {
                             }
                         }}
                         path="snippet://*"
-                        theme="GithubDark"
+                        theme={MONACO_THEME_NAME}
                         value={JSON.stringify(editSnippetForm.getValues().snippet || [], null, 2)}
                     />
                 </Paper>

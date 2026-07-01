@@ -10,6 +10,7 @@ import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
 
 import styles from './sessions-explorer.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 interface IProps {
     ip: AggregatedUserNode['ips'][number]
@@ -25,6 +26,7 @@ const getLastSeenIndicator = (lastSeen: Date | string) => {
 }
 
 export const SessionsExplorerIpRow = memo(({ ip, isMatch }: IProps) => {
+    const primaryColor = usePrimaryColorName()
     const { t, i18n } = useTranslation()
     const { color, Icon } = getLastSeenIndicator(ip.lastSeen)
 
@@ -33,7 +35,7 @@ export const SessionsExplorerIpRow = memo(({ ip, isMatch }: IProps) => {
             <Box className={clsx(styles.ipRow, isMatch && styles.ipHighlight)}>
                 <Group align="center" gap="xs" wrap="nowrap">
                     <ActionIcon
-                        color="cyan"
+                        color={primaryColor}
                         component="a"
                         href={`https://ipinfo.io/${ip.ip}`}
                         rel="noopener noreferrer"

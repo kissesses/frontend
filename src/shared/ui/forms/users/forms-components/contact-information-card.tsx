@@ -8,6 +8,7 @@ import { TbMail } from 'react-icons/tb'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps<T extends CreateUserCommand.Request | UpdateUserCommand.Request> {
     cardVariants: Variants
@@ -19,6 +20,7 @@ export function ContactInformationCard<
     T extends CreateUserCommand.Request | UpdateUserCommand.Request
 >(props: IProps<T>) {
     const { t } = useTranslation()
+    const entityAccentColor = useEntityAccentColor()
 
     const { cardVariants, motionWrapper, form } = props
 
@@ -29,7 +31,7 @@ export function ContactInformationCard<
             <SectionCard.Root>
                 <SectionCard.Section>
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbMail}
                         iconSize={20}
                         iconVariant="soft"

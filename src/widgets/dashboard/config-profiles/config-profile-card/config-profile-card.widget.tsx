@@ -17,6 +17,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { formatInt } from '@shared/utils/misc'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     configProfile: GetConfigProfilesCommand.Response['response']['configProfiles'][number]
@@ -25,6 +26,7 @@ interface IProps {
 }
 
 export function ConfigProfileCardWidget(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { configProfile, handleDeleteConfigProfile, isDragOverlay = false } = props
     const { t } = useTranslation()
 
@@ -108,7 +110,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                 size: 'xl',
                 title: (
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbEye}
                         iconVariant="soft"
                         title={computedConfigProfile.data.name}
@@ -219,7 +221,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                     ),
                                     title: (
                                         <BaseOverlayHeader
-                                            iconColor="teal"
+                                            iconColor={entityAccentColor}
                                             IconComponent={TbEye}
                                             iconVariant="soft"
                                             title={configProfile.name}

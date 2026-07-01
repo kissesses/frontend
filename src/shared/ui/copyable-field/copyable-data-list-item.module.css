@@ -26,7 +26,7 @@
 }
 
 .value[data-copied] {
-    color: var(--mantine-color-teal-6);
+    color: var(--app-accent);
 }
 
 .text {

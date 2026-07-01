@@ -17,10 +17,12 @@ import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
 import { TbChartBar } from 'react-icons/tb'
 
+import { highchartsTheme } from '@shared/constants/theme/chart-tokens'
 import { CountryFlag } from '@shared/ui/get-country-flag'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { prettifyBytesUtil } from '@shared/utils/bytes'
 import { formatTimeUtil } from '@shared/utils/time-utils'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     categories: string[] | undefined
@@ -29,6 +31,7 @@ interface IProps {
 }
 
 export const UserUsageBarchartWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { categories = [], series = [], isLoading } = props
 
     const { t, i18n } = useTranslation()
@@ -74,7 +77,7 @@ export const UserUsageBarchartWidget = (props: IProps) => {
             size: '600px',
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbChartBar}
                     iconVariant="soft"
                     subtitle={`Σ ${prettifyBytesUtil(totalDayTraffic)}`}
@@ -202,7 +205,7 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                         categories,
                         crosshair: true,
                         labels: {
-                            style: { color: 'var(--mantine-color-text)' },
+                            style: highchartsTheme.axisLabelStyle,
                             formatter: ({ value }) =>
                                 formatTimeUtil({
                                     time: value,
@@ -210,7 +213,7 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                                     language: i18n.language
                                 })
                         },
-                        gridLineColor: 'var(--mantine-color-gray-light-hover)',
+                        gridLineColor: highchartsTheme.gridLineColor,
                         gridLineWidth: 1,
                         gridLineDashStyle: 'LongDash'
                     },
@@ -219,17 +222,15 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                         reversedStacks: false,
                         labels: {
                             autoRotation: [-45, 45],
-                            style: { color: 'var(--mantine-color-text)' },
+                            style: highchartsTheme.axisLabelStyle,
                             formatter: ({ value }) => prettifyBytesUtil(value, true)
                         },
                         gridLineColor: undefined
                     },
                     tooltip: {
                         shared: false,
-                        backgroundColor: 'var(--mantine-color-body)',
-                        borderColor: 'var(--mantine-color-gray-4)',
-                        style: { color: 'var(--mantine-color-text)' },
                         useHTML: true,
+                        ...highchartsTheme.tooltip,
                         formatter() {
                             const value = this.y || 0
                             const pointIndex = this.index

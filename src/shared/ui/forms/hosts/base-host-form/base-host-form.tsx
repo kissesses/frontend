@@ -76,6 +76,7 @@ import { FINAL_MASK_MODAL_ID, FinalMaskModalContent } from './modals/final-mask.
 import { MUX_MODAL_ID, MuxModalContent } from './modals/mux.modal.content'
 import { SOCKOPT_MODAL_ID, SockoptModalContent } from './modals/sockopt.modal.content'
 import { XHTTP_MODAL_ID, XhttpModalContent } from './modals/xhttp.modal.content'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const SUBSCRIPTION_TYPES = {
     [SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON]: {
@@ -122,6 +123,7 @@ export const BaseHostForm = <
     } = props
 
     const { t } = useTranslation()
+    const entityAccentColor = useEntityAccentColor()
     const [activeTab, setActiveTab] = useState<null | string>('basic')
     const isMobile = useIsMobile()
 
@@ -373,7 +375,7 @@ export const BaseHostForm = <
                             <SectionCard.Root style={styles}>
                                 <SectionCard.Section>
                                     <BaseOverlayHeader
-                                        iconColor="teal"
+                                        iconColor={entityAccentColor}
                                         IconComponent={PiTag}
                                         iconVariant="soft"
                                         title={t('base-host-form.vital-parameters')}
@@ -623,7 +625,7 @@ export const BaseHostForm = <
                                 <SectionCard.Root>
                                     <SectionCard.Section>
                                         <BaseOverlayHeader
-                                            iconColor="teal"
+                                            iconColor={entityAccentColor}
                                             IconComponent={PiGearSixDuotone}
                                             iconVariant="soft"
                                             title={t('base-host-form.connection-overrides')}
@@ -978,7 +980,7 @@ export const BaseHostForm = <
                                                         fullScreen: isMobile,
                                                         title: (
                                                             <BaseOverlayHeader
-                                                                iconColor="teal"
+                                                                iconColor={entityAccentColor}
                                                                 IconComponent={PiPencilDuotone}
                                                                 iconVariant="soft"
                                                                 title={t(
@@ -1006,7 +1008,7 @@ export const BaseHostForm = <
                                                         fullScreen: isMobile,
                                                         title: (
                                                             <BaseOverlayHeader
-                                                                iconColor="teal"
+                                                                iconColor={entityAccentColor}
                                                                 IconComponent={TbCloudNetwork}
                                                                 iconVariant="soft"
                                                                 title="MUX"
@@ -1032,7 +1034,7 @@ export const BaseHostForm = <
                                                         fullScreen: isMobile,
                                                         title: (
                                                             <BaseOverlayHeader
-                                                                iconColor="teal"
+                                                                iconColor={entityAccentColor}
                                                                 IconComponent={PiNetwork}
                                                                 iconVariant="soft"
                                                                 title="SockOpt"
@@ -1060,7 +1062,7 @@ export const BaseHostForm = <
                                                         fullScreen: isMobile,
                                                         title: (
                                                             <BaseOverlayHeader
-                                                                iconColor="teal"
+                                                                iconColor={entityAccentColor}
                                                                 IconComponent={TbMask}
                                                                 iconVariant="soft"
                                                                 title="Final Mask"
@@ -1085,7 +1087,7 @@ export const BaseHostForm = <
                                 <SectionCard.Root>
                                     <SectionCard.Section>
                                         <BaseOverlayHeader
-                                            iconColor="teal"
+                                            iconColor={entityAccentColor}
                                             IconComponent={PiListChecks}
                                             iconVariant="soft"
                                             title={t('base-host-form.misc-settings')}
@@ -1302,7 +1304,7 @@ export const BaseHostForm = <
                 <Group gap="xs" justify="space-between" w="100%">
                     <Group gap="xs">
                         <Button
-                            color="teal"
+                            color={entityAccentColor}
                             disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
                             leftSection={<PiFloppyDiskDuotone size="16px" />}
                             loading={isSubmitting}

@@ -10,8 +10,10 @@ import { TbCode } from 'react-icons/tb'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import classes from './FlatInboundCheckboxCard.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const FlatInboundCheckboxCardShared = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { inbound, isSelected, onInboundToggle, profileName } = props
 
     const { t } = useTranslation()
@@ -33,7 +35,7 @@ export const FlatInboundCheckboxCardShared = (props: IProps) => {
             ),
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCode}
                     iconVariant="soft"
                     title={t('flat-inbound-checkbox-card.shared.inbound-config-inbound-tag', {
@@ -71,7 +73,7 @@ export const FlatInboundCheckboxCardShared = (props: IProps) => {
                         {inbound.type}
                     </Badge>
                     {inbound.port && (
-                        <Badge color="teal" size="xs" variant="soft">
+                        <Badge color={entityAccentColor} size="xs" variant="soft">
                             {inbound.port}
                         </Badge>
                     )}

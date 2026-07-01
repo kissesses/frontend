@@ -43,6 +43,8 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 import { formatInt } from '@shared/utils/misc'
 import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     onClose: () => void
@@ -66,6 +68,8 @@ const getLastSeenIndicator = (lastSeen: Date | string) => {
 }
 
 export const UserActiveSessionDrawerWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { userUuid, opened, onClose } = props
     const { t, i18n } = useTranslation()
 
@@ -223,7 +227,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             <SectionCard.Section>
                 <Group align="flex-center" justify="space-between">
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbRadar}
                         iconVariant="soft"
                         subtitle={t('active-sessions-drawer.widget.active-ips-across-nodes')}
@@ -312,7 +316,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             </SectionCard.Section>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon color="teal" size="md" variant="soft">
+                <ThemeIcon color={entityAccentColor} size="md" variant="soft">
                     <TbTag size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
@@ -349,7 +353,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             </Stack>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon color="cyan" size="md" variant="soft">
+                <ThemeIcon color={primaryColor} size="md" variant="soft">
                     <TbClock size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
@@ -404,7 +408,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                             >
                                 <Progress.Section
                                     animated
-                                    color="teal"
+                                    color={entityAccentColor}
                                     style={{
                                         transition: 'width 400ms ease'
                                     }}
@@ -439,7 +443,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                             </Text>
 
                             <Button
-                                color="teal"
+                                color={entityAccentColor}
                                 leftSection={<TbRefresh size={20} />}
                                 onClick={handleClearResults}
                                 size="md"
@@ -499,7 +503,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                         title={node.nodeName}
                                     />
                                     <Group gap="xs">
-                                        <Badge color="teal" size="lg" variant="default">
+                                        <Badge color={entityAccentColor} size="lg" variant="default">
                                             {node.ips.length}
                                         </Badge>
                                         <Tooltip
@@ -549,7 +553,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                 node.ips.map((item) => (
                                     <Group align="center" gap="xs" key={item.ip} wrap="nowrap">
                                         <ActionIcon
-                                            color="cyan"
+                                            color={primaryColor}
                                             component="a"
                                             href={`https://ipinfo.io/${item.ip}`}
                                             rel="noopener noreferrer"
@@ -658,7 +662,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                 <>
                     {renderWarning()}
                     <Button
-                        color="teal"
+                        color={entityAccentColor}
                         fullWidth
                         leftSection={<TbRadar size={20} />}
                         loading={isFetchingIps}
@@ -688,7 +692,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             size="500px"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbRadar}
                     iconVariant="soft"
                     title={t('active-sessions-drawer.widget.title')}

@@ -24,8 +24,10 @@ import {
 import { ROUTES } from '@shared/constants'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const SubpageConfigsHeaderActionButtonsFeature = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { isFetching } = useGetSubscriptionPageConfigs()
@@ -82,7 +84,7 @@ export const SubpageConfigsHeaderActionButtonsFeature = () => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <ActionIcon color="teal" onClick={open} size="input-md" variant="light">
+                <ActionIcon color={entityAccentColor} onClick={open} size="input-md" variant="light">
                     <TbPlus size="24px" />
                 </ActionIcon>
             </ActionIconGroup>
@@ -94,7 +96,7 @@ export const SubpageConfigsHeaderActionButtonsFeature = () => {
                 size="md"
                 title={
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbFile}
                         iconVariant="soft"
                         title={t('common.create')}
@@ -124,7 +126,7 @@ export const SubpageConfigsHeaderActionButtonsFeature = () => {
                                 {t('common.cancel')}
                             </Button>
 
-                            <Button color="teal" loading={isPending} type="submit">
+                            <Button color={entityAccentColor} loading={isPending} type="submit">
                                 {t('common.create')}
                             </Button>
                         </Group>

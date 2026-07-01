@@ -5,8 +5,10 @@ import { TbRefresh } from 'react-icons/tb'
 import { useResetNodeTraffic } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function ResetNodeTrafficFeature(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
     const { handleClose, node } = props
 
@@ -24,7 +26,7 @@ export function ResetNodeTrafficFeature(props: IProps) {
     return (
         <Menu.Item
             leftSection={
-                isPending ? <Loader color="teal" size="1rem" /> : <TbRefresh size="1rem" />
+                isPending ? <Loader color={entityAccentColor} size="1rem" /> : <TbRefresh size="1rem" />
             }
             onClick={() => resetNodeTraffic({})}
         >

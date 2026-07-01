@@ -9,6 +9,7 @@ import { SiSecurityscorecard } from 'react-icons/si'
 import { useGetConfigProfiles } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps<T extends CreateNodeCommand.Request | UpdateNodeCommand.Request> {
     cardVariants: Variants
@@ -22,6 +23,7 @@ export const NodeConfigProfilesCard = <
     props: IProps<T>
 ) => {
     const { t } = useTranslation()
+    const entityAccentColor = useEntityAccentColor()
     const { cardVariants, form, motionWrapper } = props
 
     const MotionWrapper = motionWrapper
@@ -50,7 +52,7 @@ export const NodeConfigProfilesCard = <
             <SectionCard.Root>
                 <SectionCard.Section>
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={SiSecurityscorecard}
                         iconVariant="soft"
                         title={t('base-node-form.core-configuration')}

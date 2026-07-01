@@ -5,6 +5,7 @@ import { TbCheck } from 'react-icons/tb'
 
 import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { getEntityAccentColorFromDom } from '@shared/hocs/theme-applier/theme-applier'
 
 const DOCKER_COMMAND = 'docker restart remnawave-subscription-page'
 
@@ -12,7 +13,7 @@ export const showSubpageConfigSavedModal = (t: TFunction) =>
     modals.open({
         title: (
             <BaseOverlayHeader
-                iconColor="teal"
+                iconColor={getEntityAccentColorFromDom()}
                 IconComponent={TbCheck}
                 iconSize={20}
                 iconVariant="soft"

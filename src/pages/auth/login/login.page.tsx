@@ -9,6 +9,7 @@ import { useMemo } from 'react'
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { Logo, Page } from '@shared/ui'
 import { parseColoredTextUtil } from '@shared/utils/misc'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 const getAuthMethods = (authStatus: GetStatusCommand.Response['response'] | undefined) => {
     const isPasswordEnabled = authStatus?.authentication?.password?.enabled ?? false
@@ -89,6 +90,7 @@ const AlternativeAuthMethods = ({
 )
 
 export const LoginPage = () => {
+    const primaryColor = usePrimaryColorName()
     const { data: authStatus } = useGetAuthStatus()
 
     const titleParts = useMemo(() => {
@@ -114,7 +116,7 @@ export const LoginPage = () => {
                 </Group>
 
                 {!authStatus && (
-                    <Badge color="cyan" mt={10} size="lg" variant="filled">
+                    <Badge color={primaryColor} mt={10} size="lg" variant="filled">
                         Server is not responding. Check logs.
                     </Badge>
                 )}

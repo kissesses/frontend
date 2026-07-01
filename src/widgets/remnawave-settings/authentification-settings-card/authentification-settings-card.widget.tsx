@@ -38,6 +38,8 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { TagInputPill } from '@shared/ui/tag-input-pill'
 import { handleFormErrors } from '@shared/utils/misc'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     oauth2Settings: NonNullable<GetRemnawaveSettingsCommand.Response['response']['oauth2Settings']>
@@ -181,6 +183,8 @@ const getFieldConfig = (t: TFunction) =>
     }) as const
 
 export const AuthentificationSettingsCardWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { passkeySettings, passwordSettings, oauth2Settings } = props
     const { t } = useTranslation()
     const [drawerOpened, { open: openDrawer, close: closeDrawer }] = useDisclosure(false)
@@ -395,7 +399,6 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                     <SettingsCardShared.Header
                         description={t('auth-settings.header.description')}
                         icon={<PiKey size={24} />}
-                        iconColor="cyan"
                         iconVariant="soft"
                         title={t('auth-settings.header.title')}
                     />
@@ -453,7 +456,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                 <Center>
                                     <Accordion.Control
                                         icon={
-                                            <ThemeIcon color="cyan" size="lg" variant="light">
+                                            <ThemeIcon color={primaryColor} size="lg" variant="light">
                                                 <TbFingerprint size={24} />
                                             </ThemeIcon>
                                         }
@@ -522,7 +525,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
 
                     <SettingsCardShared.Bottom>
                         <Group justify="flex-end">
-                            <Button color="teal" loading={isUpdatePending} size="md" type="submit">
+                            <Button color={entityAccentColor} loading={isUpdatePending} size="md" type="submit">
                                 {t('common.save')}
                             </Button>
                         </Group>

@@ -30,6 +30,8 @@ import { useNodePluginExecutor } from '@shared/api/hooks'
 import { ActionCardShared } from '@shared/ui/action-card'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     nodes: GetAllNodesCommand.Response['response']
@@ -50,6 +52,8 @@ const UNBLOCK_PLACEHOLDER = `192.168.1.1
 const ipSchema = z.string().ip({ message: 'Invalid IP address' })
 
 export const NodePluginExecutorContent = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { nodes, onClose } = props
     const { t } = useTranslation()
 
@@ -249,7 +253,7 @@ export const NodePluginExecutorContent = (props: IProps) => {
                                 'node-plugin-executor.content.remove-ip-blocks-on-selected-nodes'
                             )}
                             icon={<TbLockOpen size={20} />}
-                            iconColor="teal"
+                            iconColor={entityAccentColor}
                             onClick={() => selectCommand('unblockIps')}
                             title={t('node-plugin-executor.content.unblock-ips')}
                             variant="soft"
@@ -460,7 +464,7 @@ export const NodePluginExecutorContent = (props: IProps) => {
                         )}
 
                         <Button
-                            color="cyan"
+                            color={primaryColor}
                             disabled={selectedNodeUuids.size === 0}
                             loading={isPending}
                             onClick={handleSubmit}

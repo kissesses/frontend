@@ -26,6 +26,7 @@ import { faviconResolver } from '@shared/utils/misc'
 import { formatDurationUtil } from '@shared/utils/time-utils'
 
 import { NodeStatusSimplfiedBadgeWidget } from '../node-status-simplfied-badge'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export type NodeStatusFilter = 'connected' | 'connecting' | 'disabled' | 'disconnected'
 
@@ -56,7 +57,8 @@ export function getNodesTableColumns(
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'],
     nodePlugins: GetNodePluginsCommand.Response['response']['nodePlugins'],
     handleViewNode: (nodeUuid: string) => void,
-    filters: NodesTableFilters
+    filters: NodesTableFilters,
+    accentColor: string
 ): DataTableColumn<GetAllNodesCommand.Response['response'][number]>[] {
     return [
         {
@@ -451,11 +453,11 @@ export function getNodesTableColumns(
             draggable: false,
             resizable: false,
             titleStyle: {
-                backgroundColor: 'var(--mantine-color-dark-7)'
+                backgroundColor: 'var(--app-surface-raised)'
             },
             cellsStyle: () => {
                 return {
-                    backgroundColor: 'var(--mantine-color-dark-7)'
+                    backgroundColor: 'var(--app-surface-raised)'
                 }
             },
             title: (
@@ -468,7 +470,7 @@ export function getNodesTableColumns(
             render: ({ uuid }) => (
                 <Group gap={4} justify="flex-end" wrap="nowrap">
                     <ActionIcon
-                        color="teal"
+                        color={accentColor}
                         onClick={() => handleViewNode(uuid)}
                         size="md"
                         variant="outline"

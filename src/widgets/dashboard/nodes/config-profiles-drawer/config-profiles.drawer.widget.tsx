@@ -22,8 +22,10 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import classes from './config-profiles.module.css'
 import { IProps } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const ConfigProfilesDrawer = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const {
         opened,
         onClose,
@@ -168,7 +170,7 @@ export const ConfigProfilesDrawer = (props: IProps) => {
             }}
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={XrayLogo}
                     iconVariant="soft"
                     title={t('config-profiles.drawer.widget.config-profiles')}
@@ -225,7 +227,7 @@ export const ConfigProfilesDrawer = (props: IProps) => {
 
                             <Tooltip label={t('common.save')}>
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     disabled={selectedInbounds.size === 0}
                                     onClick={handleSaveInbounds}
                                     size="lg"

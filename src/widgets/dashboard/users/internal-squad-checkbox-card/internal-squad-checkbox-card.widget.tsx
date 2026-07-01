@@ -9,8 +9,12 @@ import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-st
 
 import classes from './Checkbox.module.css'
 import { IProps } from './interfaces'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const InternalSquadCheckboxCard = memo((props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { internalSquad, hideEditButton } = props
 
     const openModalWithData = useModalsStoreOpenWithData()
@@ -42,7 +46,7 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
 
                 <Group gap="xs" wrap="nowrap">
                     <Badge
-                        color="teal"
+                        color={entityAccentColor}
                         leftSection={<PiUsers size="16" />}
                         size="md"
                         variant="light"
@@ -57,7 +61,7 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
                     </Badge>
                     {!hideEditButton && (
                         <ActionIcon
-                            color="cyan"
+                            color={primaryColor}
                             component="a"
                             onClick={(e) => {
                                 e.preventDefault()

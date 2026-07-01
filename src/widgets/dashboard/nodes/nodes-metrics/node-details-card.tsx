@@ -29,6 +29,7 @@ import { TbServer2 } from 'react-icons/tb'
 
 import { SectionCard } from '@shared/ui/section-card'
 import { formatInt } from '@shared/utils/misc'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const NodeDetailsCard = memo(
     ({
@@ -40,6 +41,7 @@ export const NodeDetailsCard = memo(
     }) => {
         const [hideZeroValues, setHideZeroValues] = useState(true)
         const { t } = useTranslation()
+        const entityAccentColor = useEntityAccentColor()
 
         const filterNonZeroStats = (stats: typeof node.inboundsStats) => {
             if (!hideZeroValues) return stats
@@ -146,7 +148,7 @@ export const NodeDetailsCard = memo(
                             </Tooltip>
 
                             <Badge
-                                color="teal"
+                                color={entityAccentColor}
                                 leftSection={<PiUsersDuotone size={px('0.9rem')} />}
                                 size="lg"
                                 style={{ flexShrink: 0 }}
@@ -192,7 +194,7 @@ export const NodeDetailsCard = memo(
                                         <Box key={stat.tag} mb="sm">
                                             <Group align="center" justify="space-between" mb="xs">
                                                 <Badge
-                                                    color="teal"
+                                                    color={entityAccentColor}
                                                     leftSection={<PiTag size={px('0.8rem')} />}
                                                     size="sm"
                                                     variant="outline"

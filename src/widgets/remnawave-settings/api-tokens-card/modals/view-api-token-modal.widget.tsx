@@ -23,6 +23,7 @@ import { formatTimeUtil } from '@shared/utils/time-utils'
 import classes from '../api-token-card.module.css'
 import { ScopeResourceRow } from './scope-resource-row'
 import { countSelected, expandScopesToKeys } from './scopes.utils'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     isMobile: boolean
@@ -32,6 +33,7 @@ interface IProps {
 }
 
 export const ViewApiTokenContentWidget = ({ isMobile, token }: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t, i18n } = useTranslation()
 
     const { data: scopesData } = useGetScopes()
@@ -150,7 +152,7 @@ export const ViewApiTokenContentWidget = ({ isMobile, token }: IProps) => {
                     </CopyButton>
                 </ActionIconGroup>
 
-                <Button color="teal" onClick={() => modals.closeAll()} size="md" variant="light">
+                <Button color={entityAccentColor} onClick={() => modals.closeAll()} size="md" variant="light">
                     {t('common.close')}
                 </Button>
             </ModalFooter>

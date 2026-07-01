@@ -42,6 +42,8 @@ import { formatInt } from '@shared/utils/misc'
 
 import { NodeActiveSessionItem } from './node-active-session.item.widget'
 import classes from './node-active-sessions.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     nodeUuid: string
@@ -57,6 +59,8 @@ const DOCKER_SNIPPET = `
 const HIGHLIGHT_SPAN = <Text c="white" component="span" fw={600} size="sm" />
 
 export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { nodeUuid, opened, onClose } = props
     const { t } = useTranslation()
 
@@ -128,7 +132,7 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
             <SectionCard.Section>
                 <Group align="flex-center" justify="space-between">
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbUser}
                         iconVariant="soft"
                         subtitle={t('node-active-sessions.drawer.widget.active-users-on-this-node')}
@@ -277,7 +281,7 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
             </Stack>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon color="cyan" size="md" variant="soft">
+                <ThemeIcon color={primaryColor} size="md" variant="soft">
                     <TbClock size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
@@ -334,7 +338,7 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
                             </Text>
 
                             <Button
-                                color="teal"
+                                color={entityAccentColor}
                                 leftSection={<TbRefresh size={20} />}
                                 onClick={handleClearResults}
                                 size="sm"
@@ -455,7 +459,7 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
                 <>
                     {renderWarning()}
                     <Button
-                        color="teal"
+                        color={entityAccentColor}
                         fullWidth
                         leftSection={<TbRadar size={20} />}
                         loading={isFetchingUsersIps}
@@ -492,7 +496,7 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
             }}
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbRadar}
                     iconVariant="soft"
                     title={t('active-sessions-drawer.widget.title')}

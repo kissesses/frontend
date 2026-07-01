@@ -14,8 +14,10 @@ import { BuildInfoModal } from '../sidebar/build-info-modal'
 import { HeaderControl } from './HeaderControl'
 import { SkeletonHeaderControl } from './SkeletonHeaderControl'
 import classes from './VersionControl.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function VersionControl() {
+    const entityAccentColor = useEntityAccentColor()
     const remnawaveInfo = useRemnawaveInfo()
     const { data: remnawaveMetadata, isLoading } = useGetRemnawaveMetadata()
 
@@ -35,7 +37,7 @@ export function VersionControl() {
         modals.open({
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={Logo}
                     iconVariant="soft"
                     title="Build Info"

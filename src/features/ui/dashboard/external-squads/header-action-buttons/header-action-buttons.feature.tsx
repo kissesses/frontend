@@ -20,12 +20,14 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     externalSquadCount: number
 }
 
 export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { externalSquadCount } = props
 
     const { isFetching, refetch: refetchExternalSquads } = useGetExternalSquads()
@@ -90,7 +92,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                     label={t('header-action-buttons.feature.create-new-external-squad')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} size="input-md" variant="soft">
+                    <ActionIcon color={entityAccentColor} onClick={open} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
@@ -103,7 +105,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                 size="md"
                 title={
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={TbWebhook}
                         iconVariant="soft"
                         title={t('header-action-buttons.feature.create-new-external-squad')}
@@ -134,7 +136,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                             </Button>
 
                             <Button
-                                color="teal"
+                                color={entityAccentColor}
                                 disabled={!!nameField.error || nameField.getValue().length === 0}
                                 loading={isPending}
                                 type="submit"

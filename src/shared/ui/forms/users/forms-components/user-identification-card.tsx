@@ -43,6 +43,8 @@ import { formatRelativeDateUtil, formatTimeUtil, getTimeAgoUtil } from '@shared/
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     cardVariants: Variants
@@ -67,6 +69,8 @@ const getLastSeenIndicatorColor = (lastSeen: Date | string) => {
 }
 
 export const UserIdentificationCard = memo((props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { t, i18n } = useTranslation()
 
     const { cardVariants, lastConnectedNode, motionWrapper, user } = props
@@ -163,14 +167,14 @@ export const UserIdentificationCard = memo((props: IProps) => {
                         <Group gap={5} justify="center">
                             <Tooltip label={t('view-user-modal.widget.qr-code')}>
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     onClick={() => {
                                         modals.open({
                                             centered: true,
                                             size: 'auto',
                                             title: (
                                                 <BaseOverlayHeader
-                                                    iconColor="teal"
+                                                    iconColor={entityAccentColor}
                                                     IconComponent={PiQrCode}
                                                     iconVariant="soft"
                                                     title={t(
@@ -197,7 +201,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
 
                             <Tooltip label="Metadata">
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     disabled={!metadata}
                                     loading={isMetadataLoading}
                                     onClick={() => {
@@ -207,7 +211,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                             size: 'auto',
                                             title: (
                                                 <BaseOverlayHeader
-                                                    iconColor="teal"
+                                                    iconColor={entityAccentColor}
                                                     IconComponent={TbJson}
                                                     iconVariant="soft"
                                                     title="Metadata"
@@ -241,7 +245,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
                         <Group gap={5} justify="center">
                             <Tooltip label={t('view-user-modal.widget.detailed-info')}>
                                 <ActionIcon
-                                    color="cyan"
+                                    color={primaryColor}
                                     onClick={async () => {
                                         await actions.setDrawerUserUuid(user.uuid)
                                         actions.changeDetailedUserInfoDrawerState(true)
@@ -255,7 +259,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
 
                             <Tooltip label={t('view-user-modal.widget.accessible-nodes')}>
                                 <ActionIcon
-                                    color="cyan"
+                                    color={primaryColor}
                                     onClick={() => {
                                         openModalWithData(MODALS.USER_ACCESSIBLE_NODES_DRAWER, {
                                             userUuid: user.uuid

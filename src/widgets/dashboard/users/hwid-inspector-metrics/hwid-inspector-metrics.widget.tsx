@@ -14,8 +14,10 @@ import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-ca
 
 import { buildPlatformData } from './hwid-inspector-metrics.utils'
 import { PlatformRow } from './platform-row'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 export function HwidInspectorMetrics() {
+    const primaryColor = usePrimaryColorName()
     const { t } = useTranslation()
 
     const { data: stats, isLoading } = useGetHwidDevicesStats()
@@ -67,7 +69,7 @@ export function HwidInspectorMetrics() {
             >
                 <Group align="center" gap="sm" justify="space-between" mb="lg" wrap="nowrap">
                     <Group align="center" gap="sm" style={{ minWidth: 0 }} wrap="nowrap">
-                        <ThemeIcon color="cyan" radius="md" size="lg" variant="soft">
+                        <ThemeIcon color={primaryColor} radius="md" size="lg" variant="soft">
                             <TbChartArcs3 size="20px" />
                         </ThemeIcon>
                         <Text fw={600} lineClamp={1} size="lg">

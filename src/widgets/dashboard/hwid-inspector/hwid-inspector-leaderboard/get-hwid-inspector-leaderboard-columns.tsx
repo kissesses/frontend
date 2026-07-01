@@ -15,11 +15,11 @@ export function getHwidInspectorLeaderboardColumns(
             draggable: false,
 
             titleStyle: {
-                backgroundColor: 'var(--mantine-color-dark-7)'
+                backgroundColor: 'var(--app-surface-raised)'
             },
             cellsStyle: () => {
                 return {
-                    backgroundColor: 'var(--mantine-color-dark-7)'
+                    backgroundColor: 'var(--app-surface-raised)'
                 }
             },
             title: (

@@ -19,6 +19,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/nodes-store'
 import { NODES_VIEW_MODE } from '@entities/dashboard/view-preferences-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     setViewMode: (viewMode: NODES_VIEW_MODE) => void
@@ -26,6 +27,7 @@ interface IProps {
 }
 
 export const NodesHeaderActionButtonsFeature = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { setViewMode, viewMode } = props
 
     const { t } = useTranslation()
@@ -48,7 +50,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
         modals.open({
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbRocket}
                     iconVariant="soft"
                     title={t('nodes-header-action-buttons.feature.restart-all-nodes')}
@@ -82,7 +84,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                             'nodes-header-action-buttons.feature.graceful-restart-description-1'
                         )}
                         icon={<TbRocket size={22} />}
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         isLoading={isPending}
                         onClick={() => {
                             restartAllNodes({
@@ -172,7 +174,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
             </ActionIconGroup>
             <ActionIconGroup>
                 <Tooltip label={t('nodes-header-action-buttons.feature.create-new-node')} withArrow>
-                    <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="soft">
+                    <ActionIcon color={entityAccentColor} onClick={handleCreate} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>

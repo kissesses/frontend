@@ -14,6 +14,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { getDefaultDateRange } from '@shared/utils/time-utils'
 
 import { IProps } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const TOP_NODES_LIMIT_OPTIONS = [
     { value: '5', label: 'Top 5' },
@@ -32,6 +33,7 @@ const TOP_NODES_LIMIT_OPTIONS = [
 const DEFAULT_TOP_NODES_LIMIT = 20
 
 export const UserUsageModalWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { userUuid, opened, onClose } = props
     const { t, i18n } = useTranslation()
     const defaultRange = getDefaultDateRange()
@@ -100,7 +102,7 @@ export const UserUsageModalWidget = (props: IProps) => {
             size="900px"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbChartPie}
                     iconVariant="soft"
                     title={t('user-usage-modal.widget.traffic-statistics')}

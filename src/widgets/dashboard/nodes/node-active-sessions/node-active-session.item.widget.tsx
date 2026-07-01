@@ -19,6 +19,8 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 import { openOrNavigate } from '@shared/utils/open-or-navigate'
 import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     user: NonNullable<FetchUsersIpsResultCommand.Response['response']['result']>['users'][number]
@@ -33,6 +35,8 @@ const getLastSeenIndicator = (lastSeen: Date | string) => {
 }
 
 export const NodeActiveSessionItem = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { user } = props
 
     const { t, i18n } = useTranslation()
@@ -66,7 +70,7 @@ export const NodeActiveSessionItem = (props: IProps) => {
                         icon={
                             <Tooltip label={t('node-active-session.item.widget.view-user')}>
                                 <ActionIcon
-                                    color="cyan"
+                                    color={primaryColor}
                                     loading={isLoading}
                                     onClick={handleViewUser}
                                     size="lg"
@@ -83,7 +87,7 @@ export const NodeActiveSessionItem = (props: IProps) => {
                     />
 
                     <Group gap="xs">
-                        <Badge color="teal" size="lg" variant="default">
+                        <Badge color={entityAccentColor} size="lg" variant="default">
                             {user.ips.length}
                         </Badge>
                     </Group>
@@ -103,7 +107,7 @@ export const NodeActiveSessionItem = (props: IProps) => {
                 user.ips.map((item) => (
                     <Group align="center" gap="xs" key={item.ip} wrap="nowrap">
                         <ActionIcon
-                            color="cyan"
+                            color={primaryColor}
                             component="a"
                             href={`https://ipinfo.io/${item.ip}`}
                             rel="noopener noreferrer"

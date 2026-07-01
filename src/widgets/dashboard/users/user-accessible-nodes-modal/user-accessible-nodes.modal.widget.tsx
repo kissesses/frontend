@@ -14,12 +14,14 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 import classes from './user-accessible.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 type ActiveNode = GetUserAccessibleNodesCommand.Response['response']['activeNodes'][number]
 type ActiveSquad = ActiveNode['activeSquads'][number]
 type ActiveInbound = ActiveSquad['activeInbounds'][number]
 
 export const UserAccessibleNodesModalWidget = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const [expandedNodeIds, setExpandedNodeIds] = useState<string[]>([])
@@ -248,7 +250,7 @@ export const UserAccessibleNodesModalWidget = () => {
             size="800px"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbServer}
                     iconVariant="soft"
                     title={t('user-accessible-nodes.modal.widget.user-accessible-nodes')}

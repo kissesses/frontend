@@ -11,6 +11,7 @@ import { StatusColumnEntity } from '@entities/dashboard/users/ui/table-columns/s
 import { UsernameColumnEntity } from '@entities/dashboard/users/ui/table-columns/username'
 
 import classes from './user-card.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 const tagColorHash = new ColorHash({ lightness: [0.65, 0.65, 0.65] })
 
@@ -25,6 +26,7 @@ export interface IProps {
 export const UserCardWidget = memo(function UserCardWidget(props: IProps) {
     const { isSelected, node, onOpen, onSelect, user } = props
     const { t } = useTranslation()
+    const primaryColor = usePrimaryColorName()
     const tagColor = useMemo(() => (user.tag ? tagColorHash.hex(user.tag) : undefined), [user.tag])
 
     return (
@@ -56,7 +58,7 @@ export const UserCardWidget = memo(function UserCardWidget(props: IProps) {
                     <Checkbox
                         checked={isSelected}
                         className={classes.checkbox}
-                        color="cyan"
+                        color={primaryColor}
                         onChange={(event) => {
                             event.stopPropagation()
                             onSelect?.(user.uuid)

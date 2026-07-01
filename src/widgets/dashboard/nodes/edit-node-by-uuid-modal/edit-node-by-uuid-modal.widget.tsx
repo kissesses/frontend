@@ -12,8 +12,10 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { MODALS, useModalCloseActions, useModalState } from '@entities/dashboard/modal-store'
 
 import { EditNodeByUuidModalContent } from './edit-node-by-uuid-modal.content'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const EditNodeByUuidModalWidget = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { isOpen, internalState: nodeUuid } = useModalState(MODALS.EDIT_NODE_BY_UUID_MODAL)
@@ -46,7 +48,7 @@ export const EditNodeByUuidModalWidget = () => {
             size="1000px"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCpu}
                     iconVariant="soft"
                     title={t('edit-node-modal.widget.edit-node')}

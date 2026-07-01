@@ -17,8 +17,10 @@ import { TbServer } from 'react-icons/tb'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const ActiveNodesListModalWithStoreShared = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { isOpen, internalState: nodes } = useModalState(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)
     const close = useModalClose(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)
 
@@ -32,7 +34,7 @@ export const ActiveNodesListModalWithStoreShared = () => {
             size="lg"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbServer}
                     iconVariant="soft"
                     title={t('active-nodes-list-with-store.modal.shared.active-nodes')}

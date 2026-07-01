@@ -58,12 +58,14 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { sleep } from '@shared/utils/misc'
 
 import styles from './subpage-config-editor-page.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 interface Props {
     config: GetSubscriptionPageConfigCommand.Response['response']
 }
 
 export const SubpageConfigEditorPageComponent = (props: Props) => {
+    const primaryColor = usePrimaryColorName()
     const { config } = props
     const { t } = useTranslation()
     const navigate = useNavigate()
@@ -208,7 +210,6 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
             modals.open({
                 title: (
                     <BaseOverlayHeader
-                        iconColor="cyan"
                         IconComponent={TbFileImport}
                         iconSize={20}
                         iconVariant="soft"
@@ -345,7 +346,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                 }
                 className={styles.headerCard}
                 customThemeIcon={
-                    <ThemeIcon color="cyan" size="lg" variant="soft">
+                    <ThemeIcon color={primaryColor} size="lg" variant="soft">
                         <TbPalette size={24} />
                     </ThemeIcon>
                 }

@@ -19,6 +19,7 @@ import { handleFormErrors } from '@shared/utils/misc'
 import { toUtcDayISO } from '@shared/utils/time-utils'
 
 import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 enum Mode {
     NAME = 'name',
@@ -26,6 +27,7 @@ enum Mode {
 }
 
 export function CreateInfraBillingNodeModalWidget() {
+    const entityAccentColor = useEntityAccentColor()
     const isOpen = useModalIsOpen(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
     const close = useModalClose(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
 
@@ -128,7 +130,7 @@ export function CreateInfraBillingNodeModalWidget() {
             size="md"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbServer}
                     iconVariant="soft"
                     title={t('create-infra-billing-node.modal.widget.billing-node')}

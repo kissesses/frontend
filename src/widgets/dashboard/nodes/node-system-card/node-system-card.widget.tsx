@@ -25,12 +25,16 @@ import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
 import { formatDurationUtil } from '@shared/utils/time-utils'
 
 import classes from './node-system-card.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     node: GetOneNodeCommand.Response['response']
 }
 
 export const NodeSystemCardWidget = memo((props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { node } = props
     const { t } = useTranslation()
     const cardRef = useRef<HTMLDivElement | null>(null)
@@ -134,7 +138,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                 {info.platform} / {info.arch}
                             </Badge>
                             <Badge
-                                color="teal"
+                                color={entityAccentColor}
                                 ff="monospace"
                                 leftSection={<PiTimerDuotone size={12} />}
                                 size="lg"
@@ -188,7 +192,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                     >
                                         {t('node-system-card.widget.interface')}
                                     </Text>
-                                    <Badge color="cyan" ff="monospace" size="xs" variant="soft">
+                                    <Badge color={primaryColor} ff="monospace" size="xs" variant="soft">
                                         {interfaceData.name}
                                     </Badge>
                                 </Group>

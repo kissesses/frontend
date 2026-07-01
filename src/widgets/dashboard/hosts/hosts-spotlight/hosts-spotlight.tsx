@@ -7,6 +7,7 @@ import { XrayLogo } from '@shared/ui/logos'
 import { UniversalSpotlightContentShared } from '@shared/ui/universal-spotlight'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles']
@@ -14,6 +15,7 @@ interface IProps {
 }
 
 export const HostsSpotlightWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { configProfiles, hosts } = props
 
     const openModalWithData = useModalsStoreOpenWithData()
@@ -39,7 +41,7 @@ export const HostsSpotlightWidget = (props: IProps) => {
         }
         if (!isDisabled && !isHidden) {
             return (
-                <ThemeIcon color="teal" size="lg" style={{ flexShrink: 0 }} variant="soft">
+                <ThemeIcon color={entityAccentColor} size="lg" style={{ flexShrink: 0 }} variant="soft">
                     <PiPulse size={20} />
                 </ThemeIcon>
             )
@@ -85,7 +87,7 @@ export const HostsSpotlightWidget = (props: IProps) => {
                     </Group>
 
                     {host.xrayJsonTemplateUuid && (
-                        <ThemeIcon color="teal" size="lg" style={{ flexShrink: 0 }} variant="soft">
+                        <ThemeIcon color={entityAccentColor} size="lg" style={{ flexShrink: 0 }} variant="soft">
                             <XrayLogo size={20} />
                         </ThemeIcon>
                     )}

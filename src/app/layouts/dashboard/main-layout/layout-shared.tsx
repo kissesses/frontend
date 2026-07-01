@@ -1,4 +1,5 @@
 import { AppShell, Group, GroupProps } from '@mantine/core'
+import clsx from 'clsx'
 import { Outlet, ScrollRestoration } from 'react-router'
 
 import { HelpDrawerShared } from '@shared/ui/help-drawer'
@@ -10,8 +11,8 @@ export const DASHBOARD_LINKS = {
 
 type LayoutMainProps = Omit<React.ComponentProps<typeof AppShell.Main>, 'children'>
 
-export const LayoutMain = (props: LayoutMainProps) => (
-    <AppShell.Main {...props}>
+export const LayoutMain = ({ className, ...props }: LayoutMainProps) => (
+    <AppShell.Main {...props} className={clsx('app-page-content', className)}>
         <Outlet />
         <ScrollRestoration />
         <HelpDrawerShared />

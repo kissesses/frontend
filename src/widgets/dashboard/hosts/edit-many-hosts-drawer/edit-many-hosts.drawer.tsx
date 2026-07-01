@@ -23,8 +23,10 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { parseJsonField } from '@shared/utils/misc'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const EditManyHostsDrawer = memo(() => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { isOpen, internalState: uuids } = useModalState(MODALS.EDIT_MANY_HOSTS_DRAWER)
@@ -189,7 +191,7 @@ export const EditManyHostsDrawer = memo(() => {
             size="lg"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={PiListChecks}
                     iconVariant="soft"
                     title={t('edit-host-modal.widget.edit-host')}

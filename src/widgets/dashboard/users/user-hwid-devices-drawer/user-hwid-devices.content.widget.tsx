@@ -32,6 +32,7 @@ import { openBlockHwidModal } from '@shared/utils/hwid/open-block-hwid-modal.uti
 import { UserHwidDeviceItem } from './user-hwid-device-item'
 import classes from './user-hwid-devices.module.css'
 import { UserHwidDevicesTable } from './user-hwid-devices.table'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 interface IProps {
     mobile: boolean
@@ -39,6 +40,7 @@ interface IProps {
 }
 
 export const UserHwidDevicesContentWidget = (props: IProps) => {
+    const primaryColor = usePrimaryColorName()
     const { userUuid, mobile } = props
     const { t } = useTranslation()
 
@@ -212,7 +214,7 @@ export const UserHwidDevicesContentWidget = (props: IProps) => {
                                         }}
                                     >
                                         {isLoading ? (
-                                            <Loader color="cyan" size="sm" type="oval" />
+                                            <Loader color={primaryColor} size="sm" type="oval" />
                                         ) : (
                                             <Text c="white" fw={700} size="xl">
                                                 {devices?.devices.length ?? 0}

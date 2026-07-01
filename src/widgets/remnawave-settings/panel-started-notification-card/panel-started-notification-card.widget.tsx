@@ -30,6 +30,7 @@ import { useUpdateRemnawaveSettings } from '@shared/api/hooks/remnawave-settings
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { handleFormErrors } from '@shared/utils/misc'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     panelStartedNotificationSettings: NonNullable<
@@ -38,6 +39,7 @@ interface IProps {
 }
 
 export const PanelStartedNotificationCardWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { panelStartedNotificationSettings } = props
     const { t } = useTranslation()
     const [previewSettings, setPreviewSettings] = useState(panelStartedNotificationSettings)
@@ -467,7 +469,7 @@ export const PanelStartedNotificationCardWidget = (props: IProps) => {
 
                 <SettingsCardShared.Bottom>
                     <Group justify="flex-end">
-                        <Button color="teal" loading={isUpdatePending} size="md" type="submit">
+                        <Button color={entityAccentColor} loading={isUpdatePending} size="md" type="submit">
                             {t('common.save')}
                         </Button>
                     </Group>

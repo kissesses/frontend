@@ -9,8 +9,10 @@ import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-st
 
 import classes from './Checkbox.module.css'
 import { IProps } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const InternalSquadCardShared = memo((props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { internalSquad } = props
 
     const openModalWithData = useModalsStoreOpenWithData()
@@ -41,7 +43,7 @@ export const InternalSquadCardShared = memo((props: IProps) => {
 
                 <Group gap="xs" wrap="nowrap">
                     <Badge
-                        color="teal"
+                        color={entityAccentColor}
                         leftSection={<PiUsers size="16" />}
                         size="md"
                         variant="light"

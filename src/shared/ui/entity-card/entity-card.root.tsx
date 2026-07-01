@@ -15,20 +15,26 @@ export function EntityCardRoot({ children, withTopAccent = true }: EntityCardPro
 
     return (
         <EntityCardContext.Provider value={{ menuOpened, setMenuOpened }}>
-            <Card className={classes.card} h="100%" p="xl" shadow="sm" withBorder>
-                <Box
-                    className={clsx({
-                        [classes.topAccent]: withTopAccent,
-                        [classes.inactiveTopAccent]: !withTopAccent
-                    })}
-                />
+            <Box
+                className={clsx(classes.cardWrapper, {
+                    [classes.inactive]: !withTopAccent
+                })}
+            >
+                <Card className={classes.card} h="100%" p="xl" shadow="sm" withBorder>
+                    <Box
+                        className={clsx({
+                            [classes.topAccent]: withTopAccent,
+                            [classes.inactiveTopAccent]: !withTopAccent
+                        })}
+                    />
 
-                <Box className={classes.glowEffect} />
+                    <Box className={classes.glowEffect} />
 
-                <Stack gap="lg" justify="space-between" style={{ flex: 1 }}>
-                    {children}
-                </Stack>
-            </Card>
+                    <Stack gap="lg" justify="space-between" style={{ flex: 1 }}>
+                        {children}
+                    </Stack>
+                </Card>
+            </Box>
         </EntityCardContext.Provider>
     )
 }

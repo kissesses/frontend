@@ -23,8 +23,10 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import classes from './hosts-config-profiles.module.css'
 import { IProps } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const HostsConfigProfilesDrawer = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
     const { opened, onClose, activeConfigProfileInbound, activeConfigProfileUuid, onSaveInbound } =
         props
@@ -143,7 +145,7 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
             }}
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={XrayLogo}
                     iconVariant="soft"
                     title={t('constants.config-profiles')}
@@ -210,7 +212,7 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
 
                             <Tooltip label={t('common.save')}>
                                 <ActionIcon
-                                    color="teal"
+                                    color={entityAccentColor}
                                     disabled={!selectedInbound}
                                     onClick={handleSaveInbound}
                                     size="lg"

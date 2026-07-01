@@ -5,6 +5,8 @@ import { TbAlertTriangle, TbBrandDocker, TbClock, TbRadar, TbRadar2 } from 'reac
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const DOCKER_SNIPPET = `
     cap_add:
@@ -19,6 +21,8 @@ interface IProps {
 }
 
 export function SessionsExplorerIdle({ onlineNodesCount, onStart }: IProps) {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { t } = useTranslation()
 
     return (
@@ -58,7 +62,7 @@ export function SessionsExplorerIdle({ onlineNodesCount, onStart }: IProps) {
                 </Stack>
 
                 <Group gap="sm" wrap="nowrap">
-                    <ThemeIcon color="cyan" size="md" variant="soft">
+                    <ThemeIcon color={primaryColor} size="md" variant="soft">
                         <TbClock size={16} />
                     </ThemeIcon>
                     <Text c="dimmed" size="sm">
@@ -80,7 +84,7 @@ export function SessionsExplorerIdle({ onlineNodesCount, onStart }: IProps) {
             </SectionCard.Root>
 
             <Button
-                color="teal"
+                color={entityAccentColor}
                 disabled={onlineNodesCount === 0}
                 fullWidth
                 leftSection={<TbRadar2 size={20} />}

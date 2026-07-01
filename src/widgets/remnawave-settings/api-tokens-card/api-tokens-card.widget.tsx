@@ -25,12 +25,16 @@ import { SettingsCardShared } from '@shared/ui/settings-card'
 import classes from './api-token-card.module.css'
 import { ApiTokenItem } from './api-token-item'
 import { CreateApiTokenContentWidget } from './modals/create-api-token-modal.widget'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     apiTokensData: FindAllApiTokensCommand.Response['response']
 }
 
 export const ApiTokensCardWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { apiTokensData } = props
     const { t } = useTranslation()
     const isMobile = useIsMobile()
@@ -42,7 +46,6 @@ export const ApiTokensCardWidget = (props: IProps) => {
             <SettingsCardShared.Header
                 description={t('api-tokens-card.widget.api-tokens-description')}
                 icon={<TbCookie size={24} />}
-                iconColor="cyan"
                 iconVariant="soft"
                 title={t('api-tokens-card.widget.api-tokens')}
             />
@@ -111,7 +114,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
                             <>
                                 {apiTokensData.docs.swaggerPath && (
                                     <ActionIcon
-                                        color="cyan"
+                                        color={primaryColor}
                                         component={Link}
                                         rel="noopener noreferrer"
                                         size="input-md"
@@ -124,7 +127,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
                                 )}
                                 {apiTokensData.docs.scalarPath && (
                                     <ActionIcon
-                                        color="cyan"
+                                        color={primaryColor}
                                         component={Link}
                                         rel="noopener noreferrer"
                                         size="input-md"
@@ -145,7 +148,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
                                 modals.open({
                                     title: (
                                         <BaseOverlayHeader
-                                            iconColor="teal"
+                                            iconColor={entityAccentColor}
                                             IconComponent={TbCookie}
                                             iconVariant="soft"
                                             title={t('api-tokens-card.widget.create-api-token')}
@@ -158,7 +161,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
                                 })
                             }}
                             size="input-md"
-                            color="teal"
+                            color={entityAccentColor}
                             variant="soft"
                         >
                             <TbPlus size={24} />

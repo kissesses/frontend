@@ -9,12 +9,14 @@ import { ActionCardShared } from '@shared/ui'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { BulkAllUsersUpdateWidget } from './bulk-all-users-update.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     isMobile: boolean
 }
 
 export const BulkAllUsersActionsWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { isMobile } = props
 
     const { t } = useTranslation()
@@ -34,7 +36,7 @@ export const BulkAllUsersActionsWidget = (props: IProps) => {
         modals.open({
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCalendarUp}
                     iconVariant="soft"
                     title={t('bulk-user-actions.actions.tab.feature.extend-expiration-date')}
@@ -86,12 +88,11 @@ export const BulkAllUsersActionsWidget = (props: IProps) => {
             <ActionCardShared
                 description={t('bulk-all-user-actions-drawer.widget.all-users')}
                 icon={<TbPencil size={20} />}
-                iconColor="teal"
+                iconColor={entityAccentColor}
                 onClick={() => {
                     modals.open({
                         title: (
                             <BaseOverlayHeader
-                                iconColor="cyan"
                                 IconComponent={TbUsers}
                                 iconVariant="soft"
                                 title={t(
@@ -113,7 +114,6 @@ export const BulkAllUsersActionsWidget = (props: IProps) => {
                     'bulk-user-actions.actions.tab.feature.extend-expiration-date-description'
                 )}
                 icon={<TbCalendarUp size={20} />}
-                iconColor="cyan"
                 isLoading={isExtendExpirationDatePending}
                 onClick={handleExtendExpirationDate}
                 title={t('bulk-user-actions.actions.tab.feature.extend-expiration-date')}

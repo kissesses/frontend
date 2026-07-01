@@ -12,6 +12,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { LocaleCard } from '../editor-components/locale-card.component'
 import styles from '../subpage-config-visual-editor.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 const ALL_LANGUAGES = getLanguagesArray()
 
@@ -20,6 +21,7 @@ interface IProps {
 }
 
 export function LocalizationBlockComponent({ form }: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
     const { locales } = form.getValues()
 
@@ -41,7 +43,7 @@ export function LocalizationBlockComponent({ form }: IProps) {
             <Stack gap="md" h="100%">
                 <Group gap="sm" justify="space-between">
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={IconGlobe}
                         iconSize={20}
                         iconVariant="soft"
@@ -50,7 +52,7 @@ export function LocalizationBlockComponent({ form }: IProps) {
                         titleOrder={5}
                     />
 
-                    <Badge color="teal" size="sm" variant="light">
+                    <Badge color={entityAccentColor} size="sm" variant="light">
                         {locales.length} active
                     </Badge>
                 </Group>

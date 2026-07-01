@@ -9,8 +9,10 @@ import { XrayLogo } from '@shared/ui/logos'
 import { SectionCard } from '@shared/ui/section-card'
 
 import { IProps } from './interfaces'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
+    const primaryColor = usePrimaryColorName()
     const {
         activeConfigProfileInbounds,
         activeConfigProfileUuid,
@@ -48,7 +50,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
                         <Stack gap="sm">
                             <Group gap="sm" justify="space-between" wrap="nowrap">
                                 <Group gap="sm" style={{ flex: 1, minWidth: 0 }} wrap="nowrap">
-                                    <ThemeIcon color="cyan" size="lg" variant="soft">
+                                    <ThemeIcon color={primaryColor} size="lg" variant="soft">
                                         <XrayLogo size={20} />
                                     </ThemeIcon>
                                     <Text ff="monospace" fw={600} size="sm" truncate>
@@ -58,7 +60,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
 
                                 <Group gap="xs" style={{ flexShrink: 0 }} wrap="nowrap">
                                     <Badge
-                                        color="cyan"
+                                        color={primaryColor}
                                         leftSection={<TbTag size={12} />}
                                         size="lg"
                                         variant="light"
@@ -119,7 +121,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
 
                         <SectionCard.Section>
                             <Button
-                                color="cyan"
+                                color={primaryColor}
                                 fullWidth
                                 leftSection={<TbFilePlus size={16} />}
                                 onClick={handlers.open}

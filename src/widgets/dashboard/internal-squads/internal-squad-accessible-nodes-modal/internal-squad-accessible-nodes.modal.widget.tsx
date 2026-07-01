@@ -15,12 +15,14 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 import classes from './internal-squad-accessible-nodes.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 type AccessibleNode =
     GetInternalSquadAccessibleNodesCommand.Response['response']['accessibleNodes'][number]
 type ActiveInbound = string
 
 export const InternalSquadAccessibleNodesModalWidget = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const [expandedNodeIds, setExpandedNodeIds] = useState<string[]>([])
@@ -185,7 +187,7 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
             size="800px"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbServer}
                     iconVariant="soft"
                     title={t(

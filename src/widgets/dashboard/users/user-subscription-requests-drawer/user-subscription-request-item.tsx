@@ -6,12 +6,14 @@ import { TbExternalLink, TbViewfinder } from 'react-icons/tb'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { formatTimeUtil } from '@shared/utils/time-utils'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 interface IProps {
     request: GetUserSubscriptionRequestHistoryCommand.Response['response']['records'][number]
 }
 
 export const UserSubscriptionRequestItem = (props: IProps) => {
+    const primaryColor = usePrimaryColorName()
     const { request } = props
 
     const { t, i18n } = useTranslation()
@@ -20,7 +22,7 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
         <SettingsCardShared.Container>
             <Group align="center" gap="xs" justify="space-between" wrap="nowrap">
                 <Group align="center" gap="xs" wrap="nowrap">
-                    <ThemeIcon color="cyan" size="lg" variant="soft">
+                    <ThemeIcon color={primaryColor} size="lg" variant="soft">
                         <TbViewfinder size="20" />
                     </ThemeIcon>
                     <Text fw={600} size="md">
@@ -44,7 +46,7 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
 
                         {request.requestIp && (
                             <ActionIcon
-                                color="cyan"
+                                color={primaryColor}
                                 component="a"
                                 href={`https://ipinfo.io/${request.requestIp}`}
                                 rel="noopener noreferrer"

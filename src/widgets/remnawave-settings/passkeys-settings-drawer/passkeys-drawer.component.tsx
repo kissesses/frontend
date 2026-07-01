@@ -42,6 +42,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { formatDate } from '@shared/utils/misc/date'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     onClose: () => void
@@ -49,6 +50,7 @@ interface IProps {
 }
 
 export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { data: passkeysData, isLoading } = useGetAllPasskeys()
@@ -185,7 +187,7 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
             size="lg"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbFingerprint}
                     iconVariant="soft"
                     title={t('passkeys-drawer.component.passkeys')}

@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next'
 import { queryClient } from '@shared/api'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { useCreateSnippet } from '@shared/api/hooks/snippets/snippets.mutation.hooks'
-import { monacoTheme } from '@shared/constants/monaco-theme'
+import { applyMonacoTheme, MONACO_THEME_NAME, useApplyMonacoTheme } from '@shared/constants/monaco-theme'
 
 import classes from './SnippetsDrawer.module.css'
 
@@ -23,6 +23,7 @@ export const CreateSnippetModal = () => {
     const { t, i18n } = useTranslation()
 
     const monaco = useMonaco()
+    useApplyMonacoTheme(monaco)
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 
     const createSnippetForm = useForm<CreateSnippetCommand.Request>({
@@ -88,11 +89,8 @@ export const CreateSnippetModal = () => {
         })
     }
 
-    const handleEditorDidMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
+    const handleEditorDidMount = (monacoInstance: Monaco) => {
+        applyMonacoTheme(monacoInstance)
     }
 
     return (
@@ -179,7 +177,7 @@ export const CreateSnippetModal = () => {
                             }
                         }}
                         path="snippet://*"
-                        theme="GithubDark"
+                        theme={MONACO_THEME_NAME}
                         value={JSON.stringify(createSnippetForm.getValues().snippet || [], null, 2)}
                     />
                 </Paper>

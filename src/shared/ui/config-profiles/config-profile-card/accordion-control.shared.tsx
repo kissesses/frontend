@@ -14,6 +14,7 @@ import { PiCheckBold, PiXBold } from 'react-icons/pi'
 
 import { XrayLogo } from '@shared/ui/logos'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps extends AccordionControlProps {
     hideSelectActions?: boolean
@@ -24,6 +25,7 @@ interface IProps extends AccordionControlProps {
 }
 
 export const AccordionControlShared = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { profile, onSelectAllInbounds, onUnselectAllInbounds, hideSelectActions, ...rest } =
         props
 
@@ -46,7 +48,7 @@ export const AccordionControlShared = (props: IProps) => {
             ),
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={XrayLogo}
                     iconVariant="soft"
                     title={profile.name}

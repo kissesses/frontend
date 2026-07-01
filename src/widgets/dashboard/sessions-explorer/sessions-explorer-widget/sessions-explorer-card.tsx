@@ -19,6 +19,8 @@ import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 
 import { SessionsExplorerIpRow } from './sessions-explorer-ip-row'
 import styles from './sessions-explorer.module.css'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface FlatIp {
     ip: AggregatedUserNode['ips'][number]
@@ -62,6 +64,8 @@ const virtuosoComponents = {
 
 export const SessionsExplorerCard = memo(
     ({ user, midThreshold, highThreshold, ipSearchQuery }: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
         const { t } = useTranslation()
         const { mutateAsync: resolveUser, isPending: isLoading } = useResolveUser()
         const navigate = useNavigate()
@@ -111,7 +115,7 @@ export const SessionsExplorerCard = memo(
                             icon={
                                 <Tooltip label={t('node-active-session.item.widget.view-user')}>
                                     <ActionIcon
-                                        color="cyan"
+                                        color={primaryColor}
                                         loading={isLoading}
                                         onClick={handleViewUser}
                                         size="lg"
@@ -182,7 +186,7 @@ export const SessionsExplorerCard = memo(
                                             titleOrder={6}
                                         />
 
-                                        <Badge color="teal" size="lg" variant="default">
+                                        <Badge color={entityAccentColor} size="lg" variant="default">
                                             {node.ips.length}
                                         </Badge>
                                     </Group>

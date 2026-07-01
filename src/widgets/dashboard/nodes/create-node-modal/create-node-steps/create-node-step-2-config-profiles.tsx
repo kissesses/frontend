@@ -12,6 +12,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 
 import { CopyDockerComposeWidget } from './copy-docker-compose.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     // oxlint-disable-next-line
@@ -29,6 +30,7 @@ export const CreateNodeStep2ConfigProfiles = ({
     onPrev,
     port
 }: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
@@ -71,7 +73,7 @@ export const CreateNodeStep2ConfigProfiles = ({
             <SectionCard.Root>
                 <SectionCard.Section>
                     <BaseOverlayHeader
-                        iconColor="teal"
+                        iconColor={entityAccentColor}
                         IconComponent={SiSecurityscorecard}
                         iconVariant="soft"
                         title={t('base-node-form.core-configuration')}
@@ -117,7 +119,7 @@ export const CreateNodeStep2ConfigProfiles = ({
                         {t('create-node-modal.widget.back')}
                     </Button>
                     <Button
-                        color="teal"
+                        color={entityAccentColor}
                         leftSection={<TbCheck size={18} />}
                         loading={isCreating}
                         onClick={handleCreateNode}

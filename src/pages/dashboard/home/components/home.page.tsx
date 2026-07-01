@@ -207,7 +207,6 @@ export const HomePage = (props: IProps) => {
                                     modals.open({
                                         title: (
                                             <BaseOverlayHeader
-                                                iconColor="cyan"
                                                 IconComponent={TbInfoCircle}
                                                 iconSize={20}
                                                 iconVariant="soft"

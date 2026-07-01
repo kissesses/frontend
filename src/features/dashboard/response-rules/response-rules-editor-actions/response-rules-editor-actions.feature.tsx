@@ -38,8 +38,10 @@ import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-temp
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { Props } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function ResponseRulesEditorActionsFeature(props: Props) {
+    const entityAccentColor = useEntityAccentColor()
     const {
         editorRef,
         monacoRef,
@@ -216,7 +218,7 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
         modals.open({
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbBug}
                     iconVariant="soft"
                     title={t('response-rules-editor-actions.feature.response-rules-debugger')}

@@ -7,12 +7,15 @@ import { useTranslation } from 'react-i18next'
 import { PiChartBar, PiPulseDuotone } from 'react-icons/pi'
 
 import { useGetUserActivityTimelineStats } from '@shared/api/hooks'
+import { getHighchartsColumnDefaults, highchartsTheme } from '@shared/constants/theme/chart-tokens'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 import { TopLeaderboardCardShared } from '@shared/ui/leaderboard-item-card'
 import { formatInt } from '@shared/utils/misc'
 
 import { useUserActivityEventTypeLabel } from '@entities/dashboard/user-activity-timeline/ui'
 
 export function UserActivityTimelineMetricsWidget() {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
     const getEventTypeLabel = useUserActivityEventTypeLabel()
 
@@ -46,56 +49,34 @@ export function UserActivityTimelineMetricsWidget() {
                 },
                 units: [['hour', [1, 2, 3, 4, 6, 8, 12]]],
                 labels: {
-                    style: {
-                        color: 'var(--mantine-color-text)'
-                    }
+                    style: highchartsTheme.axisLabelStyle
                 },
-                gridLineColor: 'var(--mantine-color-gray-6)',
-                lineColor: 'var(--mantine-color-gray-6)'
+                gridLineColor: highchartsTheme.gridLineColor,
+                lineColor: highchartsTheme.axisLineColor
             },
             yAxis: {
                 title: {
                     text: t('user-activity-timeline-metrics.widget.events'),
-                    style: {
-                        color: 'var(--mantine-color-text)'
-                    }
+                    style: highchartsTheme.axisLabelStyle
                 },
                 labels: {
-                    style: {
-                        color: 'var(--mantine-color-text)'
-                    }
+                    style: highchartsTheme.axisLabelStyle
                 },
-                gridLineColor: 'var(--mantine-color-gray-6)',
-                lineColor: 'var(--mantine-color-gray-6)'
+                gridLineColor: highchartsTheme.gridLineColor,
+                lineColor: highchartsTheme.axisLineColor
             },
             tooltip: {
                 shared: true,
-                backgroundColor: 'var(--mantine-color-body)',
-                borderColor: 'var(--mantine-color-gray-4)',
+                backgroundColor: highchartsTheme.tooltip.backgroundColor,
+                borderColor: highchartsTheme.tooltip.borderColor,
                 headerFormat: '',
-                style: {
-                    color: 'var(--mantine-color-text)'
-                },
+                style: highchartsTheme.tooltip.style,
                 pointFormatter(this: { x: number; y: number }): string {
                     return `<b>${dayjs(this.x).format('DD.MM.YYYY, HH:mm')}</b> </br> Events: <b>${this.y}<b>`
                 }
             },
             plotOptions: {
-                column: {
-                    borderWidth: 0,
-                    borderRadius: 4,
-                    pointPadding: 0.1,
-                    groupPadding: 0.1,
-                    color: 'var(--mantine-color-indigo-6)',
-                    states: {
-                        hover: {
-                            color: 'var(--mantine-color-indigo-3)'
-                        }
-                    },
-                    dataLabels: {
-                        enabled: false
-                    }
-                }
+                column: getHighchartsColumnDefaults()
             },
             legend: {
                 enabled: false
@@ -137,15 +118,9 @@ export function UserActivityTimelineMetricsWidget() {
     return (
         <Stack gap="xl">
             <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="lg">
-                <Card
-                    p="lg"
-                    style={{
-                        background:
-                            'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
-                    }}
-                >
+                <Card p="lg" className="app-chart-surface">
                     <Group align="center" gap="sm" mb="lg" wrap="nowrap">
-                        <ThemeIcon color="teal" size="lg" variant="outline">
+                        <ThemeIcon color={entityAccentColor} size="lg" variant="outline">
                             <PiPulseDuotone size="20px" />
                         </ThemeIcon>
 
@@ -167,13 +142,7 @@ export function UserActivityTimelineMetricsWidget() {
                     />
                 </Card>
 
-                <Card
-                    p="lg"
-                    style={{
-                        background:
-                            'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
-                    }}
-                >
+                <Card p="lg" className="app-chart-surface">
                     <Group align="center" gap="sm" mb="lg" wrap="nowrap">
                         <ThemeIcon color="blue" size="lg" variant="outline">
                             <PiChartBar size="20px" />

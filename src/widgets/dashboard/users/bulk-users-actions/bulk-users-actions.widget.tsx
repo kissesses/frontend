@@ -28,12 +28,16 @@ import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-
 
 import { InternalSquadsListWidget } from '../internal-squads-list'
 import { BulkUsersUpdateWidget } from './bulk-users-update.widget'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     isMobile: boolean
 }
 
 export const BulkUsersActionsWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
+    const primaryColor = usePrimaryColorName()
     const { isMobile } = props
     const { t } = useTranslation()
 
@@ -68,7 +72,7 @@ export const BulkUsersActionsWidget = (props: IProps) => {
         modals.open({
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCalendarUp}
                     iconVariant="soft"
                     title={t('bulk-user-actions.actions.tab.feature.extend-expiration-date')}
@@ -131,12 +135,11 @@ export const BulkUsersActionsWidget = (props: IProps) => {
             <ActionCardShared
                 description=""
                 icon={<TbPencil size={20} />}
-                iconColor="teal"
+                iconColor={entityAccentColor}
                 onClick={() => {
                     modals.open({
                         title: (
                             <BaseOverlayHeader
-                                iconColor="cyan"
                                 IconComponent={TbUsers}
                                 iconVariant="soft"
                                 title={t(
@@ -158,7 +161,6 @@ export const BulkUsersActionsWidget = (props: IProps) => {
                     'bulk-user-actions.actions.tab.feature.extend-expiration-date-description'
                 )}
                 icon={<TbCalendarUp size={20} />}
-                iconColor="cyan"
                 isLoading={isExtendExpirationDatePending}
                 onClick={handleExtendExpirationDate}
                 title={t('bulk-user-actions.actions.tab.feature.extend-expiration-date')}
@@ -224,7 +226,7 @@ export const BulkUsersActionsWidget = (props: IProps) => {
                 <Stack gap="md">
                     <Group gap="md" justify="space-between" wrap="nowrap">
                         <Group gap="md" wrap="nowrap">
-                            <ThemeIcon color="cyan" radius="md" size="xl" variant="soft">
+                            <ThemeIcon color={primaryColor} radius="md" size="xl" variant="soft">
                                 <TbCirclesRelation size={20} />
                             </ThemeIcon>
                             <Stack gap={2}>
@@ -254,7 +256,7 @@ export const BulkUsersActionsWidget = (props: IProps) => {
 
                 <Group justify="flex-end">
                     <Button
-                        color="cyan"
+                        color={primaryColor}
                         loading={isSetActiveInternalSquadsPending}
                         onClick={() => {
                             setActiveInternalSquads({

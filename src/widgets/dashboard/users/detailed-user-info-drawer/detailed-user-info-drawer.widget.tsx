@@ -25,8 +25,10 @@ import {
 } from '@entities/dashboard/user-modal-store/user-modal-store'
 
 import { UserStatusBadge } from '../user-status-badge/user-status-badge.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const DetailedUserInfoDrawerWidget = () => {
+    const entityAccentColor = useEntityAccentColor()
     const { t, i18n } = useTranslation()
 
     const actions = useUserModalStoreActions()
@@ -139,7 +141,7 @@ export const DetailedUserInfoDrawerWidget = () => {
                     <SectionCardRoot>
                         <SectionCardSection>
                             <BaseOverlayHeader
-                                iconColor="teal"
+                                iconColor={entityAccentColor}
                                 IconComponent={PiArrowsDownUpDuotone}
                                 iconVariant="soft"
                                 title={t('detailed-user-info-drawer.widget.traffic-information')}

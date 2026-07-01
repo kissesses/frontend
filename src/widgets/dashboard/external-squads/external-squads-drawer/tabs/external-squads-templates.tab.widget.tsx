@@ -12,6 +12,7 @@ import { queryClient } from '@shared/api'
 import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
 import { useGetSubscriptionTemplates } from '@shared/api/hooks/subscription-template/subscription-template.query.hooks'
 import { MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     externalSquad: GetExternalSquadByUuidCommand.Response['response']
@@ -19,6 +20,7 @@ interface IProps {
 }
 
 export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
+    const entityAccentColor = useEntityAccentColor()
     const { externalSquad, isOpen } = props
 
     const { t } = useTranslation()
@@ -215,7 +217,7 @@ export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
                 </Stack>
 
                 <Button
-                    color="teal"
+                    color={entityAccentColor}
                     fullWidth
                     leftSection={<TbDeviceFloppy size="1.2rem" />}
                     loading={isUpdatingExternalSquad}

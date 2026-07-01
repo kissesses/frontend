@@ -46,9 +46,10 @@
     right: 0;
     bottom: 0;
     border-radius: var(--mantine-radius-lg);
-    background: light-dark(
-        radial-gradient(circle at 20% 20%, rgb(99, 102, 241, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 20% 20%, rgb(6, 182, 212, 0.1) 0%, transparent 50%)
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgba(var(--app-accent-rgb), 0.08) 0%,
+        transparent 50%
     );
     pointer-events: none;
     z-index: -1;
@@ -98,7 +99,12 @@
     left: var(--mantine-spacing-md);
     right: var(--mantine-spacing-md);
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgb(6, 182, 212, 0.3) 50%, transparent 100%);
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(var(--app-accent-rgb), 0.35) 50%,
+        transparent 100%
+    );
 }
 
 .footerSection {
@@ -115,7 +121,12 @@
     left: var(--mantine-spacing-md);
     right: var(--mantine-spacing-md);
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgb(6, 182, 212, 0.3) 50%, transparent 100%);
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(var(--app-accent-rgb), 0.35) 50%,
+        transparent 100%
+    );
 }
 
 .scrollArea {

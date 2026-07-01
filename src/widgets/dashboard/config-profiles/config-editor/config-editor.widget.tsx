@@ -5,14 +5,15 @@ import { ConfigValidationFeature } from '@features/dashboard/config-profiles/con
 import { MonacoSetupFeature } from '@features/dashboard/config-profiles/monaco-setup'
 import { Box, Button, Card, Code, Group, Loader, Paper, Stack } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
+import Editor, { useMonaco } from '@monaco-editor/react'
 import clsx from 'clsx'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
 
-import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
+import { MONACO_THEME_NAME, applyMonacoTheme, useApplyMonacoTheme } from '@shared/constants/monaco-theme'
+import { useUiTheme } from '@entities/dashboard/view-preferences-store'
 import { usePseudoFullscreen } from '@shared/hooks'
 import { FullscreenToggleButton, fullscreenClasses } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -23,7 +24,9 @@ import { IProps } from './interfaces'
 
 export function ConfigEditorWidget(props: IProps) {
     const { t, i18n } = useTranslation()
+    const uiTheme = useUiTheme()
     const monaco = useMonaco()
+    useApplyMonacoTheme(monaco)
 
     const { configProfile, isWasmCrashed, isWasmRestarting, onRestartWasm, snippets } = props
 
@@ -59,11 +62,8 @@ export function ConfigEditorWidget(props: IProps) {
         wasWasmRestarting.current = isWasmRestarting
     }, [isWasmRestarting, isWasmCrashed])
 
-    const handleEditorDidMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
+    const handleEditorBeforeMount = (monacoInstance: Parameters<typeof applyMonacoTheme>[0]) => {
+        applyMonacoTheme(monacoInstance, uiTheme)
     }
 
     const checkForChanges = () => {
@@ -137,7 +137,7 @@ export function ConfigEditorWidget(props: IProps) {
                 <FullscreenToggleButton isFullscreen={isFullscreen} onToggle={toggleFullscreen} />
 
                 <Editor
-                    beforeMount={handleEditorDidMount}
+                    beforeMount={handleEditorBeforeMount}
                     className={styles.monacoEditor}
                     defaultLanguage="json"
                     loading={t('config-editor.widget.loading-editor')}
@@ -203,7 +203,7 @@ export function ConfigEditorWidget(props: IProps) {
                             bottom: 10
                         }
                     }}
-                    theme="GithubDark"
+                    theme={MONACO_THEME_NAME}
                     value={JSON.stringify(configProfile.config, null, 2)}
                 />
             </Paper>

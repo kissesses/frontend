@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { TbChevronDown, TbRestore } from 'react-icons/tb'
 
 import { ColumnsVisibilityPopover } from './columns-visibility-popover'
+import classes from './datatable.module.css'
 
 interface IProps {
     onResetColumnsOrder: () => void
@@ -31,7 +32,7 @@ export function DataTableControls(props: IProps) {
     } = props
 
     return (
-        <Group gap="xs" justify="right" mt="md">
+        <Group className={classes.controls} gap="xs" justify="right" mt="md">
             <Menu position="top-end" shadow="md" width={230} withinPortal>
                 <Menu.Target>
                     <Button

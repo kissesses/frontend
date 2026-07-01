@@ -24,6 +24,7 @@ import { faviconResolver, formatCurrencyWithIntl } from '@shared/utils/misc'
 import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     providers: GetInfraProvidersCommand.Response['response']['providers']
@@ -31,6 +32,7 @@ interface IProps {
 }
 
 export function MobileProvidersListWidget(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { providers, style } = props
     const openModalWithData = useModalsStoreOpenWithData()
     const { t } = useTranslation()
@@ -120,7 +122,7 @@ export function MobileProvidersListWidget(props: IProps) {
                             <Group gap={4} wrap="nowrap">
                                 {provider.loginUrl && (
                                     <ActionIcon
-                                        color="teal"
+                                        color={entityAccentColor}
                                         onClick={() => {
                                             window.open(
                                                 provider.loginUrl!,

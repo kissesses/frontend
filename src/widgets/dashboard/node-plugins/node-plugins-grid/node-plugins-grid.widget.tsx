@@ -24,6 +24,7 @@ import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 
 import { ActivePluginsOnNodesModalShared } from '../active-on-nodes-modal/adtive-on-nodes.modal.shared'
 import { NodePluginCardWidget } from '../node-plugin-card/node-plugin-card.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     nodes: GetAllNodesCommand.Response['response']
@@ -31,6 +32,7 @@ interface IProps {
 }
 
 export function NodePluginsGridWidget(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
     const { nodes, plugins } = props
 
@@ -111,7 +113,7 @@ export function NodePluginsGridWidget(props: IProps) {
             children: <ActivePluginsOnNodesModalShared nodes={activeOnNodes} />,
             title: (
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbPackage}
                     iconVariant="soft"
                     title={t('node-plugin-card.widget.active-on-nodes')}
@@ -167,7 +169,7 @@ export function NodePluginsGridWidget(props: IProps) {
                                     Torrent Blocker
                                 </Badge>
                                 <Badge
-                                    color="teal"
+                                    color={entityAccentColor}
                                     leftSection={<TbLogin size={16} />}
                                     radius="md"
                                     size="lg"

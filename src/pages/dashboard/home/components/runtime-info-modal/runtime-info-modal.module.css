@@ -21,7 +21,7 @@
     background: linear-gradient(
         90deg,
         transparent 0%,
-        var(--section-accent, var(--mantine-color-cyan-6)) 50%,
+        var(--section-accent, var(--app-accent)) 50%,
         transparent 100%
     );
 }

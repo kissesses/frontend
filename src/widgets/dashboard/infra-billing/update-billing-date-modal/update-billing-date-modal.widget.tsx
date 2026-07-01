@@ -13,8 +13,10 @@ import { toUtcDayISO } from '@shared/utils/time-utils'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 import styles from './UpdateModal.module.css'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function UpdateBillingDateModalWidget() {
+    const entityAccentColor = useEntityAccentColor()
     const { isOpen, internalState: billingNode } = useModalState(MODALS.UPDATE_BILLING_DATE_MODAL)
     const close = useModalClose(MODALS.UPDATE_BILLING_DATE_MODAL)
 
@@ -79,7 +81,7 @@ export function UpdateBillingDateModalWidget() {
             size="auto"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={TbCalendar}
                     iconVariant="soft"
                     title={t('update-billing-date-modal.widget.update-billing-date')}

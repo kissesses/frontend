@@ -69,7 +69,6 @@ export const UsersTableTemplatesFeature = (props: IProps) => {
                         modals.open({
                             title: (
                                 <BaseOverlayHeader
-                                    iconColor="cyan"
                                     IconComponent={TbBookmark}
                                     iconVariant="soft"
                                     title={t('constants.templates')}

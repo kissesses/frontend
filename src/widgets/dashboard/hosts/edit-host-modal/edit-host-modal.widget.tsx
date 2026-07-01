@@ -8,8 +8,10 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 import { EditHostModalContentWidget } from './edit-host-modal-content.widget'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export const EditHostModalWidget = memo(() => {
+    const entityAccentColor = useEntityAccentColor()
     const { t } = useTranslation()
 
     const { isOpen, internalState: host } = useModalState(MODALS.EDIT_HOST_MODAL)
@@ -26,7 +28,7 @@ export const EditHostModalWidget = memo(() => {
             size="lg"
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
+                    iconColor={entityAccentColor}
                     IconComponent={PiListChecks}
                     iconVariant="soft"
                     subtitle={host?.uuid}

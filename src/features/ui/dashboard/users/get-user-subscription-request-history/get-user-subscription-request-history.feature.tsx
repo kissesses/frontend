@@ -6,12 +6,14 @@ import { TbTimeline } from 'react-icons/tb'
 
 import { useIsMobile } from '@shared/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 interface IProps {
     userUuid: string
 }
 
 export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { userUuid } = props
     const { t } = useTranslation()
     const isMobile = useIsMobile()
@@ -24,7 +26,7 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
                     modals.open({
                         title: (
                             <BaseOverlayHeader
-                                iconColor="teal"
+                                iconColor={entityAccentColor}
                                 IconComponent={TbTimeline}
                                 iconVariant="soft"
                                 title={t(

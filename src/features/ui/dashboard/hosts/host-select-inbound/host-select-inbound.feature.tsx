@@ -9,8 +9,10 @@ import { XrayLogo } from '@shared/ui/logos'
 
 import classes from './host-select-inbound.module.css'
 import { IProps } from './interfaces'
+import { useEntityAccentColor } from '@shared/hocs/theme-applier/theme-applier'
 
 export function HostSelectInboundFeature(props: IProps) {
+    const entityAccentColor = useEntityAccentColor()
     const { activeConfigProfileInbound, activeConfigProfileUuid, configProfiles, onSaveInbound } =
         props
 
@@ -44,7 +46,7 @@ export function HostSelectInboundFeature(props: IProps) {
                         <Group gap="sm" justify="space-between" w="100%">
                             <Group gap="xs" miw={0} style={{ flex: 1 }}>
                                 <Box className={classes.iconWrapper}>
-                                    <ActionIcon color="teal" size="lg" variant="light">
+                                    <ActionIcon color={entityAccentColor} size="lg" variant="light">
                                         <XrayLogo size={24} />
                                     </ActionIcon>
                                 </Box>

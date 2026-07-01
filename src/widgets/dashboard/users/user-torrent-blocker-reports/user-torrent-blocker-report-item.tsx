@@ -9,12 +9,14 @@ import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { formatTimeUtil } from '@shared/utils/time-utils/format-time.util'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 interface IProps {
     report: GetTorrentBlockerReportsCommand.Response['response']['records'][number]
 }
 
 export const UserTorrentBlockerReportItem = (props: IProps) => {
+    const primaryColor = usePrimaryColorName()
     const { report } = props
 
     const { t, i18n } = useTranslation()
@@ -86,7 +88,7 @@ export const UserTorrentBlockerReportItem = (props: IProps) => {
                         </Box>
 
                         <ActionIcon
-                            color="cyan"
+                            color={primaryColor}
                             component="a"
                             href={`https://ipinfo.io/${report.report.actionReport.ip}`}
                             rel="noopener noreferrer"
