@@ -64,6 +64,39 @@ const normalizeStreamSettings = (
     return normalized
 }
 
+const isBlankTag = (tag: unknown): boolean => typeof tag !== 'string' || tag.trim() === ''
+
+const generateInboundTag = (inbound: Record<string, unknown>, index: number): string => {
+    const protocol = String(inbound.protocol ?? 'inbound')
+    const streamSettings = inbound.streamSettings as Record<string, unknown> | undefined
+    const network = streamSettings?.network ? String(streamSettings.network) : ''
+    const port = inbound.port != null ? String(inbound.port) : ''
+    const random = Math.floor(Math.random() * 999999) + 1
+
+    const parts = [protocol, network, port].filter(Boolean)
+    const prefix = parts.join('_').replace(/-/g, '_')
+
+    return prefix ? `${prefix}_${random}` : `inbound_${index + 1}_${random}`
+}
+
+const ensureUniqueInboundTags = (
+    inbounds: Record<string, unknown>[]
+): Record<string, unknown>[] => {
+    const usedTags = new Set<string>()
+
+    return inbounds.map((inbound, index) => {
+        let tag = isBlankTag(inbound.tag) ? generateInboundTag(inbound, index) : String(inbound.tag)
+
+        while (usedTags.has(tag)) {
+            tag = `${tag}_${usedTags.size + 1}`
+        }
+
+        usedTags.add(tag)
+
+        return { ...inbound, tag }
+    })
+}
+
 const normalizeInbound = (inbound: Record<string, unknown>): Record<string, unknown> => {
     let normalized = { ...inbound }
 
@@ -136,11 +169,11 @@ export const normalizeXrayPresetConfig = (
     }
 
     if (Array.isArray(result.inbounds)) {
-        result.inbounds = result.inbounds.map((inbound) =>
-            inbound && typeof inbound === 'object'
-                ? normalizeInbound(inbound as Record<string, unknown>)
-                : inbound
-        )
+        const normalizedInbounds = result.inbounds
+            .filter((inbound): inbound is Record<string, unknown> => Boolean(inbound) && typeof inbound === 'object')
+            .map((inbound) => normalizeInbound(inbound))
+
+        result.inbounds = ensureUniqueInboundTags(normalizedInbounds)
     }
 
     return result
