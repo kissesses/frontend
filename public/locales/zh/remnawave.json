@@ -1328,7 +1328,62 @@
       "create-a-new-config-profile-by-entering-a-name-below": "在下方输入名称以创建新的配置文件。",
       "you-can-customize-xray-config-after-creation": "创建后可以自定义 XRay 配置。",
       "profile-name": "配置文件名称",
-      "enter-profile-name": "输入配置文件名称"
+      "enter-profile-name": "输入配置文件名称",
+      "profile-presets": "预设配置"
+    }
+  },
+  "config-profile-presets": {
+    "modal": {
+      "title": "预设配置",
+      "description": "选择可用的 Xray-core 配置模板。创建后请替换占位符（密钥、证书、域名）。",
+      "profile-name": "配置文件名称",
+      "enter-profile-name": "输入配置文件名称",
+      "name-too-short": "名称至少 2 个字符",
+      "name-too-long": "名称不能超过 30 个字符",
+      "name-invalid": "名称只能包含字母、数字、空格、下划线和连字符",
+      "failed-to-load-preset": "加载所选模板失败，请稍后重试。"
+    },
+    "presets": {
+      "vless-tcp-reality": {
+        "name": "VLESS + TCP + REALITY (Vision)",
+        "description": "XTLS 官方示例：TCP 上的 VLESS，含 XTLS-Vision 与 REALITY。"
+      },
+      "vless-xhttp-reality": {
+        "name": "VLESS + XHTTP + REALITY",
+        "description": "XTLS 官方示例：XHTTP 传输 + REALITY 伪装。"
+      },
+      "vless-xhttp-reality-browser": {
+        "name": "VLESS + XHTTP + REALITY（浏览器伪装）",
+        "description": "Remnawave 版 InternetkafeXHTTP：浏览器头、FakeDNS、UDP noise。请替换 sempre.moscow、密钥和端口 47222。"
+      },
+      "vless-xhttp-tls-h3": {
+        "name": "VLESS + XHTTP + TLS (HTTP/3)",
+        "description": "XTLS 官方示例：XHTTP + TLS，ALPN 为 h3。"
+      },
+      "vless-xhttp-behind-nginx": {
+        "name": "VLESS + XHTTP 经 Nginx",
+        "description": "XTLS 官方示例：localhost 上的 XHTTP，置于 Nginx/Caddy 反代之后。"
+      },
+      "vless-grpc-reality": {
+        "name": "VLESS + gRPC + REALITY",
+        "description": "XTLS 官方示例：gRPC 上的 VLESS + REALITY。"
+      },
+      "vless-tcp-reality-selfhost": {
+        "name": "VLESS + REALITY（防偷跑）",
+        "description": "XTLS 官方示例：REALITY + dokodemo-door，防止流量被偷跑。"
+      },
+      "hysteria2": {
+        "name": "Hysteria2",
+        "description": "XTLS 官方示例：Hysteria2 v2，TLS + brutal 拥塞控制。"
+      },
+      "trojan-tcp-tls": {
+        "name": "Trojan + TCP + TLS",
+        "description": "XTLS 官方最小示例：Trojan TCP + TLS。"
+      },
+      "shadowsocks-2022": {
+        "name": "Shadowsocks 2022",
+        "description": "适用于 Xray 2.7+ 的 Shadowsocks 2022（Remnawave 模板）。"
+      }
     }
   },
   "restart-node-button": {

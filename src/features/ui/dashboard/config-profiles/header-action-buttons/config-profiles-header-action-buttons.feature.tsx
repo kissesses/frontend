@@ -1,3 +1,5 @@
+import { ConfigProfilePresetsModalFeature } from '@features/dashboard/config-profiles/profile-presets'
+import { CreateConfigProfileCommand } from '@kissesses/backend-contract'
 import {
     ActionIcon,
     ActionIconGroup,
@@ -11,9 +13,9 @@ import {
 } from '@mantine/core'
 import { useField } from '@mantine/form'
 import { useDisclosure } from '@mantine/hooks'
-import { CreateConfigProfileCommand } from '@kissesses/backend-contract'
+import { modals } from '@mantine/modals'
 import { useTranslation } from 'react-i18next'
-import { TbCode, TbPlus, TbRefresh } from 'react-icons/tb'
+import { TbCode, TbPlus, TbRefresh, TbTemplate } from 'react-icons/tb'
 import { generatePath, useNavigate } from 'react-router'
 
 import { queryClient } from '@shared/api'
@@ -146,6 +148,40 @@ export const ConfigProfilesHeaderActionButtonsFeature = (props: IProps) => {
                         variant="soft"
                     >
                         <TbRefresh size="24px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
+
+            <ActionIconGroup>
+                <Tooltip
+                    label={t('config-profiles-header-action-buttons.feature.profile-presets')}
+                    withArrow
+                >
+                    <ActionIcon
+                        color="cyan"
+                        onClick={() => {
+                            const modalId = modals.open({
+                                centered: true,
+                                size: 'lg',
+                                title: (
+                                    <BaseOverlayHeader
+                                        IconComponent={TbTemplate}
+                                        iconColor="cyan"
+                                        iconVariant="soft"
+                                        title={t('config-profile-presets.modal.title')}
+                                    />
+                                ),
+                                children: (
+                                    <ConfigProfilePresetsModalFeature
+                                        onClose={() => modals.close(modalId)}
+                                    />
+                                )
+                            })
+                        }}
+                        size="input-md"
+                        variant="soft"
+                    >
+                        <TbTemplate size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>

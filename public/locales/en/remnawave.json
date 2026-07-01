@@ -1353,7 +1353,62 @@
       "create-a-new-config-profile-by-entering-a-name-below": "Create a new config profile by entering a name below.",
       "you-can-customize-xray-config-after-creation": "You can customize XRay config after creation.",
       "profile-name": "Profile Name",
-      "enter-profile-name": "Enter profile name"
+      "enter-profile-name": "Enter profile name",
+      "profile-presets": "Ready-made profiles"
+    }
+  },
+  "config-profile-presets": {
+    "modal": {
+      "title": "Ready-made profiles",
+      "description": "Pick a working Xray-core profile template. Replace placeholders (keys, certificates, domains) after creation.",
+      "profile-name": "Profile name",
+      "enter-profile-name": "Enter profile name",
+      "name-too-short": "Name must be at least 2 characters",
+      "name-too-long": "Name must be less than 30 characters",
+      "name-invalid": "Name can only contain letters, numbers, underscores, dashes and spaces",
+      "failed-to-load-preset": "Failed to load the selected preset. Try again later."
+    },
+    "presets": {
+      "vless-tcp-reality": {
+        "name": "VLESS + TCP + REALITY (Vision)",
+        "description": "Official XTLS example: VLESS over TCP with XTLS-Vision and REALITY."
+      },
+      "vless-xhttp-reality": {
+        "name": "VLESS + XHTTP + REALITY",
+        "description": "Official XTLS example: XHTTP transport with REALITY masking."
+      },
+      "vless-xhttp-reality-browser": {
+        "name": "VLESS + XHTTP + REALITY (browser mimic)",
+        "description": "InternetkafeXHTTP for Remnawave: browser-like headers, FakeDNS, UDP noise. Replace sempre.moscow, keys and port 47222."
+      },
+      "vless-xhttp-tls-h3": {
+        "name": "VLESS + XHTTP + TLS (HTTP/3)",
+        "description": "Official XTLS example: XHTTP with TLS and ALPN h3."
+      },
+      "vless-xhttp-behind-nginx": {
+        "name": "VLESS + XHTTP behind Nginx",
+        "description": "Official XTLS example: XHTTP on localhost behind Nginx/Caddy reverse proxy."
+      },
+      "vless-grpc-reality": {
+        "name": "VLESS + gRPC + REALITY",
+        "description": "Official XTLS example: VLESS over gRPC with REALITY."
+      },
+      "vless-tcp-reality-selfhost": {
+        "name": "VLESS + REALITY (anti-steal)",
+        "description": "Official XTLS example: REALITY with dokodemo-door to prevent traffic theft."
+      },
+      "hysteria2": {
+        "name": "Hysteria2",
+        "description": "Official XTLS example: Hysteria2 v2 with TLS and brutal congestion."
+      },
+      "trojan-tcp-tls": {
+        "name": "Trojan + TCP + TLS",
+        "description": "Official XTLS minimal example: Trojan over TCP with TLS certificates."
+      },
+      "shadowsocks-2022": {
+        "name": "Shadowsocks 2022",
+        "description": "Shadowsocks 2022 inbound for Xray 2.7+ (Remnawave template)."
+      }
     }
   },
   "restart-node-button": {

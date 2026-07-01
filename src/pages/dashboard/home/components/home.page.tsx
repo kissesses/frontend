@@ -1,7 +1,6 @@
 import { ActionIcon, Box, Group, SimpleGrid, Stack, Title } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { notifications } from '@mantine/notifications'
-import { NodesRealtimeUsageMetrics } from '@widgets/dashboard/nodes/nodes-realtime-metrics'
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbCamera, TbInfoCircle, TbLayoutDashboard } from 'react-icons/tb'
@@ -15,12 +14,10 @@ import { Page } from '@shared/ui/page'
 import { PageHeaderShared } from '@shared/ui/page-header'
 import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
 
-import { HomeTrafficWidget } from './home-traffic'
 import classes from './home.module.css'
 import { IProps } from './interfaces'
 import {
     getBandwidthMetrics,
-    getHeroMetrics,
     getOnlineMetrics,
     getRuntimeProcessMetrics,
     getRuntimeSummaryMetrics,
@@ -48,7 +45,7 @@ export const HomePage = (props: IProps) => {
     const runtimeRef = useRef<HTMLDivElement>(null)
     const [copying, setCopying] = useState(false)
 
-    const { systemInfo, bandwidthStats, remnawaveHealth, nodes, isNodesLoading } = props
+    const { systemInfo, bandwidthStats, remnawaveHealth } = props
 
     const copyRuntimeScreenshot = async () => {
         if (!runtimeRef.current || copying) return
@@ -73,7 +70,6 @@ export const HomePage = (props: IProps) => {
         return <LoadingScreen />
     }
 
-    const heroMetrics = getHeroMetrics(systemInfo, nodes, t)
     const bandwidthMetrics = getBandwidthMetrics(bandwidthStats, t)
     const simpleMetrics = getSimpleMetrics(systemInfo, t)
     const usersMetrics = getUsersMetrics(systemInfo.users, t)
@@ -81,53 +77,11 @@ export const HomePage = (props: IProps) => {
     const runtimeSummaryMetrics = getRuntimeSummaryMetrics(remnawaveHealth.runtimeMetrics, t)
     const runtimeProcessMetrics = getRuntimeProcessMetrics(remnawaveHealth.runtimeMetrics)
 
-    const bandwidthMonthMetric = bandwidthMetrics[3]
-
     return (
         <Page title={t('constants.home')}>
             <PageHeaderShared icon={<TbLayoutDashboard size={24} />} title={t('constants.home')} />
 
             <Stack gap="sm">
-                <div className={classes.section}>
-                    <Title className={classes.title} m="xs" ml={0} order={4}>
-                        {t('home.page.overview')}
-                    </Title>
-                    <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }} spacing="xs">
-                        {heroMetrics.map((metric, index) => (
-                            <AnimatedCard index={index} key={metric.title}>
-                                <MetricCardShared
-                                    iconColor={metric.iconColor}
-                                    IconComponent={metric.IconComponent}
-                                    iconVariant={metric.iconVariant}
-                                    isLoading={false}
-                                    subtitle={metric.subtitle}
-                                    title={metric.title}
-                                    value={metric.value}
-                                />
-                            </AnimatedCard>
-                        ))}
-                        {bandwidthMonthMetric && (
-                            <AnimatedCard index={heroMetrics.length}>
-                                <MetricCardWithTrendShared {...bandwidthMonthMetric} />
-                            </AnimatedCard>
-                        )}
-                    </SimpleGrid>
-                </div>
-
-                <div className={classes.section}>
-                    <Title className={classes.title} m="xs" ml={0} order={4}>
-                        {t('home.page.live-nodes')}
-                    </Title>
-                    <NodesRealtimeUsageMetrics isLoading={isNodesLoading} nodes={nodes} />
-                </div>
-
-                <div className={classes.section}>
-                    <Title className={classes.title} m="xs" ml={0} order={4}>
-                        {t('home.page.traffic')}
-                    </Title>
-                    <HomeTrafficWidget />
-                </div>
-
                 <div className={classes.section}>
                     <Title className={classes.title} m="xs" ml={0} order={4}>
                         {t('home.page.bandwidth')}

@@ -1328,7 +1328,62 @@
       "create-a-new-config-profile-by-entering-a-name-below": "برای ایجاد پروفایل پیکربندی جدید اسم آن را وارد کنید",
       "you-can-customize-xray-config-after-creation": "کانفیگ Xray را می‌توانید بعد از ایجاد شخصی‌سازی کنید",
       "profile-name": "نام پروفایل",
-      "enter-profile-name": "نام پروفایل را وارد کنید"
+      "enter-profile-name": "نام پروفایل را وارد کنید",
+      "profile-presets": "پروفایل‌های آماده"
+    }
+  },
+  "config-profile-presets": {
+    "modal": {
+      "title": "پروفایل‌های آماده",
+      "description": "یک قالب Xray-core آماده انتخاب کنید. پس از ایجاد، placeholderها (کلیدها، گواهی‌ها، دامنه) را جایگزین کنید.",
+      "profile-name": "نام پروفایل",
+      "enter-profile-name": "نام پروفایل را وارد کنید",
+      "name-too-short": "نام باید حداقل ۲ کاراکتر باشد",
+      "name-too-long": "نام باید کمتر از ۳۰ کاراکتر باشد",
+      "name-invalid": "نام فقط می‌تواند شامل حروف، اعداد، فاصله، _ و - باشد",
+      "failed-to-load-preset": "بارگذاری قالب انتخاب‌شده ناموفق بود. بعداً دوباره تلاش کنید."
+    },
+    "presets": {
+      "vless-tcp-reality": {
+        "name": "VLESS + TCP + REALITY (Vision)",
+        "description": "نمونه رسمی XTLS: VLESS روی TCP با XTLS-Vision و REALITY."
+      },
+      "vless-xhttp-reality": {
+        "name": "VLESS + XHTTP + REALITY",
+        "description": "نمونه رسمی XTLS: ترانسپورت XHTTP با REALITY."
+      },
+      "vless-xhttp-reality-browser": {
+        "name": "VLESS + XHTTP + REALITY (شبیه‌سازی مرورگر)",
+        "description": "InternetkafeXHTTP برای Remnawave: هدرهای مرورگر، FakeDNS، UDP noise. sempre.moscow، کلیدها و پورت 47222 را جایگزین کنید."
+      },
+      "vless-xhttp-tls-h3": {
+        "name": "VLESS + XHTTP + TLS (HTTP/3)",
+        "description": "نمونه رسمی XTLS: XHTTP با TLS و ALPN h3."
+      },
+      "vless-xhttp-behind-nginx": {
+        "name": "VLESS + XHTTP پشت Nginx",
+        "description": "نمونه رسمی XTLS: XHTTP روی localhost پشت Nginx/Caddy."
+      },
+      "vless-grpc-reality": {
+        "name": "VLESS + gRPC + REALITY",
+        "description": "نمونه رسمی XTLS: VLESS روی gRPC با REALITY."
+      },
+      "vless-tcp-reality-selfhost": {
+        "name": "VLESS + REALITY (ضد سرقت)",
+        "description": "نمونه رسمی XTLS: REALITY با dokodemo-door برای جلوگیری از سرقت ترافیک."
+      },
+      "hysteria2": {
+        "name": "Hysteria2",
+        "description": "نمونه رسمی XTLS: Hysteria2 v2 با TLS و brutal congestion."
+      },
+      "trojan-tcp-tls": {
+        "name": "Trojan + TCP + TLS",
+        "description": "نمونه حداقلی رسمی XTLS: Trojan روی TCP با TLS."
+      },
+      "shadowsocks-2022": {
+        "name": "Shadowsocks 2022",
+        "description": "Shadowsocks 2022 برای Xray 2.7+ (قالب Remnawave)."
+      }
     }
   },
   "restart-node-button": {
