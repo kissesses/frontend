@@ -174,6 +174,15 @@ export const ConfigProfilesHeaderActionButtonsFeature = (props: IProps) => {
                                 children: (
                                     <ConfigProfilePresetsModalFeature
                                         onClose={() => modals.close(modalId)}
+                                        onCreated={(uuid) =>
+                                            navigate(
+                                                generatePath(
+                                                    ROUTES.DASHBOARD.MANAGEMENT
+                                                        .CONFIG_PROFILE_BY_UUID,
+                                                    { uuid }
+                                                )
+                                            )
+                                        }
                                     />
                                 )
                             })

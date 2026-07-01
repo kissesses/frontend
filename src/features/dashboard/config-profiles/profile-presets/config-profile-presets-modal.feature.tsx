@@ -14,11 +14,9 @@ import { useField } from '@mantine/form'
 import ColorHash from 'color-hash'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { generatePath, useNavigate } from 'react-router'
 
 import { queryClient } from '@shared/api'
 import { QueryKeys, useCreateConfigProfile } from '@shared/api/hooks'
-import { ROUTES } from '@shared/constants'
 
 import { CONFIG_PROFILE_PRESETS, IConfigProfilePreset } from './config-profile-presets.constants'
 import { normalizeXrayPresetConfig } from './normalize-xray-preset-config'
@@ -26,6 +24,7 @@ import { parseJsonc } from './parse-jsonc'
 
 interface IProps {
     onClose: () => void
+    onCreated: (uuid: string) => void
 }
 
 const ch = new ColorHash()
@@ -45,9 +44,8 @@ const resolvePresetConfig = async (
 }
 
 export const ConfigProfilePresetsModalFeature = (props: IProps) => {
-    const { onClose } = props
+    const { onClose, onCreated } = props
     const { t } = useTranslation()
-    const navigate = useNavigate()
 
     const [selectedPreset, setSelectedPreset] = useState<IConfigProfilePreset | undefined>(
         CONFIG_PROFILE_PRESETS[0]
@@ -79,11 +77,7 @@ export const ConfigProfilePresetsModalFeature = (props: IProps) => {
                     queryKey: QueryKeys.configProfiles.getConfigProfiles.queryKey
                 })
                 onClose()
-                navigate(
-                    generatePath(ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILE_BY_UUID, {
-                        uuid: data.uuid
-                    })
-                )
+                onCreated(data.uuid)
             },
             onError: (error) => {
                 setLoadError(error.message)
