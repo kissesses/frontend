@@ -19,7 +19,8 @@ export const authQueryKeys = createQueryKeys('auth', {
 export const useGetAuthStatus = createGetQueryHook({
     endpoint: GetStatusCommand.TSQ_url,
     responseSchema: GetStatusCommand.ResponseSchema,
-    getQueryKey: () => authQueryKeys.getAuthStatus.queryKey,
+    requestQuerySchema: GetStatusCommand.RequestQuerySchema,
+    getQueryKey: ({ query }) => [...authQueryKeys.getAuthStatus.queryKey, query ?? {}],
     rQueryParams: {
         refetchOnMount: false,
         placeholderData: keepPreviousData

@@ -1,15 +1,17 @@
 import { LoginFormFeature } from '@features/auth/login-form'
+import { StealthLoginGate, useStealthUnlock } from '@features/auth/stealth-login'
 import { OAuth2LoginButtonsFeature } from '@features/auth/oauth2-login-button/oauth2-login-button.feature'
 import { PasskeyLoginButtonFeature } from '@features/auth/passkey-login-button'
 import { RegisterFormFeature } from '@features/auth/register-form'
 import { Badge, Box, Center, Divider, Group, Image, Stack, Text, Title } from '@mantine/core'
 import { GetStatusCommand } from '@kissesses/backend-contract'
 import { useMemo } from 'react'
+import { useSearchParams } from 'react-router'
 
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
+import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 import { Logo, Page } from '@shared/ui'
 import { parseColoredTextUtil } from '@shared/utils/misc'
-import { usePrimaryColorName } from '@shared/hocs/theme-applier'
 
 const getAuthMethods = (authStatus: GetStatusCommand.Response['response'] | undefined) => {
     const isPasswordEnabled = authStatus?.authentication?.password?.enabled ?? false
@@ -91,7 +93,10 @@ const AlternativeAuthMethods = ({
 
 export const LoginPage = () => {
     const primaryColor = usePrimaryColorName()
-    const { data: authStatus } = useGetAuthStatus()
+    const [searchParams] = useSearchParams()
+    const stealthQuery = useMemo(() => Object.fromEntries(searchParams.entries()), [searchParams])
+    const { data: authStatus } = useGetAuthStatus({ query: stealthQuery })
+    const { unlocked: stealthUnlocked } = useStealthUnlock(authStatus?.stealthLogin)
 
     const titleParts = useMemo(() => {
         if (authStatus?.branding.title) {
@@ -106,6 +111,12 @@ export const LoginPage = () => {
 
     const isRegister = !authStatus?.isLoginAllowed && authStatus?.isRegisterAllowed
     const authMethods = getAuthMethods(authStatus)
+    const showStealthGate =
+        authStatus?.stealthLogin?.enabled && !stealthUnlocked && !isRegister
+
+    if (showStealthGate) {
+        return <StealthLoginGate config={authStatus.stealthLogin} />
+    }
 
     return (
         <Page title="Login">

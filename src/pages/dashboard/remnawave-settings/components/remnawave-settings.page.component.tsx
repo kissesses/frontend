@@ -5,6 +5,7 @@ import { AuthentificationSettingsCardWidget } from '@widgets/remnawave-settings/
 import { BrandingSettingsCardWidget } from '@widgets/remnawave-settings/branding-settings-card/branding-settings-card.widget'
 import { PanelStartedNotificationCardWidget } from '@widgets/remnawave-settings/panel-started-notification-card/panel-started-notification-card.widget'
 import { VisualSettingsCardWidget } from '@widgets/remnawave-settings/visual-settings-card/visual-settings-card.widget'
+import { StealthLoginSettingsCardWidget } from '@widgets/remnawave-settings/stealth-login-settings-card/stealth-login-settings-card.widget'
 import { useTranslation } from 'react-i18next'
 import Masonry from 'react-layout-masonry'
 
@@ -28,7 +29,8 @@ export const RemnawaveSettingsPageComponent = (props: IProps) => {
         !remnawaveSettings.oauth2Settings ||
         !remnawaveSettings.passkeySettings ||
         !remnawaveSettings.passwordSettings ||
-        !remnawaveSettings.brandingSettings
+        !remnawaveSettings.brandingSettings ||
+        !remnawaveSettings.stealthLoginSettings
     ) {
         return <LoadingScreen />
     }
@@ -49,6 +51,10 @@ export const RemnawaveSettingsPageComponent = (props: IProps) => {
                     <VisualSettingsCardWidget />
                     <BrandingSettingsCardWidget
                         brandingSettings={remnawaveSettings.brandingSettings}
+                    />
+
+                    <StealthLoginSettingsCardWidget
+                        stealthLoginSettings={remnawaveSettings.stealthLoginSettings}
                     />
 
                     {remnawaveSettings.panelStartedNotificationSettings && (
